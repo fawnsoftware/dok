@@ -65,6 +65,6 @@ statamic new mysite fawn/dok
 
 **Installing into an existing site**
 ```bash
-php please starter-kit:install fawn/dok
+php please starter-kit:install fawnsoftware/dok
 ```
 

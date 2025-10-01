@@ -12,9 +12,9 @@ updated_at: 1741264233
 Get up and running in an instant with the Statamic CLI tool. This will install a fresh Statamic instance with Dok installed.
 
 ```shell
-statamic new my-site fawn/dok
+statamic new my-site fawnsoftware/dok
 ```
 
 **Installing into an existing site**
 ```shell
-php please starter-kit:install fawn/dok
+php please starter-kit:install fawnsoftware/dok
