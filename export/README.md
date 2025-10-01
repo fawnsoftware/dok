@@ -14,7 +14,7 @@ A beautiful documentation starter kit.
 * **Highly customisable** typography styles
 * Host your content on **Statamic** or **Github**
 * Sync from GitHub, even from multiple **repositories** and **organisations**.
-* Sync **manually**, on a **shedule**, or even through a **webhook**. 
+* Sync **manually**, on a **shedule**, or even through a **webhook**.
 * **Permalink** and **Table of contents** markdown extensions preinstalled.
 * Shiki for **code highlighting**
 
@@ -22,7 +22,7 @@ A beautiful documentation starter kit.
 You can host multiple projects and manage different versions for each project. This is handled through the releases collection. To add a new project or version, simply create a new entry in the collection and configure the required fields.
 
 ### Statamic as a content source
-Wanna just write markdown directly to Statamic? Yup, you can do that. 
+Wanna just write markdown directly to Statamic? Yup, you can do that.
 
 ### GitHub as a content source
 If you'd like to host your documentation within a project repository to keep everything centralized, Dok makes the process simple. All you need is a GitHub Personal Access Token and a small update to your configuration file. Once that's done, you can easily link entries to their corresponding resource paths.
@@ -38,7 +38,7 @@ Dok supports the latest versions of all major browsers. We use progressive enhan
 ### Compiling Assets
 By default, we use a simple Vite configuration that comes with every new Statamic site when using the CLI tool so you should feel right at home.
 
-`npm run dev` - Watches your content, rebuilds, and refreshes your browser so you can instantly see the changes. 
+`npm run dev` - Watches your content, rebuilds, and refreshes your browser so you can instantly see the changes.
 `npm run build` - Build for production
 
 
@@ -46,14 +46,14 @@ By default, we use a simple Vite configuration that comes with every new Statami
 
 **Installing with Statamic CLI (recommended)**
 
-Get up and running in an instant with the Statamic CLI tool. This will install a fresh Statamic instance with Dok installed. 
+Get up and running in an instant with the Statamic CLI tool. This will install a fresh Statamic instance with Dok installed.
 
 ```bash
-statamic new my-site arrowtide/dok
+statamic new my-site fawn/dok
 ```
 
 **Installing into an existing site**
 ```bash
-php please starter-kit:install arrowtide/dok
+php please starter-kit:install fawn/dok
 ```
 
