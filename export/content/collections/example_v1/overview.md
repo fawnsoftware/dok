@@ -29,10 +29,10 @@ php please stache:refresh
 ```
 
 ## Documentation
-We've written fairly detailed documentation for Dok. It should cover everything you need to know to get started. If you think something is missing, please [open an issue](https://github.com/arrowtide/dok/issues/new). We are always looking to improve Dok.
+We've written fairly detailed documentation for Dok. It should cover everything you need to know to get started. If you think something is missing, please [open an issue](https://github.com/fawnsoftware/dok/issues/new). We are always looking to improve Dok.
 
 ## Issues
-If you think something is missing or broken, please [open an issue](https://github.com/arrowtide/dok/issues/new).
+If you think something is missing or broken, please [open an issue](https://github.com/fawnsoftware/dok/issues/new).
 
 ## Questions? Suggestions?
-If you have any questions or suggestions, please open a [discussion](https://github.com/arrowtide/dok/discussions/new).
+If you have any questions or suggestions, please open a [discussion](https://github.com/fawnsoftware/dok/discussions/new).
