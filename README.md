@@ -60,7 +60,7 @@ By default, we use a simple Vite configuration that comes with every new Statami
 Get up and running in an instant with the Statamic CLI tool. This will install a fresh Statamic instance with Dok installed.
 
 ```bash
-statamic new mysite fawn/dok
+statamic new mysite fawnsoftware/dok
 ```
 
 **Installing into an existing site**
