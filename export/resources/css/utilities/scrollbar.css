@@ -1,0 +1,11 @@
+/*
+  Scrollbar
+
+  A utility to override default browser scrollbar styles,
+  with automatic dark/light mode support.
+*/
+
+@utility scrollbar-default {
+  scrollbar-width: thin;
+  scrollbar-color: --alpha(var(--color-base-content) / 15%) transparent;
+}

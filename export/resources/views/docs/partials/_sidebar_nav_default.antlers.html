@@ -1,0 +1,35 @@
+<menu class="flex flex-col">
+    {{ nav handle="{release:nav:handle}" }}
+        <li>
+            {{ if children }}
+                <div class="my-4">
+                    <h2 class="text-xs text-base-content block mb-1 pl-4 font-semibold relative group">
+                        {{ title }}
+                    </h2>
+                    <ul class="flex flex-col">
+                        {{ children }}
+                            <li>
+                                <a
+                                    href="{{ uri }}"
+                                    class="block items-center relative text-xs tracking-wide text-base-content/80
+                                           px-4 py-1.5 rounded-control hover:text-base-content hover:bg-base-content/5
+                                           {{ if is_current }} contrast-more:font-bold bg-primary/15 text-primary!
+                                           hover:bg-primary/15! {{ /unless }}"
+                                >
+                                    {{ title }}
+                                </a>
+                            </li>
+                        {{ /children }}
+                    </ul>
+                </div>
+            {{ /else }}
+                <a href="{{ uri }}"
+                    class="block items-center relative text-xs tracking-wide text-base-content
+                           px-4 py-1.5 rounded-control hover:text-base-content hover:bg-base-content/5
+                           {{ if is_current }} contrast-more:font-bold bg-primary/15 !text-primary hover:bg-primary/15! {{ /unless }}">
+                    {{ title }}
+                </a>
+            {{ /if }}
+        </li>
+    {{ /nav }}
+</menu>

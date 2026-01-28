@@ -1,7 +1,7 @@
-{{ partial:components/dropdown name="version-dropdown" anchor="bottom" }}
-    {{ slot:button }}
+<x-dropdown name="version-dropdown" anchor="bottom">
+    <x-slot:button>
         <button
-            class="flex items-center w-full touch-manipulation text-2xs sm:text-xs gap-2 sm:gap-3 py-2 px-3 md:py-3 md:px-4 text-text hover:text-text-focus focus:text-focus cursor-pointer transition duration-100 hover:bg-black/3 dark:hover:bg-white/3 rounded-xl data-active:bg-black/3 dark:data-active:bg-white/3 data-active:text-text-strong"
+            class="flex items-center gap-2 p-2 cursor-pointer hover:text-base-content text-base-content/70 text-xs"
             x-ref="button"
             x-bind="button"
         >
@@ -9,36 +9,27 @@
                 <span class="hidden sm:inline">Version </span>
                 <span class="sm:hidden">v</span>{{ release:version }}
             </span>
-            {{ svg src="dropdown" class="size-2.5 ml-auto" }}
+            {{ svg src="icon/caret-down" class="size-2.5 ml-auto" aria-hidden="true" }}
         </button>
-    {{ /slot:button }}
-    {{ slot:content }}
-        <div class="space-y-1">
-            {{ project:versions }}
-                <a href="{{ url }}" class="flex items-center gap-3 p-3 cursor-pointer w-full rounded-sm transition hover:bg-popover-background-focus text-text hover:text-accent focus:text-accent text-sm">
-                    {{ version }}
+    </x-slot:button>
+    <x-slot:content>
+        <x-dropdown.section>
+            <div class="flex flex-col gap-1">
+                {{ project:versions }}
+                    <a
+                        href="{{ url }}"
+                        class="btn rounded-notch hover:bg-base-content/10 focus:bg-base-content/10 text-xs justify-between w-full"
+                        role="menuitem">
+                        {{ version }}
 
-                    {{ if label }}
-                        {{ notch_class = switch(
-                            (label == 'current') => 'text-accent border-accent',
-                            (label == 'alpha') => 'text-gray-500 dark:text-gray-400 border-gray-500 dark:border-gray-500',
-                            (label == 'beta') => 'text-pink-400 border-pink-400',
-                        )}}
-
-                        {{ text = switch(
-                            (label == 'current') => 'Latest',
-                            (label == 'alpha') => 'Alpha',
-                            (label == 'beta') => 'Beta'
-                        )}}
-
-                        <span class="text-[0.6rem] ml-auto min-w-[3rem] text-center px-2 py-1 border tracking-wider {{ notch_class }} rounded-full ml-5">{{ text }}</span>
-                    {{ /if }}
-                </a>
-
-                {{ unless last }}
-                    {{ partial:components/separator }}
-                {{ /unless }}
-            {{ /project:versions }}
-        </div>
-    {{ /slot:content }}
-{{ /partial:components/dropdown }}
+                        {{ if label }}
+                            <span class="text-[0.8rem] bg-base-100 rounded-full px-2 py-1 text-base-content/70">
+                                {{ label:label }}
+                            </span>
+                        {{ /if }}
+                    </a>
+                {{ /project:versions }}
+            </div>
+        </x-dropdown.section>
+    </x-slot:content>
+</x-dropdown>

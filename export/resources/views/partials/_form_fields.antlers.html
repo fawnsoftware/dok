@@ -1,0 +1,47 @@
+{{ partial:partials/form_skeleton }}
+
+{{ fields }}
+    <template x-if="{{ show_field }}">
+        <div class="
+            flex flex-col gap-y-1
+            {{ input_type == 'hidden' ?= 'hidden' }}
+            {{ type == 'spacer' ?= 'hidden md:flex' }}
+            {{ switch(
+                (width == '25') => 'md:col-span-3',
+                (width == '33') => 'md:col-span-4',
+                (width == '50') => 'md:col-span-6',
+                (width == '66') => 'md:col-span-8',
+                (width == '75') => 'md:col-span-9',
+                () => 'md:col-span-12'
+            )}}
+        ">
+            {{ unless type == 'spacer' }}
+                <label class="label" for="{{ id }}">
+                    {{ trans :key="display" }}
+                    {{ unless validate | contains('required') || validate | contains('accepted') }}
+                        <span class="text-xs opacity-60">({{ trans key="Optional" }})</span>
+                    {{ /unless }}
+                </label>
+            {{ /unless }}
+
+            {{ if instructions && instructions_position == 'above' }}
+                <div class="label label-description prose prose-on-base" id="{{ id }}-instructions">{{ instructions | markdown }}</div>
+            {{ /if }}
+
+            <div class="flex {{ inline ? 'flex-col sm:flex-row flex-wrap gap-2 sm:gap-10' : 'flex-col gap-2' }} mt-2">
+                {{ field }}
+            </div>
+
+            {{ if instructions && instructions_position == 'below' }}
+                <div class="label label-description prose" id="{{ id }}-instructions">{{ instructions | markdown }}</div>
+            {{ /if }}
+
+            <template x-if="form.invalid('{{ handle }}')">
+                <x-hint type="error" size="sm" style="soft">
+                    <span x-text="form.errors.{{ handle }}"></span>
+                </x-hint>
+            </template>
+
+        </div>
+    </template>
+{{ /fields }}

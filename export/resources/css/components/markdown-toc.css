@@ -1,0 +1,40 @@
+/*
+    Markdown Table Of Contents
+
+    If you have enabled the Table of Contents extension and want to change
+    the style of your table of contents, you can do so here.
+*/
+
+@layer components {
+  .table-of-contents {
+    padding-left: --spacing(2.5);
+    font-size: 0.9rem;
+    margin-top: --spacing(5);
+
+    & a:before {
+      content: "#";
+      color: var(--prose-anchor-color);
+      margin-right: --spacing(2);
+    }
+
+    & ul {
+      padding-left: --spacing(5);
+    }
+
+    & a {
+      color: --alpha(var(--color-base-content) / 80%);
+      display: block;
+      padding-top: --spacing(1.5);
+      padding-bottom: --spacing(1.5);
+      padding-right: --spacing(2);
+
+      &:hover {
+        color: var(--color-base-content);
+      }
+    }
+
+    @media (width >= theme("breakpoint.xl")) {
+      display: none;
+    }
+  }
+}

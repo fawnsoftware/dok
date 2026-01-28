@@ -1,0 +1,10 @@
+.project-logo {
+  font-family: var(--font-default);
+  font-weight: var(--font-weight-bold);
+  color: var(--color-base-content);
+  font-size: var(--text-2xl);
+
+  @variant dark {
+    color: var(--color-base-content);
+  }
+}

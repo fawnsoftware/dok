@@ -1,25 +1,23 @@
-<!doctype html>
-<html lang="{{ site:short_locale }}" class="bg-body-background">
+<!DOCTYPE html>
+<html lang="{{ site:short_locale }}" data-theme="forest">
     <head>
         <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <title>{{ title ?? site:name }}</title>
 
-        <script>
-            document.documentElement.classList.toggle(
-                'dark',
-                localStorage.theme === 'dark' || (!('theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)
-            )
-        </script>
+        {{ partial:layout/favicon }}
+
+        {{ partial:helpers/theme }}
 
         {{ vite src="resources/css/site.css" }}
     </head>
-    <body class="antialiased font-default">
+    <body class="antialiased font-default text-base-content bg-base-200">
         <a href="#main-content" class="sr-only focus:not-sr-only bg-white text-black">Skip to main content</a>
 
         {{ template_content }}
-        {{ vite src="resources/js/index.js" }}
+
+        {{ vite src="resources/js/site/index.js" }}
 
         {{ stack:popovers }}
         {{ stack:scripts }}

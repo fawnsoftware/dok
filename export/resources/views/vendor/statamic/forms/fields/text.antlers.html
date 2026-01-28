@@ -1,0 +1,38 @@
+{{#
+    Notes:
+    - size="1" is used to ensure it overwrites the default browser agent, removing the default minimum width.
+#}}
+
+{{ if prepend || append }} <label class="flex input"> {{ /if }}
+
+{{ if prepend }}
+    <span class="label shrink-0 max-w-4/12"> {{ prepend }} </span>
+{{ /if }}
+
+<input
+    id="{{ id }}"
+    type="{{ input_type ?? 'text' }}"
+    name="{{ handle }}"
+    value="{{ value }}"
+    size="1"
+    class="grow min-w-0 w-full {{ if !prepend && !append }}input{{ /if }}"
+    {{ if placeholder }}placeholder="{{ placeholder }}"{{ /if }}
+    {{ if character_limit }}maxlength="{{ character_limit }}"{{ /if }}
+    {{ if autocomplete }}autocomplete="{{ autocomplete }}"{{ /if }}
+    x-model="form.{{ handle }}"
+    @input.debounce.750="form.validate('{{ handle }}')"
+    {{ if validate|contains:required }}required{{ /if }}
+    {{ if error }}
+        aria-invalid="true" aria-describedby="{{ id }}-error"
+    {{ elseif instructions }}
+        aria-describedby="{{ id }}-instructions"
+    {{ /if }}
+    :aria-invalid="form.invalid('{{ handle }}')"
+>
+
+{{ if append }}
+    <span class="label shrink-0 max-w-4/12"> {{ append }} </span>
+{{ /if }}
+
+
+{{ if prepend || append }} </label> {{ /if }}

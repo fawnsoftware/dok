@@ -1,0 +1,57 @@
+{{ dok:outline as="permalinks" min="3" markdown="{content | raw}" }}
+    {{ unless no_results }}
+        <div x-data="outline()" x-bind="eventListeners" id="on-this-page">
+            <h2 class="flex gap-2 mb-3 text-xs">
+                {{ svg src="icon/list-magnifying-glass" class="size-5 fill-current" aria-hidden="true" }}
+                On this page
+            </h2>
+
+            <menu class="text-base-content/80 [&>li>a]:pl-5 [&>li>ul>li>a]:pl-10 [&>li>ul>li>ul>li>a]:pl-15 ">
+                {{ permalinks }}
+                    <li>
+                        <a
+                            href="#{{ id }}"
+                            class="py-1 text-xs border-l border-base-content/20 has-[+ul_a[data-active='true']]:border-primary has-[+ul_a[data-active='true']]:text-primary data-active:text-primary contrast-more:data-active:font-bold data-active:border-primary hover:border-base-content hover:text-base-content block"
+                            :data-active="active === '{{ id }}'"
+                        >
+                            {{ text }}
+                        </a>
+
+                        {{ if children }}
+                            <ul>
+                                {{ children }}
+                                    <li>
+                                        <a
+                                            href="#{{ id }}"
+                                            class="py-1 text-xs border-l border-base-content/20 has-[+ul_a[data-active='true']]:border-primary has-[+ul_a[data-active='true']]:text-primary data-active:text-primary contrast-more:data-active:font-bold data-active:border-primary hover:border-base-content hover:text-base-content block"
+                                            :data-active="active === '{{ id }}'"
+                                        >
+                                            {{ text }}
+                                        </a>
+
+                                        {{ if children }}
+                                            <ul>
+                                                {{ children }}
+                                                    <li>
+                                                        <a
+                                                            href="#{{ id }}"
+                                                            class="py-1 text-xs border-l border-base-content/20 has-[+ul_a[data-active='true']]:border-primary has-[+ul_a[data-active='true']]:text-primary data-active:text-primary contrast-more:data-active:font-bold data-active:border-primary hover:border-base-content hover:text-base-content block"
+                                                            :data-active="active === '{{ id }}'"
+                                                        >
+                                                            {{ text }}
+                                                        </a>
+
+                                                    </li>
+                                                {{ /children }}
+                                            </ul>
+                                        {{ /if }}
+                                    </li>
+                                {{ /children }}
+                            </ul>
+                        {{ /if }}
+                    </li>
+                {{ /permalinks }}
+            </menu>
+        </div>
+    {{ /unless }}
+{{ /dok:outline }}

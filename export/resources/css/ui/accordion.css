@@ -1,0 +1,80 @@
+.accordion {
+  border-radius: var(--radius-box);
+  isolation: isolate;
+  width: 100%;
+  display: grid;
+  position: relative;
+  overflow: hidden;
+  border: 1px solid --alpha(var(--color-base-content) / 10%);
+  background-color: --alpha(var(--color-base-content) / 2%);
+
+  &:has(:focus-visible) {
+    outline: var(--focus-width) var(--focus-style) var(--focus-color);
+    outline-offset: var(--focus-offset);
+  }
+
+  @media (hover: hover) {
+    &:hover {
+      border-color: --alpha(var(--color-base-content) / 30%);
+      color: --alpha(var(--color-base-content) / 100%);
+    }
+  }
+
+  &[open] {
+    &:hover {
+      border-color: --alpha(var(--color-base-content) / 10%);
+      background-color: --alpha(var(--color-base-content) / 2%);
+    }
+
+    .accordion-icon {
+      transform: rotate(90deg);
+    }
+  }
+
+  @variant contrast-more {
+    border: 1px solid var(--color-base-content) !important;
+  }
+}
+
+.accordion-summary {
+  display: flex;
+  gap: --spacing(2);
+  align-items: center;
+  width: 100%;
+  padding-inline: --spacing(5);
+  padding-block: --spacing(4);
+  color: --alpha(var(--color-base-content) / 100%);
+  padding-inline-end: 3rem;
+  transition: background-color 0.2s ease-out;
+  position: relative;
+  font-size: var(--text-base);
+  font-weight: var(--font-weight-medium);
+  cursor: pointer;
+
+  &:focus {
+    outline: none;
+  }
+
+  @media (hover: hover) {
+    &:hover {
+      border-color: --alpha(var(--color-base-content) / 100%);
+      color: --alpha(var(--color-base-content) / 100%);
+    }
+  }
+
+  &::marker {
+    display: none;
+  }
+}
+
+.accordion-icon {
+  transition: transform 0.2s ease;
+  fill: --alpha(var(--color-base-content) / 100%);
+  width: --spacing(4);
+  height: --spacing(4);
+}
+
+.accordion-content {
+  padding-inline: --spacing(5);
+  padding-block-end: --spacing(5);
+}

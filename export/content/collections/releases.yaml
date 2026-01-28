@@ -1,11 +1,12 @@
 title: Releases
+icon: tree-expand
 template: default
 layout: layout
 revisions: false
 sort_dir: asc
 date_behavior:
-  past: public
-  future: private
+  past: null
+  future: null
 preview_targets:
   -
     label: Entry

@@ -13,7 +13,7 @@ class ResourceLocations extends BasicDictionary
 
     protected function getItems(): array
     {
-        $files = File::allFiles(base_path('content/docs'));
+        $files = File::allFiles(config('dok.resource_location'));
         $dictionary = [];
 
         foreach ($files as $file) {

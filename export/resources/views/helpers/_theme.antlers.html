@@ -1,0 +1,55 @@
+<script>
+    const Theme = {
+        themeAttrName: 'data-theme',
+        contrastAttrName: 'data-contrast',
+        themeMethod: 'simple',
+        defaultTheme: {
+            light: 'papyrus',
+            dark: 'forest',
+        },
+        themes: [
+            { name: 'Forest',       id: 'forest'    },
+            { name: 'Black',        id: 'black'     },
+            { name: 'White',        id: 'white'     },
+            { name: 'Coffee',       id: 'coffee'    },
+            { name: 'Amethyst',     id: 'amethyst'  },
+            { name: 'Papyrus',      id: 'papyrus'   },
+            { name: 'Moonlight',    id: 'moonlight' },
+            { name: 'System',       id: 'system'    },
+        ]
+    };
+
+    if (typeof window !== "undefined") {
+        window.Theme = Theme;
+    }
+
+    let contrast = localStorage.getItem(Theme.contrastAttrName) || 'unset';
+
+    const theme = () => {
+        let name = localStorage.getItem(Theme.themeAttrName) || document.documentElement.getAttribute(Theme.themeAttrName) || 'system';
+
+        if (name === 'system') {
+            const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+            const theme = prefersDark ? Theme.defaultTheme.light : Theme.defaultTheme.light;
+
+            return theme;
+        }
+
+        if (name === 'light') {
+            return document.documentElement.setAttribute(Theme.themeAttrName, Theme.defaultTheme.light);
+        }
+
+        if (name === 'dark') {
+            return document.documentElement.setAttribute(Theme.themeAttrName, Theme.defaultTheme.dark);
+        }
+
+        return name;
+    }
+
+    document.documentElement.setAttribute(Theme.themeAttrName, theme());
+    document.documentElement.setAttribute(Theme.contrastAttrName, contrast);
+
+    if (window.matchMedia('(prefers-contrast: more)').matches) {
+        document.documentElement.setAttribute(contrastAttrName, 'more');
+    }
+</script>

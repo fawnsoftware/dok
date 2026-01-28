@@ -1,0 +1,47 @@
+<div class="py-1 w-full border-b border-base-content/10 contrast-more:border-base-content/30">
+    <div class="container flex items-center justify-between h-12 sm:flex-nowrap">
+
+        <button type="button"
+                aria-label="Menu"
+                class="flex items-center gap-2 text-base-content cursor-pointer touch-manipulation lg:hidden"
+                x-data
+                @click="$dispatch('open-docs-navigation')"
+        >
+            {{ svg src="icon/list" class="size-5 sm:size-6 text-base-content" aria-hidden="true" }}
+            <span>Menu</span>
+        </button>
+
+        <ul class="items-center gap-2 hidden lg:flex">
+            {{ release:breadcrumbs prefix="Home" prefix_single="true" }}
+                <li class="flex items-center gap-2 text-base-content text-2xs sm:text-xs last:text-base-content-focus">
+                    {{ title }}
+                    {{ unless last }}
+                        {{ svg src="icon/caret-double-right" class="size-2 text-base-content opacity-80" aria-hidden="true" }}
+                    {{ /unless }}
+                </li>
+            {{ /release:breadcrumbs }}
+        </ul>
+
+        {{ push:popovers }}
+            <x-drawer name="docs-navigation" position="left" height="full">
+                <div class="p-10">
+                    <div class="flex flex-col grow transition duration-1000 starting:opacity-0 starting:translate-y-1">
+                        <h2 class="text-lg mb-0 text-base-content font-medium mt-5">Navigation</h2>
+
+                        <x-divider class="mb-5 mt-3" />
+
+                        <div class="flex flex-col grow w-full max-w-4xl mx-auto">
+                            {{ partial:docs/partials/sidebar_nav_default }}
+                        </div>
+                    </div>
+                </div>
+            </x-drawer>
+        {{ /push:popovers }}
+
+        {{ if {project:versioned} }}
+            {{ partial:docs/partials/versions }}
+        {{ /if }}
+    </div>
+</div>
+
+

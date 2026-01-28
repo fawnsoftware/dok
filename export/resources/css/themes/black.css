@@ -1,0 +1,19 @@
+[data-theme="black"] {
+  --color-base-100: oklch(16.842% 0.00002 271.152);
+  --color-base-200: oklch(12.212% 0.00001 271.152);
+  --color-base-300: oklch(0% 0 0);
+  --color-base-content: oklch(100% 0.00011 271.152);
+  --color-primary: oklch(91.177% 0.17943 99.581);
+  --color-primary-content: oklch(0% 0 0);
+
+  --field-color: var(--color-base-content);
+  --field-background: --alpha(var(--color-base-content) / 15%);
+  --field-shadow: none;
+  --field-border-color: --alpha(var(--color-base-content) / 0%);
+
+  --radius-box: 0rem;
+  --radius-control: 0rem;
+  --radius-notch: 0rem;
+
+  --border-width: 1px;
+}

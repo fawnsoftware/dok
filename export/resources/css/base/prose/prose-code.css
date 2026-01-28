@@ -1,0 +1,51 @@
+@layer prose.default {
+  .prose {
+    @variant prose-pre {
+      position: relative;
+      overflow-x: auto;
+      color: var(--prose-pre-color);
+      font-size: 0.8888889em;
+      background-color: var(--prose-pre-background);
+      line-height: 1.8;
+      margin-top: --spacing(6);
+      margin-bottom: --spacing(6);
+      border-radius: var(--radius-box);
+      box-shadow: none;
+      padding: --spacing(8);
+      tab-size: 4;
+      scrollbar-width: thin;
+      scrollbar-color: --alpha(var(--prose-pre-color) / 15%) transparent;
+    }
+
+    @variant prose-code {
+      color: var(--prose-code-color);
+      font-size: 0.8888889em;
+      font-weight: inherit;
+      border-radius: 0.375rem;
+      background-color: var(--prose-code-background);
+      padding: 0.2em 0.4em;
+      box-shadow: 0 0 0 1px --alpha(var(--prose-code-color) / 15%);
+      margin-inline: 0.1rem;
+      font-family: var(--font-mono);
+    }
+  }
+}
+
+@layer prose.children {
+  .prose {
+    /* Reset code styles inside of a pre */
+    :where(pre code):not(:where(.not-prose, .not-prose *)) {
+      background-color: transparent;
+      border-width: 0;
+      border-radius: 0;
+      padding: 0;
+      font-weight: inherit;
+      color: inherit;
+      font-size: inherit;
+      font-family: inherit;
+      line-height: inherit;
+      box-shadow: none;
+      margin-inline: 0;
+    }
+  }
+}

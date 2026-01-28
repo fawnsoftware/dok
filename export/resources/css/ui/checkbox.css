@@ -1,0 +1,76 @@
+.checkbox {
+  @layer ui.components {
+    appearance: none;
+    width: --spacing(6);
+    height: --spacing(6);
+    aspect-ratio: 1;
+    background-color: var(--field-background);
+    border-style: solid;
+    border-width: var(--border-width);
+    border-color: var(--field-border-color);
+    font-size: clamp(1rem, inherit, inherit);
+    color: var(--field-color);
+    box-shadow: var(--field-shadow);
+    border-radius: var(--radius-notch);
+    cursor: pointer;
+    transition: outline-width 0.08s linear;
+
+    &:focus-visible {
+      outline: var(--focus-width) var(--focus-style) var(--focus-color);
+      outline-offset: var(--focus-offset);
+    }
+
+    &:before {
+      --rotate: 45deg;
+      --scale: 0;
+
+      content: "";
+      display: block;
+      width: 100%;
+      height: 100%;
+      opacity: 0;
+      clip-path: polygon(
+        evenodd,
+        70.25% 88%,
+        16.25% 88%,
+        16.25% 71.5%,
+        51.29% 71.5%,
+        51.29% 6%,
+        70.25% 6%,
+        70.25% 65.52%
+      );
+      transform: rotate(var(--rotate)) scale(var(--scale));
+      background-color: --alpha(var(--color-primary-content) / 80%);
+    }
+
+    &.input-invalid,
+    &[aria-invalid="true"] {
+      --field-border-color: var(--color-error);
+    }
+
+    &:checked {
+      &:before {
+        --scale: 0.6;
+
+        transform: rotate(var(--rotate)) scale(var(--scale));
+        opacity: 1;
+      }
+
+      border-color: var(--color-primary);
+      background-color: var(--color-primary);
+    }
+
+    &:indeterminate {
+      &:before {
+        --rotate: 0;
+
+        clip-path: polygon(
+          10% 36.25%,
+          90.5% 36.25%,
+          90.5% 66.25%,
+          10.5% 66.25%
+        );
+      }
+    }
+  }
+}

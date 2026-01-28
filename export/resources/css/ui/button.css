@@ -1,0 +1,188 @@
+@custom-variant btn-interact {
+  @media (hover: hover) {
+    &:hover,
+    &:focus-visible {
+      @slot;
+    }
+  }
+
+  &.btn-active,
+  &[data-active] {
+    @slot;
+  }
+}
+
+.btn {
+  @layer ui.components {
+    --btn-size: --spacing(10);
+    --btn-font-size: var(--text-sm);
+    --btn-padding-x: --spacing(4);
+    --btn-border: transparent;
+
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    user-select: none;
+    height: var(--btn-size);
+    min-height: var(--btn-size);
+    gap: --spacing(1.5);
+    padding-left: var(--btn-padding-x);
+    padding-right: var(--btn-padding-x);
+    text-align: center;
+    line-height: var(--leading-relaxed);
+    border-radius: var(--radius-control);
+    background-color: var(--btn-background);
+    border: 1px solid var(--btn-border);
+    transition-property:
+      outline-width, color, background-color, border-color, opacity;
+    transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+    transition-duration: 150ms;
+    font-size: var(--btn-font-size);
+    font-weight: var(--font-weight-medium);
+    color: var(--btn-color);
+
+    &:focus-visible {
+      outline: var(--focus-width) var(--focus-style) var(--focus-color);
+      outline-offset: var(--focus-offset);
+    }
+  }
+}
+
+.btn-primary {
+  @layer ui.modifiers {
+    --btn-color: var(--color-primary-content);
+    --btn-background: var(--color-primary);
+
+    @variant btn-interact {
+      --btn-background: color-mix(
+        in oklab,
+        var(--color-primary),
+        var(--color-base-200) 20%
+      );
+    }
+  }
+}
+
+.btn-error {
+  @layer ui.modifiers {
+    --btn-color: var(--color-error-content);
+    --btn-background: var(--color-error);
+
+    @variant btn-interact {
+      --btn-background: color-mix(
+        in oklab,
+        var(--color-error),
+        var(--color-black) 20%
+      );
+    }
+  }
+}
+
+.btn-warning {
+  @layer ui.modifiers {
+    --btn-color: var(--color-warning-content);
+    --btn-background: var(--color-warning);
+
+    @variant btn-interact {
+      --btn-background: color-mix(
+        in oklab,
+        var(--color-warning),
+        var(--color-black) 20%
+      );
+    }
+  }
+}
+
+.btn-success {
+  @layer ui.modifiers {
+    --btn-color: var(--color-success-content);
+    --btn-background: var(--color-success);
+
+    @variant btn-interact {
+      --btn-background: color-mix(
+        in oklab,
+        var(--color-success),
+        var(--color-black) 20%
+      );
+    }
+  }
+}
+
+.btn-outline {
+  @layer ui.modifiers {
+    --btn-color: --alpha(var(--color-base-content) / 70%);
+    --btn-border: --alpha(var(--color-base-content) / 20%);
+
+    @variant btn-interact {
+      --btn-color: --alpha(var(--color-base-content) / 90%);
+      --btn-background: --alpha(var(--color-base-content) / 5%);
+      --btn-border: --alpha(var(--color-base-content) / 50%);
+    }
+  }
+}
+
+.btn-square {
+  @layer ui.modifiers {
+    width: var(--btn-size);
+    min-width: var(--btn-size);
+    aspect-ratio: 1;
+    padding-left: 0;
+    padding-right: 0;
+  }
+}
+
+.btn-round {
+  @layer ui.modifiers {
+    width: var(--btn-size);
+    min-width: var(--btn-size);
+    aspect-ratio: 1;
+    border-radius: 100%;
+    padding-left: 0;
+    padding-right: 0;
+  }
+}
+
+.btn-xs {
+  @layer ui.modifiers {
+    --btn-size: --spacing(6);
+    --btn-font-size: 0.638rem;
+    --btn-padding-x: --spacing(1.5);
+  }
+}
+
+.btn-sm {
+  @layer ui.modifiers {
+    --btn-size: --spacing(8);
+    --btn-font-size: 0.638rem;
+    --btn-padding-x: --spacing(2.5);
+  }
+}
+
+.btn-base {
+  @layer ui.modifiers {
+    --btn-size: --spacing(10);
+    --btn-font-size: var(--text-sm);
+    --btn-padding-x: --spacing(3.5);
+  }
+}
+
+.btn-lg {
+  @layer ui.modifiers {
+    --btn-size: --spacing(14);
+    --btn-font-size: var(--text-lg);
+    --btn-padding-x: --spacing(5);
+  }
+}
+
+.btn.btn-disabled,
+.btn[disabled],
+.btn[aria-disabled="true"] {
+  @layer ui.modifiers {
+    --btn-color: var(--color-slate-800);
+    --btn-background: var(--color-slate-200);
+    --btn-border: var(--color-slate-300);
+    cursor: not-allowed;
+    opacity: 0.8;
+  }
+}

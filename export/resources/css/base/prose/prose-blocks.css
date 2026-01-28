@@ -1,0 +1,64 @@
+@layer prose.default {
+  .prose {
+    @variant prose-hr {
+      border: 0;
+      height: 1px;
+      background-color: var(--prose-hr-color);
+      margin-top: --spacing(12);
+      margin-bottom: --spacing(12);
+    }
+
+    @variant prose-blockquote {
+      font-weight: bold;
+      font-style: italic;
+      color: var(--prose-quote-color);
+      border-color: var(--prose-quote-border-color);
+      border-left-width: 0.25rem;
+      margin-top: 1.6em;
+      margin-bottom: 1.6em;
+      padding-left: 1em;
+    }
+
+    @variant prose-lead {
+      margin-top: --spacing(5);
+      margin-bottom: --spacing(10);
+    }
+
+    @variant prose-accordion {
+      margin-top: --spacing(5);
+      margin-bottom: --spacing(10);
+    }
+
+    @variant prose-hint {
+      margin-top: --spacing(5);
+      margin-bottom: --spacing(10);
+    }
+
+    @variant prose-code-group {
+      margin-top: --spacing(5);
+      margin-bottom: --spacing(10);
+    }
+  }
+}
+
+@layer prose.children {
+  .prose {
+    /* Reset the top margin on anything that comes after a hr. */
+    :where(.lead p:first-child):not(:where(.not-prose, .not-prose *)) {
+      margin-top: 0;
+    }
+
+    /* Reset the top margin on anything that comes after a hr. */
+    :where(hr + *):not(:where(.not-prose, .not-prose *)) {
+      margin-top: 0;
+    }
+
+    /* Blockquote inner paragraphs should inherit */
+    :where(blockquote p):not(:where(.not-prose, .not-prose *)) {
+      color: inherit;
+      font-weight: inherit;
+      font-size: inherit;
+      font-style: inherit;
+    }
+  }
+}

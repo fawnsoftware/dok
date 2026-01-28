@@ -2,110 +2,133 @@
 
 namespace App\Tags;
 
+use Exception;
+use Illuminate\Support\Facades\Log;
+use Statamic\Exceptions\CollectionNotFoundException;
 use Statamic\Exceptions\NavigationNotFoundException;
 use Statamic\Facades\Collection;
 use Statamic\Facades\Entry;
 use Statamic\Facades\Nav;
-use Statamic\Facades\Site;
+use Statamic\Tags\TagNotFoundException;
 use Statamic\Tags\Tags;
 
 class Release extends Tags
 {
-    public function index()
+    public function wildcard(string $tag)
     {
-        if (! isset($this->context['collection'])) {
-            return [];
+        $parts = explode(':', $tag);
+
+        [$first, $second, $third] = array_pad($parts, 3, null);
+
+        switch (true) {
+            case $first && ! isset($second):
+                $method = $first;
+                break;
+
+            case $first === 'entry':
+                $method = 'entry';
+                $wildcard = $second;
+                break;
+
+            case $first === 'nav' && $second === 'handle':
+                $method = 'navHandle';
+                break;
         }
 
-        return $this->getRelease($this->context['collection'] ?? null)['entry'];
-    }
+        if (! method_exists($this, $method)) {
+            throw new TagNotFoundException("Cannot find method [{$method}]");
+        }
 
-    public function navHandle()
-    {
-        return $this->getRelease($this->context['collection'] ?? null)['nav_handle'];
-    }
+        if (isset($wildcard)) {
+            return $this->{$method}($wildcard);
+        } else {
+            return $this->{$method}();
+        }
 
-    public function githubRepoUrl()
-    {
-        return $this->getRelease($this->context['collection'] ?? null)['github_repo_url'];
-    }
-
-    public function githubEditUrl()
-    {
-        return $this->getRelease($this->context['collection'] ?? null)['github_edit_url'];
-    }
-
-    public function version()
-    {
-        return $this->getRelease($this->context['collection'] ?? null)['version'];
-    }
-
-    public function isOutdated()
-    {
-        return $this->getRelease($this->context['collection'] ?? null)['is_outdated'];
-    }
-
-    public function homeUrl()
-    {
-        return $this->getRelease($this->context['collection'] ?? null)['home_url'];
-    }
-
-    public function breadcrumbs()
-    {
-        return $this->getRelease($this->context['collection'] ?? null)['breadcrumbs'];
+        throw new TagNotFoundException("Tag {{ {$tag} }} not found");
     }
 
     /**
-     * Gets the project information from the collection that is retrieved
-     * from the current context.
-     *
-     * @param  Collection  $collection
-     * @return array
+     * {{ release:entry }} || {{ release:entry:* }}
      */
-    private function getRelease($collection)
+    public function entry(?string $wildcard = null)
     {
-        if (! $collection) {
-            return [];
+        if ($wildcard) {
+            // Automatically returns null if nothing is found,
+            // sending nothing back to the tag.
+            return $this->release()->{$wildcard};
         }
 
-        $collection = $collection->value()->handle();
-
-        $release = Entry::query()
-            ->where('collection', 'releases')
-            ->where('version_collection', $collection)
-            ->first();
-
-        $parent = $release->parent();
-
-        return [
-            'nav_handle' => $release->data()->get('version_navigation'),
-            'version' => $release->data()->get('version'),
-            'github_repo_url' => $release->data()->get('github_repository_url'),
-            'github_edit_url' => $release->data()->get('github_edit_url'),
-            'is_outdated' => $release->data()->get('show_outdated_banner'),
-            'home_url' => Entry::find($this->getHomeEntry($release))->url(),
-            'breadcrumbs' => $this->getBreadcrumbs($release->data()->get('version_navigation')),
-        ];
+        return $this->release();
     }
 
-    private function getHomeEntry($collection)
+    /**
+     * {{ release:nav:handle }}
+     */
+    public function navHandle()
     {
-        return $collection?->structure()->in(Site::current()->handle())->tree()[0]['entry'];
+        return $this->release()->version_navigation->handle;
     }
 
-    private function getBreadcrumbs($handle)
+    /**
+     * {{ release:outdated }}
+     */
+    public function outdated(): bool
     {
+        return $this->release()->data()->get('show_outdated_banner') ? true : false;
+    }
 
-        if (! Nav::findByHandle($handle)) {
-            throw new NavigationNotFoundException($handle);
-
-            return [];
-        }
-
-        $items = Nav::findByHandle($handle)->trees()->get('default')->tree();
+    /**
+     * {{ release:breadcrumbs }}
+     */
+    public function breadcrumbs(): array
+    {
+        $handle = $this->navHandle();
+        $nav = Nav::findByHandle($handle);
         $currentUri = '/'.request()->path();
+        $breadcrumbs = [];
 
-        return $this->findBreadcrumbTrail($items, $currentUri);
+        if (! $nav) {
+            throw new NavigationNotFoundException($handle);
+        }
+
+        // Might be a new collection without nav items yet
+        if (! $nav->trees()->has('default')) {
+            Log::warning("Navigation [{$handle}] does not have a [default] tree.");
+
+            return [];
+        }
+
+        $items = $nav->trees()->get('default')->tree();
+        $breadcrumbs = $this->findBreadcrumbTrail($items, $currentUri);
+
+        if (empty($breadcrumbs)) {
+            array_unshift($breadcrumbs, [
+                'title' => $this->context->get('title'),
+            ]);
+        }
+
+        if ($this->params->get('prefix') && (! $this->params->get('prefix_single') == true || count($breadcrumbs) === 1)) {
+            array_unshift($breadcrumbs, ['title' => $this->params->get('prefix')]);
+        }
+
+        return $breadcrumbs;
+    }
+
+    /**
+     * {{ release:version }}
+     */
+    public function version(): string
+    {
+        return $this->release()->version;
+    }
+
+    private function release(): \Statamic\Entries\Entry
+    {
+        return Entry::query()
+            ->where('collection', 'releases')
+            ->where('version_collection', $this->getCollectionHandle())
+            ->first();
     }
 
     private function findBreadcrumbTrail(array $items, string $currentUri, array $trail = [])
@@ -121,16 +144,22 @@ class Release extends Tags
 
             $entryId = $current['entry'] ?? null;
 
-            $node = $entryId
-                ? Entry::find($entryId)
-                : [
-                    'title' => $current['title'] ?? 'Untitled',
+            if ($entry = Entry::find($entryId)) {
+                $node = [
+                    'entry' => $entry,
+                    'title' => $current['title'] ?? $entry->title,
+                    'url' => $entry->uri,
+                ];
+            } else {
+                $node = [
+                    'title' => $current['title'] ?? null,
                     'url' => null,
                 ];
+            }
 
             $newTrail = [...$trail, $node];
 
-            if ($node instanceof \Statamic\Entries\Entry && $node->uri() === $currentUri) {
+            if ($node['url'] === $currentUri) {
                 return $newTrail;
             }
 
@@ -141,6 +170,29 @@ class Release extends Tags
             }
         }
 
-        return null;
+        return [];
+    }
+
+    private function getCollectionHandle()
+    {
+        $collection = $this->params->get('collection') ?? $this->context->get('collection');
+
+        // The context or param might be giving us an augmented
+        // value, convert it to a string instead
+        if ($collection instanceof \Statamic\Fields\Value) {
+            $collection = $collection->handle;
+        }
+
+        // It might even be passed in as the collection entry
+        // perhaps through the page:collection page context
+        if ($collection instanceof \Statamic\Entries\Collection) {
+            $collection = $collection->handle;
+        }
+
+        throw_if(! $collection, new Exception('Cannot find collection in context or tag params.'));
+
+        throw_if(! Collection::findByHandle($collection), new CollectionNotFoundException($collection));
+
+        return $collection;
     }
 }

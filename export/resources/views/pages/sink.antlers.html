@@ -1,0 +1,246 @@
+---
+buttons:
+    - 'outline'
+    - 'primary'
+    - 'ghost'
+    - 'error'
+    - 'warning'
+    - 'success'
+button_sizes:
+    - 'xs'
+    - 'sm'
+    - 'base'
+    - 'lg'
+---
+
+<style>
+    .sink-header {
+        margin-bottom: 30px;
+    }
+    .sink-box {
+        border: 1px solid color-mix(in oklch, var(--color-base-content) 10%, transparent);
+        padding: 50px;
+    }
+</style>
+
+
+<div class="text-base-content max-w-2xl grid gap-20 mx-auto py-32">
+    <div>
+        <div class="sink-header">
+            <h2 class="h2 sink-header-heading">Headings</h2>
+            <p class="sink-header-subheading">Used to section and create hierarchy in your document.</p>
+        </div>
+        <div class="sink-box">
+            <h1 class="h1">Level One</h1>
+            <h2 class="h2">Level Two</h2>
+            <h3 class="h3">Level Three</h3>
+            <h4 class="h4">Level Four</h4>
+        </div>
+    </div>
+
+    <div>
+        <div class="sink-header">
+            <h2 class="h2 sink-header-heading">Headings</h2>
+            <p class="sink-header-subheading">Used to section and create hierarchy in your document.</p>
+        </div>
+        <div class="sink-box flex flex-col gap-5">
+            <p class="text-2xs">Lorem ipsum, dolor sit amet consectetur adipisicing elit. Laudantium perferendis culpa, magni illo quaerat eligendi in a unde excepturi atque? Eos similique nesciunt adipisci illum dolores id ea deleniti magni!</p>
+            <p class="text-xs">Lorem ipsum, dolor sit amet consectetur adipisicing elit. Laudantium perferendis culpa, magni illo quaerat eligendi in a unde excepturi atque? Eos similique nesciunt adipisci illum dolores id ea deleniti magni!</p>
+            <p class="text-sm">Lorem ipsum, dolor sit amet consectetur adipisicing elit. Laudantium perferendis culpa, magni illo quaerat eligendi in a unde excepturi atque? Eos similique nesciunt adipisci illum dolores id ea deleniti magni!</p>
+            <p class="text-base">Lorem ipsum, dolor sit amet consectetur adipisicing elit. Laudantium perferendis culpa, magni illo quaerat eligendi in a unde excepturi atque? Eos similique nesciunt adipisci illum dolores id ea deleniti magni!</p>
+            <p class="text-lg">Lorem ipsum, dolor sit amet consectetur adipisicing elit. Laudantium perferendis culpa, magni illo quaerat eligendi in a unde excepturi atque? Eos similique nesciunt adipisci illum dolores id ea deleniti magni!</p>
+            <p class="text-xl">Lorem ipsum, dolor sit amet consectetur adipisicing elit. Laudantium perferendis culpa, magni illo quaerat eligendi in a unde excepturi atque? Eos similique nesciunt adipisci illum dolores id ea deleniti magni!</p>
+        </div>
+    </div>
+
+    <div>
+        <div class="sink-header">
+            <h2 class="h2 sink-header-heading">Accordion</h2>
+            <p class="sink-header-subheading">A collapsable details element.</p>
+        </div>
+        <div class="sink-box">
+            <x-accordion title="Accordion">
+                Lorem, ipsum dolor sit amet consectetur adipisicing elit. Nihil veritatis et, expedita quibusdam quam officia soluta consequatur error quis quasi accusamus quos ut inventore dolorum placeat ex voluptatum rerum sed?
+            </x-accordion>
+        </div>
+    </div>
+
+    <div>
+        <div class="sink-header">
+            <h2 class="h2 sink-header-heading">Hints</h2>
+            <p class="sink-header-subheading">Used for callouts, warning, and error messages.</p>
+        </div>
+        <div class="sink-box grid gap-5">
+            <x-hint type="warning" title="Warning">
+                Lorem, ipsum dolor sit amet consectetur adipisicing elit. Nihil veritatis et, expedita quibusdam quam officia soluta consequatur error quis quasi accusamus quos ut inventore dolorum placeat ex voluptatum rerum sed?
+            </x-hint>
+            <x-hint type="caution" title="Caution">
+                Lorem, ipsum dolor sit amet consectetur adipisicing elit. Nihil veritatis et, expedita quibusdam quam officia soluta consequatur error quis quasi accusamus quos ut inventore dolorum placeat ex voluptatum rerum sed?
+            </x-hint>
+            <x-hint type="important" title="Important">
+                Lorem, ipsum dolor sit amet consectetur adipisicing elit. Nihil veritatis et, expedita quibusdam quam officia soluta consequatur error quis quasi accusamus quos ut inventore dolorum placeat ex voluptatum rerum sed?
+            </x-hint>
+            <x-hint type="note" title="Note">
+                Lorem, ipsum dolor sit amet consectetur adipisicing elit. Nihil veritatis et, expedita quibusdam quam officia soluta consequatur error quis quasi accusamus quos ut inventore dolorum placeat ex voluptatum rerum sed?
+            </x-hint>
+            <x-hint type="tip" title="Tip">
+                <div class="prose">
+                    Lorem, ipsum dolor sit amet consectetur adipisicing elit. Nihil veritatis et, expedita quibusdam quam officia soluta consequatur error quis quasi accusamus quos ut inventore dolorum placeat ex voluptatum rerum sed?
+                </div>
+            </x-hint>
+        </div>
+    </div>
+
+    <div>
+        <div class="sink-header">
+            <h2 class="h2 sink-header-heading">Theme</h2>
+            <p class="sink-header-subheading">All of your theme colors.</p>
+        </div>
+        <div class="sink-box grid grid-cols-1 gap-5 [&>*]:p-5 [&>*]:rounded">
+            <div class="bg-base-100 text-base-content">
+                <div class="opacity-80 uppercase font-bold">base-100</div>
+                The quick brown fox jumped over the lazy dog
+            </div>
+           <div class="bg-base-200 text-base-content">
+                <div class="opacity-80 uppercase font-bold">base-200</div>
+                The quick brown fox jumped over the lazy dog
+            </div>
+           <div class="bg-base-300 text-base-content">
+                <div class="opacity-80 uppercase font-bold">base-300</div>
+                The quick brown fox jumped over the lazy dog
+            </div>
+           <div class="bg-primary text-primary-content">
+                <div class="opacity-80 uppercase font-bold">primary</div>
+                The quick brown fox jumped over the lazy dog
+            </div>
+
+            <div class="bg-note text-note-content">
+                <div class="opacity-80 uppercase font-bold">note</div>
+                The quick brown fox jumped over the lazy dog
+            </div>
+            <div class="bg-important text-important-content">
+                <div class="opacity-80 uppercase font-bold">important</div>
+                The quick brown fox jumped over the lazy dog
+            </div>
+
+            <div class="bg-tip text-tip-content">
+                <div class="opacity-80 uppercase font-bold">tip</div>
+                The quick brown fox jumped over the lazy dog
+            </div>
+            <div class="bg-warning text-warning-content">
+                <div class="opacity-80 uppercase font-bold">warning</div>
+                The quick brown fox jumped over the lazy dog
+            </div>
+            <div class="bg-error text-error-content">
+                <div class="opacity-80 uppercase font-bold">error</div>
+                The quick brown fox jumped over the lazy dog
+            </div>
+            <div class="bg-success text-error-content">
+                <div class="opacity-80 uppercase font-bold">success</div>
+                The quick brown fox jumped over the lazy dog
+            </div>
+        </div>
+    </div>
+
+    <div>
+        <div class="sink-header">
+            <h2 class="h2 sink-header-heading">Forms</h2>
+        </div>
+
+        <div class="sink-box grid grid-cols-2 gap-5">
+            <div class="field mb-5">
+                <label class="label mb-2 block" for="text">Text</label>
+                <input type="text" class="input" id="text">
+            </div>
+
+            <div class="field mb-5">
+                <label class="label mb-2 block" for="password">Password</label>
+                <input type="password" class="input" id="password">
+            </div>
+
+            <div class="field mb-5">
+                <label class="label mb-2 block" for="number">Number</label>
+                <input type="number" class="input" id="number">
+            </div>
+
+            <div class="field mb-5">
+                <label class="label mb-2 block" for="date">Date</label>
+                <input type="date" class="input" id="date">
+            </div>
+
+            <div class="field mb-5">
+                <label class="label mb-2 block" for="textarea">Textarea</label>
+                <textarea class="textarea" id="textarea"></textarea>
+            </div>
+
+            <div class="field mb-5">
+                <label class="label mb-2 block" for="select">Select</label>
+                <select id="select" class="select">
+                    <option>Option 1</option>
+                    <option>Option 2</option>
+                </select>
+            </div>
+
+            <div class="field mb-5">
+                <label class="label mb-2 block" for="multiple-select">Multiple Select</label>
+                <select id="multiple-select" class="select" multiple>
+                    <option>Option 1</option>
+                    <option>Option 2</option>
+                    <option>Option 3</option>
+                </select>
+            </div>
+
+            <div class="field mb-5">
+                <label class="label mb-2 block">Checkbox</label>
+                <label class="flex items-center gap-3 mb-2">
+                    <input type="checkbox" name="checkbox" class="radio"> Option A
+                </label>
+                <label class="flex items-center gap-3 mb-2">
+                    <input type="checkbox" name="checkbox" class="radio"> Option B
+                </label>
+            </div>
+
+            <div class="field mb-5">
+                <label class="label mb-2 block">Radios</label>
+                <label class="flex items-center gap-3 mb-2">
+                    <input type="radio" name="radio" class="radio"> Option A
+                </label>
+                <label class="flex items-center gap-3 mb-2">
+                    <input type="radio" name="radio" class="radio"> Option B
+                </label>
+            </div>
+
+            <div class="field mb-5">
+                <label class="label mb-2 block" for="fileinput">File</label>
+                <input type="file" class="fileinput" id="fileinput">
+            </div>
+
+            <div class="field mb-5">
+                <label class="label mb-2 block" for="range">Range</label>
+                <input type="range" class="range" id="range">
+            </div>
+        </div>
+    </div>
+
+    <div>
+        <buttons class="pb-10">
+            <h2 class="h2 sink-header-heading">Buttons</h2>
+            <p>A selection of form fields</p>
+        </div>
+        <div class="sink-box">
+            <div class="flex flex-wrap gap-5">
+                <div class="w-full font-medium opacity-75">Sizes:</div>
+                {{ foreach:view:button_sizes as="size" }}
+                    <button class="btn btn-outline btn-{{ size }}">{{ size }}</button>
+                {{ /foreach:view:button_sizes }}
+            </div>
+            <div class="flex flex-wrap gap-5">
+                <div class="w-full font-medium opacity-75">Variants:</div>
+                {{ foreach:view:buttons as="color" }}
+                    <button class="btn btn-{{ color }} btn-{{ size }}">{{ color | title }}</button>
+                {{ /foreach:view:buttons }}
+                <button class="btn btn-disabled">Disabled</button>
+            </div>
+        </div>
+    </div>
+</div>

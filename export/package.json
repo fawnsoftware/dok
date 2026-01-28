@@ -1,0 +1,33 @@
+{
+    "private": true,
+    "type": "module",
+    "scripts": {
+        "build": "vite build --config vite.config.js",
+        "dev": "vite --config vite.config.js",
+        "cp:dev": "vite build --config vite-cp.config.js --watch",
+        "cp:build": "vite build --config vite-cp.config.js",
+        "test": "vitest"
+    },
+    "devDependencies": {
+        "@playwright/test": "^1.57.0",
+        "@tailwindcss/vite": "^4.1.11",
+        "@vitejs/plugin-vue": "^6.0.3",
+        "axe-playwright": "^2.2.2",
+        "concurrently": "^9.0.1",
+        "laravel-vite-plugin": "^2.0.0",
+        "playwright": "^1.57.0",
+        "tailwindcss": "^4.1.11",
+        "vite": "^7.0.4",
+        "vitest": "^4.0.16"
+    },
+    "dependencies": {
+        "@alpinejs/anchor": "^3.14.9",
+        "@alpinejs/collapse": "^3.14.9",
+        "@alpinejs/focus": "^3.14.9",
+        "@fontsource-variable/inter": "^5.2.8",
+        "@fontsource-variable/jetbrains-mono": "^5.2.8",
+        "@statamic/cms": "file:./vendor/statamic/cms/resources/dist-package",
+        "alpinejs": "^3.14.9",
+        "laravel-precognition-alpine": "^0.8.0"
+    }
+}

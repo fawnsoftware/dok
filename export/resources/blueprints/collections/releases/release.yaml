@@ -65,12 +65,6 @@ tabs:
               display: Label
               instructions: 'A label only used in the frontend to help users better understand the type of this release. Labels are shown in some areas next to the version.'
               clearable: true
-          -
-            handle: content_is_computed
-            field:
-              type: toggle
-              display: 'Computed Content'
-              instructions: "If you're using Github to sync your content, toggle this **on**. This will turn the `content` field into a [Computed Value](https://statamic.dev/computed-values)."
       -
         display: Github
         fields:
@@ -101,12 +95,3 @@ tabs:
               type: slug
               localizable: true
               validate: 'max:200'
-          -
-            handle: parent
-            field:
-              type: entries
-              collections:
-                - releases
-              max_items: 1
-              listable: false
-              localizable: true

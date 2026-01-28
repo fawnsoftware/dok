@@ -1,0 +1,52 @@
+@theme {
+  /* Have to call these wrapper to not conflict
+  with Tailwinds --container-* classes */
+  --wrapper-sm: 75rem;
+  --wrapper-base: 90rem;
+  --wrapper-lg: 115rem;
+}
+
+@utility container-sm {
+  max-width: var(--wrapper-sm);
+  padding-left: var(--spacing-gutter);
+  padding-right: var(--spacing-gutter);
+  margin-inline: auto;
+  width: 100%;
+}
+
+@utility container {
+  max-width: var(--wrapper-base);
+  padding-left: var(--spacing-gutter);
+  padding-right: var(--spacing-gutter);
+  margin-inline: auto;
+  width: 100%;
+}
+
+@utility container-lg {
+  max-width: var(--wrapper-lg);
+  padding-left: var(--spacing-gutter);
+  padding-right: var(--spacing-gutter);
+  margin-inline: auto;
+  width: 100%;
+}
+
+/*
+  Container Offset
+
+  Used for the main body content to ensure the sidebar content & text horizontally aligns with the
+  header container content. This allows you to have for example, sidebar navigation links with
+  padding where their content still aligns with the header content.
+
+*/
+@utility container-offset {
+  max-width: var(--wrapper-base);
+  padding-left: var(--spacing-gutter);
+  padding-right: var(--spacing-gutter);
+  margin-inline: auto;
+  width: 100%;
+
+  @media (min-width: theme(--breakpoint-lg)) {
+    padding-left: calc(var(--spacing-gutter) - --spacing(4));
+    padding-right: calc(var(--spacing-gutter) - --spacing(4));
+  }
+}

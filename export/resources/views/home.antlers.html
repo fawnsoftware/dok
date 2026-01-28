@@ -1,95 +1,134 @@
 ---
-cards:
+features:
+    -
+        title: Markdown extensions
+        text: Give your markdown superpowers with accordions, codegroups, hints, and more.
+    -
+        title: Code extension
+        text: Supercharge your code blocks with titles, tabs, collapsible sections, and one-click copy for improved developer experience.
+    -
+        title: Highly customisable
+        text: Dok makes making themes fun again. No explosion of dark variants cluttering your markup.
+    -
+        title: Sync Github
+        text: Want to host your markdown files on GitHub instead? Sync across repositories, branches, and even different organisations.
+    -
+        title: Modern
+        text: A modern documentation starter kit using Tailwind CSS v4 and Alpine.js, with Blade components for total control.
+    -
+        title: Accessible
+        text: We go to great lengths to ensure Dok is as accessible as possible with both automated and manual tests.
+
+next:
     -
         title: "Setup your homepage"
+        icon: icon/wrench
         description: "Set up your homepage by starting fresh or editing this template."
     -
         title: "Write your content"
+        icon: icon/pen-nib
         description: "Write content directly to your site, or import from Github."
     -
         title: "Launch"
+        icon: icon/rocket-launch
         description: "Launch your beautiful new documentation site!"
 ---
 
+<header class="py-32 flex items-center border-b border-base-content/10 min-h-[80svh] text-center bg-base-200">
+    <div class="container">
+        <div class="absolute pointer-events-none -top-[500px] bg-gradient-to-b blur-2xl from-slate-500/40 h-[1000px] to-transparent w-[200px] -left-[100px] -rotate-45 z-10">
+        </div>
 
-{{ partial:layout/header }}
+        <p class="inline-flex gap-2 bg-primary/5 border text-base-content border-primary mx-auto py-2 px-4 mb-5 rounded-full text-xs">
+            <svg xmlns="http://www.w3.org/2000/svg" class="size-5 fill-primary" viewBox="0 0 256 256"><path d="M197.58,129.06,146,110l-19-51.62a15.92,15.92,0,0,0-29.88,0L78,110l-51.62,19a15.92,15.92,0,0,0,0,29.88L78,178l19,51.62a15.92,15.92,0,0,0,29.88,0L146,178l51.62-19a15.92,15.92,0,0,0,0-29.88ZM137,164.22a8,8,0,0,0-4.74,4.74L112,223.85,91.78,169A8,8,0,0,0,87,164.22L32.15,144,87,123.78A8,8,0,0,0,91.78,119L112,64.15,132.22,119a8,8,0,0,0,4.74,4.74L191.85,144ZM144,40a8,8,0,0,1,8-8h16V16a8,8,0,0,1,16,0V32h16a8,8,0,0,1,0,16H184V64a8,8,0,0,1-16,0V48H152A8,8,0,0,1,144,40ZM248,88a8,8,0,0,1-8,8h-8v8a8,8,0,0,1-16,0V96h-8a8,8,0,0,1,0-16h8V72a8,8,0,0,1,16,0v8h8A8,8,0,0,1,248,88Z"></path></svg>
+            v3 out now
+            </p>
+        <h1 class="h1 font-semibold text-balance text-base-content mx-auto mb-5">
+            Craft beautiful documentation sites
+        </h1>
+        <div class="text-base-content/80 font-medium leading-loose text-lg mx-auto max-w-3xl mb-10">
+            <p>
+                The easiest way to start a modern documentation site on Statamic.<br>
+                Highly customisable - from setup to launch.
+            </p>
+        </div>
 
-<main>
-    <div class="container border-x border-midnight-100 overflow-hidden relative">
+        <div class="grid sm:grid-cols-2 gap-5 max-w-90 mx-auto">
+            <a class="btn btn-primary" href="https://statamic.com/starter-kits/fawn/dok-documentation">
+                Buy now
+            </a>
+            <a class="btn btn-outline" href="/docs">
+                Documentation
+            </a>
+        </div>
+    </div>
+</header>
 
-        <header class="pt-20 md:pt-50 text-center">
-            <div class="absolute pointer-events-none -top-[500px] bg-gradient-to-b blur-2xl from-slate-500/40 h-[1000px] to-transparent w-[200px] -left-[100px] -rotate-45 z-10"></div>
+<section class="py-16">
+    <div class="container">
+        <div class="text-center">
+            <h2 class="h2 text-base-content mb-5">Features</h2>
+            <div class="text-base-content prose mx-auto max-w-3xl mb-10">
+                <p>
+                    Dok is a modern and easy to use documentation starterkit for Statamic.
+                </p>
+            </div>
+        </div>
 
-            <div class=" mt-10">
-                <h1 class="text-4xl md:text-5xl text-white mb-5 leading-snug max-w-4xl mx-auto">Create <em>beautiful</em> documentation websites with [dok]</h1>
-                <div class="text-text">
-                    <p class="text-basemd:text-lg text-white/80 tracking-wide mt-5">Dok is a modern and easy to use documentation starterkit based on Statamic.</p>
-                </div>
+        <ul class="grid md:grid-cols-3 gap-10 mt-20">
+            {{ view:features }}
+                <li>
+                    <div class="prose">
+                        <h3 class="mb-2 mt-5">{{ title }}</h3>
+                        <p>{{ text }}</p>
+                    </div>
+                </li>
+            {{ /view:features }}
+        </ul>
+    </div>
+</section>
+
+<section class="py-16 prose">
+    <div class="container">
+        <div class="text-center">
+            <h2 class="h2 text-base-content mb-5">What's next?</h2>
+            <div class="prose max-w-3xl text-center mx-auto">
+                <p>
+                    You are now ready to get cooking.
+                    As Dok can be used for a single project or documentation for multiple projects, addons or products, we've
+                    provided a barebones setup to help you get up and running as quickly as possible.
+                </p>
+            </div>
+        </div>
+
+        <div class="grid md:grid-cols-3 gap-10 mt-20">
+            {{ view:next }}
+                <x-card title="{{ title }}" icon="{{ icon }}">
+                    <p>{{ description }}</p>
+                </x-card>
+            {{ /view:next }}
+        </div>
+    </div>
+</section>
+
+<section class="relative py-32">
+    <div class="container">
+        <div class="flex items-center justify-center absolute inset-0 pointer-events-none">
+            <div class="blur-3xl to-primary/0 bg-gradient-to-t from-primary/20 h-[400px] rotate-[-10deg] w-[900px]"></div>
+            <div class="bg-gradient-to-b blur-3xl translate-y-20 from-primary/20 h-[320px] to-primary/0  w-[400px]"></div>
+        </div>
+
+        <div class="text-center">
+            <div class="prose">
+                <h2 class="text-4xl">Ready to build your documentation?</h2>
+                <p>You can find the full documentation on <a href="https://statamic.com/starter-kits/fawn/dok-documentation">the marketplace</a>.</p>
             </div>
 
             <div class="grid sm:grid-cols-2 gap-5 mt-20 max-w-70 sm:max-w-120 mx-auto">
-                <a class="px-5 py-3 inline-block bg-accent font-medium text-white transition rounded-md hover:bg-accent/90" href="/example/1.x">Get Started</a>
-                <a class="px-5 py-3 inline-block text-white rounded-md hover:bg-white/5 transition" href="https://statamic.com/starter-kits/fawn/dok-documentation" target="_blank">View on Statamic</a>
+                <a class="btn btn-primary" href="/docs">Get Started</a>
+                <a class="btn btn-outline" href="https://statamic.com/starter-kits/fawn/dok-documentation" target="_blank">View on Statamic</a>
             </div>
-        </header>
-
-        {{ partial:components/separator divider="true" class="my-20 sm:my-30 max-w-3xl mx-auto" }}
-
-        <section>
-            <div class="prose text-center">
-                <h2 class="mb-5">What's next?</h2>
-                <div class="max-w-3xl text-center mx-auto">
-                    <p>
-                        You are now ready to get cooking.
-                        As Dok can be used for a single project or documentation for multiple projects, addons or products, we've
-                        provided a barebones setup to help you get up and running as quickly as possible.
-                    </p>
-                </div>
-            </div>
-
-            <ul class="grid md:grid-cols-3 gap-10 mt-20">
-                {{ view:cards }}
-                    <li class="text-text border p-5 rounded-md bg-gradient-to-br from-midnight-300 to-midnight-800">
-                        <div class="rounded-xl aspect-square size-10 flex items-center justify-center text-black font-semibold bg-[#E1CDC1]">
-                            {{ index + 1 }}
-                        </div>
-                        <div class="prose">
-                            <h3 class="mb-2 mt-5">{{ title }}</h3>
-                            <p>{{ description }}</p>
-                        </div>
-                    </li>
-                {{ /view:cards }}
-            </ul>
-
-            {{ partial:components/hint type="important" }}
-                <div class="prose">
-                    <p>It's strongly recommend setting up GIT locally before going any further</strong> so that you can track your changes and revert them if required.</p>
-                </div>
-            {{ /partial:components/hint }}
-        </section>
-
-        {{ partial:components/separator divider="true" class="mt-30 max-w-3xl mx-auto" }}
-
-        <section class="relative py-30 sm:py-50">
-            <div class="flex items-center justify-center absolute inset-0 pointer-events-none">
-                <div class="blur-3xl to-accent/0  bg-gradient-to-t from-accent/20 h-[400px] rotate-[-10deg] w-[900px]"></div>
-                <div class="bg-gradient-to-b blur-3xl translate-y-20 from-accent/20 h-[320px] to-primary/0  w-[400px]"></div>
-            </div>
-
-            <div class="text-center">
-                <div class="prose">
-                    <h2 class="text-4xl">Ready to build your documentation?</h2>
-                    <p>You can find the full documentation on <a href="https://statamic.com/starter-kits/fawn/dok-documentation">the marketplace</a>.</p>
-                </div>
-
-                <div class="grid sm:grid-cols-2 gap-5 mt-20 max-w-70 sm:max-w-120 mx-auto">
-                    <a class="px-5 py-3 inline-block bg-accent font-medium text-white transition rounded-md hover:bg-accent/90" href="/example/1.x">Get Started</a>
-                    <a class="px-5 py-3 inline-block text-white rounded-md hover:bg-white/5 transition" href="https://statamic.com/starter-kits/fawn/dok-documentation" target="_blank">View on Statamic</a>
-                </div>
-            </div>
-        </section>
-
+        </div>
     </div>
-</main>
+</section>
 
-{{ partial:layout/footer }}

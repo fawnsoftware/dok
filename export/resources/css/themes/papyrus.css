@@ -1,0 +1,32 @@
+[data-theme="papyrus"] {
+  --color-base-100: oklch(96.076% 0.00942 93.604);
+  --color-base-200: oklch(93.941% 0.01077 95.214);
+  --color-base-300: oklch(92.902% 0.01328 102.117);
+  --color-base-content: oklch(20.482% 0.02819 72.663);
+  --color-primary: oklch(0.4862 0.0969 61.44);
+  --color-primary-content: oklch(94.413% 0.01368 67.487);
+
+  --color-important-base: oklch(0.8711 0.0457 279.94);
+  --color-error-base: oklch(0.9232 0.0455 347.88);
+  --color-warning-base: oklch(0.9488 0.0523 92.93);
+  --color-note-base: oklch(0.9093 0.0344 219.87);
+  --color-tip-base: oklch(0.9213 0.0475 202.91);
+
+  --field-color: var(--color-base-content);
+  --field-background: --alpha(var(--color-primary) / 8%);
+  --field-shadow: 0 1.5px 4px 0 --alpha(var(--color-primary) / 10%);
+  --field-border-color: --alpha(var(--color-base-content) / 20%);
+
+  --radius-box: 0rem;
+  --radius-control: 0rem;
+  --radius-notch: 0rem;
+
+  --border-width: 1px;
+
+  --focus-color: oklch(56.075% 0.12483 65.962);
+  --focus-width: 2px;
+}
+
+[data-theme="papyrus"] {
+  --prose-color: var(--color-base-content);
+}

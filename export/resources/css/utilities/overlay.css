@@ -1,0 +1,14 @@
+/*
+  A full screen overlay, useful for modal backgrounds.
+*/
+
+@utility overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  background-color: rgba(0, 0, 0, 0.5);
+  filter: blur(1px);
+  width: 100dvw;
+  height: 100dvh;
+  z-index: 30;
+}
