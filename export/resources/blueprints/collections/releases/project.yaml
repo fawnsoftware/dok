@@ -13,6 +13,12 @@ tabs:
               validate:
                 - required
           -
+            handle: name
+            field:
+              type: text
+              display: Name
+              instructions: 'The human readable name of the project. Eg. Laravel, Statamic, React'
+          -
             handle: latest_stable_release
             field:
               max_items: 1
@@ -24,6 +30,7 @@ tabs:
               instructions: 'The latest, stable release for this project.'
       -
         display: Logos
+        instructions: "Set your projects' logos or adjust their settings."
         fields:
           -
             handle: logo
@@ -34,23 +41,25 @@ tabs:
               max_files: 1
               mode: grid
               dynamic: slug
-              instructions: 'The default logo for this project.'
+              instructions: 'The default logo for this project. SVG is the recommended format.'
           -
             handle: logo_dark
             field:
               container: assets
               type: assets
               display: 'Dark logo'
-              instructions: 'The logo for this project when the current theme is dark.'
+              instructions: 'The logo for this project when the theme is dark. SVG is the recommended format.'
               max_files: 1
               mode: grid
               dynamic: slug
           -
-            handle: logo_class
+            handle: logo_text
             field:
-              type: text
-              display: Class
-              instructions: 'Apply CSS classes to this svg finetune the output style of the logos.'
+              placeholder: 'Your project'
+              character_limit: 20
+              type: textarea
+              display: 'Logo text'
+              instructions: 'If no logos are set, the logo for the project will default to this text. HTML & Antlers is allowed.'
   sidebar:
     display: Sidebar
     sections:
@@ -62,12 +71,3 @@ tabs:
               type: slug
               localizable: true
               validate: 'max:200'
-          -
-            handle: parent
-            field:
-              type: entries
-              collections:
-                - releases
-              max_items: 1
-              listable: false
-              localizable: true

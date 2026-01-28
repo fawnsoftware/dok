@@ -1,0 +1,76 @@
+@layer components {
+  .code-group {
+    background-color: var(--color-base-200);
+    border-radius: var(--prose-pre-radius);
+    border: 1px solid --alpha(var(--color-base-content) / 20%);
+    border-radius: var(--radius-box);
+    overflow: hidden;
+    padding: --spacing(1);
+
+    @variant contrast-more {
+      border-color: --alpha(var(--color-base-content) / 40%);
+    }
+  }
+
+  .code-group pre {
+    margin: 0;
+    border-radius: calc(var(--radius-box) - --spacing(1));
+  }
+
+  .code-group-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: --spacing(0) --spacing(4) --spacing(1) --spacing(4);
+    font-size: 0.8rem;
+    font-weight: var(--font-weight-bold);
+    font-family: var(--font-mono);
+    position: relative;
+  }
+
+  .code-group-tab-buttons {
+    display: flex;
+    gap: --spacing(5);
+  }
+
+  button.code-group-tab-button {
+    cursor: pointer;
+    border-bottom: 1px solid transparent;
+
+    @media (hover: hover) {
+      &:hover {
+        color: var(--color-base-content);
+        border-color: var(--color-base-content);
+      }
+    }
+
+    &.active {
+      color: var(--color-primary);
+      border-color: var(--color-primary);
+    }
+  }
+
+  .code-group-footer {
+    padding: --spacing(2) --spacing(4) --spacing(2) --spacing(4);
+  }
+
+  .code-group-expand {
+    display: flex;
+    align-items: center;
+    gap: --spacing(1);
+    font-size: 0.8rem;
+    cursor: pointer;
+
+    @media (hover: hover) {
+      &:hover {
+        color: var(--color-base-content);
+      }
+    }
+
+    svg {
+      fill: currentColor;
+      width: 1.2rem;
+      height: 1.2rem;
+    }
+  }
+}

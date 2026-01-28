@@ -1,0 +1,43 @@
+<menu class="flex flex-col">
+    {{ nav handle="{release:nav:handle}" }}
+        {{ $depth_1_index = {index} }}
+        <li x-data="{active: null}">
+            {{ if children }}
+                <h2 class="block">
+                    <button
+                        class="group flex justify-between w-full text-left text-xs font-semibold text-base-content my-1 px-4 py-2 rounded-xl relative items-center cursor-pointer hover:bg-black/3 dark:hover:bg-white/5 group-hover:text-base-content-focus"
+                        @click="active = active ? null : `{{ index }}`"
+                        :aria-expanded="active == `{{ index }}`"
+                    >
+                        {{ title }}
+
+                        {{ svg src="icon/caret-right" class="size-3 fill-current ml-2 group-aria-expanded:rotate-90 transition duration-100" aria-hidden="true" }}
+                    </button>
+                </h2>
+                <ul class="flex flex-col pl-3"
+                    {{ if ({children} | where('uri', {current_uri}) | count) == 1 }}
+                        x-init="active = '{{ $depth_1_index }}'"
+                    {{ else }}
+                        x-cloak
+                    {{ /if }}
+                    x-show="active == `{{ $depth_1_index }}`"
+                    x-collapse.duration.300
+                >
+                    {{ children }}
+                        <li>
+                            <a href="{{ uri }}" class="block items-center relative text-xs text-base-content/80 px-4 py-2 rounded-xl hover:bg-black/5 dark:hover:bg-white/4 {{ if is_current }} bg-primary/15 !text-primary hover:bg-primary/15! {{ /unless }}">
+                                {{ title }}
+                            </a>
+                        </li>
+                    {{ /children }}
+                </ul>
+            {{ /else }}
+                <li>
+                    <a href="{{ uri }}" class="block items-center relative text-xs text-base-content/80 px-4 py-2 rounded-xl hover:bg-black/5 dark:hover:bg-white/4 {{ if is_current }} bg-primary/15 !text-primary hover:bg-primary/15! {{ /unless }}">
+                        {{ title }}
+                    </a>
+                </li>
+            {{ /if }}
+        </li>
+    {{ /nav }}
+</menu>

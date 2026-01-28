@@ -2,103 +2,101 @@
 
 namespace App\Tags;
 
+use Exception;
+use Statamic\Exceptions\CollectionNotFoundException;
 use Statamic\Facades\Collection;
 use Statamic\Facades\Entry;
 use Statamic\Facades\Site;
+use Statamic\Tags\TagNotFoundException;
 use Statamic\Tags\Tags;
 
 class Project extends Tags
 {
     public function index()
     {
-        if (! isset($this->context['collection'])) {
-            return [];
+        return [];
+    }
+
+    public function wildcard(string $tag)
+    {
+        $parts = explode(':', $tag);
+
+        [$first, $second, $third] = array_pad($parts, 3, null);
+
+        if ($first && ! isset($second)) {
+            $method = $first;
         }
 
-        return $this->getRelease($this->context['collection'] ?? null)['entry'];
-    }
+        if ($first == 'entry') {
+            $method = 'entry';
+            $wildcard = $second;
+        }
 
-    public function entry()
-    {
-        return $this->getRelease($this->context['collection'] ?? null)['entry'];
-    }
+        if ($first == 'stable' && $second == 'entry') {
+            $method = 'stableEntry';
+            $wildcard = $third;
+        }
 
-    public function versions()
-    {
-        return $this->getRelease($this->context['collection'] ?? null)['versions'];
-    }
+        if ($first == 'stable' && $second == 'url') {
+            $method = 'stableUrl';
+        }
 
-    public function githubRepoUrl()
-    {
-        return $this->getRelease($this->context['collection'] ?? null)['github_repo_url'];
-    }
+        if (! method_exists($this, $method)) {
+            throw new TagNotFoundException("Cannot find method [{$method}]");
+        }
 
-    public function githubEditUrl()
-    {
-        return $this->getRelease($this->context['collection'] ?? null)['github_edit_url'];
-    }
+        if (isset($wildcard)) {
+            return $this->{$method}($wildcard);
+        } else {
+            return $this->{$method}();
+        }
 
-    public function title()
-    {
-        return $this->getRelease($this->context['collection'] ?? null)['title'];
-    }
-
-    public function latestStableVersion()
-    {
-        return $this->getRelease($this->context['collection'] ?? null)['latest_stable_version'];
-    }
-
-    public function latestStableVersionUrl()
-    {
-        return $this->getRelease($this->context['collection'] ?? null)['latest_stable_version_url'];
-    }
-
-    public function hasVersions()
-    {
-        return $this->getRelease($this->context['collection'] ?? null)['has_versions'];
+        throw new TagNotFoundException("Tag {{ {$tag} }} not found");
     }
 
     /**
-     * Gets the project information from the collection that is retrieved
-     * from the current context.
-     *
-     * @param  Collection  $collection
-     * @return array
+     * {{ project:entry }} || {{ project:entry:* }}
      */
-    private function getRelease($collection)
+    public function entry(?string $wildcard = null)
     {
-        if (! $collection) {
-            return [];
+        if ($wildcard) {
+            // Automatically returns null if nothing is found,
+            // sending nothing back to the tag.
+            return $this->project()->{$wildcard};
         }
 
-        $collection = $collection->value()->handle();
-
-        $release = Entry::query()
-            ->where('collection', 'releases')
-            ->where('version_collection', $collection)
-            ->first();
-
-        $parent = $release->parent();
-
-        return [
-            'entry' => $parent,
-            'project' => $parent->slug(),
-            'title' => $parent->title(),
-            'latest_stable_version' => $parent->latest_stable_release ?? null,
-            'latest_stable_version_url' => $this->getLatestStableVersionUrl($parent),
-            'versions' => $this->getProjectVersions($parent),
-            'has_versions' => $parent->flattenedPages()->count() > 1,
-        ];
+        return $this->project();
     }
 
-    private function getLatestStableVersionUrl($parent)
+    /**
+     * {{ project:stable:entry }} || {{ project:stable:entry:* }}
+     */
+    public function stableEntry(?string $wildcard = null)
     {
-        if (! $parent->latest_stable_release) {
+        if (! $this->project()->latest_stable_release) {
+            throw new \Exception('You must have a latest stable release. Go to your project entry in the Releases collection and add one.');
+        }
+
+        if ($wildcard) {
+            // Automatically returns null if nothing is found,
+            // sending nothing back to the tag.
+            return $this->project()->latest_stable_release->{$wildcard};
+        }
+
+        return $this->project()->latest_stable_release;
+    }
+
+    /**
+     * {{ project:stable:url }}
+     */
+    public function stableUrl()
+    {
+        if (! $this->project()->latest_stable_release) {
             throw new \Exception('You must have a latest stable release. Go to your project entry in the Releases collection and add one.');
         }
 
         return Entry::find(
-            Collection::findByHandle($parent->latest_stable_release->version_collection->handle())
+            Collection::findByHandle($this->project()->latest_stable_release->version_collection->handle())
                 ->structure()
                 ->in(Site::current()->handle())
                 ->tree()[0]['entry']
@@ -107,38 +105,88 @@ class Project extends Tags
     }
 
     /**
-     * Given a parent page, this will return an array of its children
+     * {{ project:versions }}
      */
-    private function getProjectChildren(\Statamic\Structures\Page $parent): array
+    public function versions()
     {
-        return $parent
+        $children = Entry::query()
+            ->where('collection', 'releases')
+            ->where('version_collection', $this->getCollectionHandle())
+            ->first()
+            ->parent()
             ->flattenedPages()
             ->map(function ($page) {
                 return $page->id();
             })
             ->toArray();
-    }
 
-    /**
-     * Given a parent page, this will return an array of its childrens versions
-     */
-    private function getProjectVersions(\Statamic\Structures\Page $parent): array
-    {
-        return collect($this->getProjectChildren($parent))
+        $versions = collect($children)
             ->map(function ($child) {
                 $release = Entry::find($child);
                 $releaseCollection = Collection::find($release->get('version_collection'));
                 $releaseCollectionHomeId = $releaseCollection?->structure()->in(Site::current()->handle())->tree()[0]['entry'];
 
                 return [
-                    'version' => $release->get('version'),
+                    'entry' => $release,
+                    'version' => $release->version,
                     'url' => Entry::find($releaseCollectionHomeId)?->url(),
-                    'label' => $release->get('label'),
+                    'label' => $release->label,
                 ];
 
             })
             ->reverse()
             ->values()
             ->toArray();
+
+        return $versions;
+    }
+
+    /**
+     * {{ project:versioned }}
+     */
+    public function versioned()
+    {
+        $count = Entry::query()
+            ->where('collection', 'releases')
+            ->where('version_collection', $this->getCollectionHandle())
+            ->first()
+            ->parent()
+            ->flattenedPages()
+            ->count();
+
+        return $count > 1;
+    }
+
+    private function getCollectionHandle()
+    {
+        $collection = $this->params->get('collection') ?? $this->context->get('collection');
+
+        // The context or param might be giving us an augmented
+        // value, convert it to a string instead
+        if ($collection instanceof \Statamic\Fields\Value) {
+            $collection = $collection->handle;
+        }
+
+        // It might even be passed in as the collection entry
+        // perhaps through the page:collection page context
+        if ($collection instanceof \Statamic\Entries\Collection) {
+            $collection = $collection->handle;
+        }
+
+        throw_if(! $collection, new Exception('Cannot find collection in context or tag params.'));
+
+        throw_if(! Collection::findByHandle($collection), new CollectionNotFoundException($collection));
+
+        return $collection;
+    }
+
+    private function project()
+    {
+        $release = Entry::query()
+            ->where('collection', 'releases')
+            ->where('version_collection', $this->getCollectionHandle())
+            ->first();
+
+        return Entry::findOrFail($release->parent()->id);
     }
 }

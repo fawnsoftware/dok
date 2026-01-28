@@ -1,0 +1,31 @@
+
+<footer class="mt-auto pb-10 flex flex-wrap items-center justify-between py-5 gap-3">
+    {{ if {release:entry:github_repository_url} }}
+        <div>
+            <a
+                href="{{ {release:entry:github_repository_url} | ensure_left('https://') }}"
+                class="btn btn-outline"
+                target="_blank"
+            >
+                {{ svg src="icon/github-logo" class="size-4" aria-hidden="true" }}
+                <span>Github</span>
+            </a>
+        </div>
+    {{ /if }}
+
+        {{ if {release:entry:github_edit_url} }}
+        <a
+            href="{{ {release:entry:github_edit_url} | ensure_left('https://') | ensure_right('/') }}{{ resource_location.shortPath }}"
+            class="btn btn-outline"
+            target="_blank"
+        >
+            <span>{{ svg src="icon/pencil-simple" class="size-4 fill-current" aria-hidden="true" }}</span>
+            Suggest edits
+            <span class="sr-only">Opens in new tab</span>
+        </a>
+    {{ /if }}
+
+    <div class="ml-auto">
+        {{ partial:partials/theme_picker }}
+    </div>
+</footer>

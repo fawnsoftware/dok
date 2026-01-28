@@ -1,33 +1,5 @@
 A beautiful documentation starter kit.
 
-## **New in v2.0:**
-* Added Torchlight Engine as the recommended **code highlighter**.
-* New **hints** extension for callouts, tips etc.
-* New **copy code** button.
-* New **language label** (Torchlight Engine only).
-* New custom breadcrumbs that work from the _navigation_ instead of the current URI.
-* Better designed sidebar navigation. You can now choose between 2 different templates that come with different styles and functionality.
-* Enhanced visual styles.
-* Numerous other fixes and accessibility improvements.
-
-## Features
-* Tailwind 4
-* AlpineJS
-* Light & Dark theme
-* Easily create **new themes** with css variables
-* [**Phosphor Icons**](https://phosphoricons.com) used as icons
-* Add an unlimited amount of **projects**
-* Unlimited **versions** per project
-* Fully **accessible**
-* Built for **fast loading times**
-* Simple progressive **View Transitions**
-* **Highly customisable** typography styles
-* Host your content on **Statamic** or **Github**
-* Sync from GitHub, even from multiple **repositories** and **organisations**.
-* Sync via **control panel**, on a **command**
-* **Permalink** and **Table of contents** markdown extensions preinstalled.
-* Torchlight Engine or Shiki for **code highlighting**
-
 ### Projects and versions
 You can host multiple projects and manage different versions for each project. This is handled through the releases collection. To add a new project or version, simply create a new entry in the collection and configure the required fields.
 

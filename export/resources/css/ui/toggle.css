@@ -1,0 +1,66 @@
+.toggle {
+  @layer ui.components {
+    --toggle-size: --spacing(8);
+    --toggle-padding: --spacing(1);
+
+    appearance: none;
+    position: relative;
+    display: inline-grid;
+    cursor: pointer;
+    grid-template-columns: 0fr 1fr 1fr;
+    padding: var(--toggle-padding);
+    height: var(--toggle-size);
+    width: calc(
+      (var(--toggle-size) * 2) - (var(--border-width) + var(--toggle-padding)) *
+        2
+    );
+    border-radius: 9999px;
+    place-content: center;
+    background-color: var(--field-background);
+    border-width: var(--border-width);
+    border-color: var(--field-border-color);
+    transition:
+      grid-template-columns 250ms,
+      border-color 250ms,
+      background-color 250ms,
+      outline-width 80ms;
+
+    &.input-invalid,
+    &[aria-invalid="true"] {
+      --field-border-color: var(--color-error);
+    }
+
+    &::after {
+      content: "";
+      aspect-ratio: 1;
+      height: 100%;
+      grid-column-start: 2;
+      background-color: var(--color-base-content);
+      border-radius: 50%;
+      transition: background-color 250ms;
+    }
+
+    &:checked {
+      background-color: var(--color-primary);
+      border-color: --alpha(var(--color-primary-content) / 20%);
+      grid-template-columns: 1fr 1fr 0fr;
+
+      &::after {
+        background-color: --alpha(var(--color-primary-content) / 75%);
+      }
+    }
+
+    &:focus-visible {
+      outline: var(--focus-width) var(--focus-style) var(--focus-color);
+      outline-offset: var(--focus-offset);
+    }
+  }
+}
+
+.toggle-sm {
+  @layer ui.modifiers {
+    --toggle-size: --spacing(6);
+    --toggle-padding: 2px;
+    --border-width: 1px;
+  }
+}

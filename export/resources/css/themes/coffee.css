@@ -1,0 +1,19 @@
+[data-theme="coffee"] {
+  --color-base-100: oklch(24% 0.023 329.708);
+  --color-base-200: oklch(21% 0.021 329.708);
+  --color-base-300: oklch(16% 0.019 329.708);
+  --color-base-content: oklch(83.302% 0.003 326.261);
+  --color-primary: oklch(71.996% 0.123 62.756);
+  --color-primary-content: oklch(14.399% 0.024 62.756);
+
+  --field-color: var(--color-base-content);
+  --field-background: --alpha(var(--color-base-content) / 15%);
+  --field-shadow: none;
+  --field-border-color: --alpha(var(--color-base-content) / 20%);
+
+  --radius-box: 1rem;
+  --radius-control: 0.65rem;
+  --radius-notch: 0.3rem;
+
+  --border-width: 1px;
+}

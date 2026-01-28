@@ -1,0 +1,32 @@
+@layer base {
+  /*
+    Workaround for Safari bug. If you change the font size
+    or line height, you'll need to update this.
+    https://bugs.webkit.org/show_bug.cgi?id=198959
+  */
+  ::-webkit-datetime-edit {
+    display: inline-flex;
+    align-items: center;
+    min-height: 1.25rem;
+  }
+
+  ::-webkit-datetime-edit-text,
+  ::-webkit-datetime-edit-year-field,
+  ::-webkit-datetime-edit-month-field,
+  ::-webkit-datetime-edit-day-field,
+  ::-webkit-datetime-edit-hour-field,
+  ::-webkit-datetime-edit-minute-field,
+  ::-webkit-datetime-edit-second-field,
+  ::-webkit-datetime-edit-millisecond-field,
+  ::-webkit-datetime-edit-meridiem-field {
+    padding-top: 0;
+    padding-bottom: 0;
+  }
+
+  ::-webkit-search-decoration,
+  ::-webkit-search-cancel-button,
+  ::-webkit-search-results-button,
+  ::-webkit-search-results-decoration {
+    display: none;
+  }
+}

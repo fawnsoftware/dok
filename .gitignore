@@ -6,6 +6,7 @@
 .env.production
 .phpunit.result.cache
 Homestead.json
+export/content/docs
 Homestead.yaml
 auth.json
 npm-debug.log

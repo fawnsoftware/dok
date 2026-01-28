@@ -1,7 +1,33 @@
 title: Content
 fields:
   -
+    handle: use_synced_content
+    field:
+      type: toggle
+      display: 'Use synced content'
+      instructions: 'Instead of writing markdown for the content field, use a synced file.'
+  -
     handle: content
     field:
       type: markdown
       display: Content
+      localizable: true
+      if:
+        use_synced_content: 'equals false'
+  -
+    handle: resource_location
+    field:
+      dictionary: resource_locations
+      max_items: 1
+      type: dictionary
+      display: 'Resource location'
+      if:
+        use_synced_content: 'equals true'
+  -
+    handle: synced_content
+    field:
+      type: markdown
+      display: Content
+      visibility: computed
+      if:
+        use_synced_content: 'equals true'

@@ -1,0 +1,45 @@
+{{ form:create :in="handle" js="alpine:form" attr:x-ref="form" }}
+    <div x-data="precognitionForm()" x-ref="formInner" class="grid grid-cols-1 gap-7 scroll-mt-30">
+
+        <div class="hidden">
+            <label class="font-medium" for="{{ honeypot }}">{{ trans:strings.form_honeypot }} <sup class="text-red-700">*</sup></label>
+            <input class="w-full form-input" id="{{ honeypot }}" type="text" name="{{ honeypot }}" x-model="form.{{ honeypot }}" tabindex="-1" autocomplete="off"/>
+        </div>
+
+        <template x-if="form.hasErrors && submitted">
+            <x-hint type="error" title="{{ trans:strings.form_error_title }}">
+                <ul class="list-disc list-inside">
+                    <template x-for="(error, index) in form.errors">
+                        <li x-text="error"></li>
+                    </template>
+                </ul>
+            </x-hint>
+        </template>
+
+        <template x-if="success">
+            <x-hint type="success" title="{{ trans:strings.form_success_title }}">
+                <p>{{ trans:strings.form_success_message }}</p>
+            </x-hint>
+        </template>
+
+        {{ sections }}
+            <fieldset class="group">
+                {{ if display }}
+                    <legend class="h3 mb-3 w-full mt-5 pt-5 group-not-has-[>p]:mb-10">
+                        {{ display }}
+                    </legend>
+                {{ /if }}
+
+                {{ if instructions }}
+                    <p class="text-base-content/80 mb-10">{{ instructions }}</p>
+                {{ /if }}
+
+                <div class="grid w-full gap-8 md:grid-cols-12">
+                    {{ partial:partials/form_fields }}
+                </div>
+            </fieldset>
+        {{ /sections }}
+
+        <button class="mt-10 btn btn-lg btn-primary" @click.prevent="submit" :aria-disabled="form.processing">Submit</button>
+    </div>
+{{ /form:create }}

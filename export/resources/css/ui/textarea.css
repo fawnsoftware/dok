@@ -1,0 +1,31 @@
+.textarea {
+  @layer ui.components {
+    appearance: none;
+    background-color: var(--field-background);
+    border-style: solid;
+    border-width: var(--border-width);
+    border-color: var(--field-border-color);
+    font-size: 1rem;
+    color: var(--field-color);
+    box-shadow: var(--field-shadow);
+    padding: --spacing(3) --spacing(3.5);
+    border-radius: var(--radius-control);
+    width: 100%;
+    transition: outline-width 0.08s linear;
+
+    &.input-invalid,
+    &[aria-invalid="true"] {
+      --field-border-color: var(--color-error);
+    }
+
+    &::placeholder {
+      opacity: 1;
+      color: --alpha(var(--color-base-content) / 50%);
+    }
+
+    &:focus-visible {
+      outline: var(--focus-width) var(--focus-style) var(--focus-color);
+      outline-offset: var(--focus-offset);
+    }
+  }
+}

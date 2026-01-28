@@ -1,0 +1,26 @@
+{{ foreach:options as="option|label" }}
+    <label class="inline-flex items-center">
+        <input
+            id="{{ id }}-{{ option | slugify }}-option"
+            type="radio"
+            name="{{ handle }}"
+            value="{{ option }}"
+            x-model="form.{{ handle }}"
+            @change="form.validate('{{ handle }}')"
+            class="radio"
+            {{ if value == option }}checked{{ /if }}
+            {{ if validate|contains:required }}required{{ /if }}
+            {{ if error }}
+                aria-invalid="true" aria-describedby="{{ id }}-error"
+            {{ elseif instructions }}
+                aria-describedby="{{ id }}-instructions"
+            {{ /if }}
+        >
+        <span class="ml-2 text-base-content inline-block">
+            {{ label !== null ? label : option }}
+        </span>
+    </label>
+    {{ unless inline }}
+        <br>
+    {{ /unless }}
+{{ /foreach:options }}

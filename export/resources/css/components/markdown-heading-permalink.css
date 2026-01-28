@@ -1,0 +1,40 @@
+/*
+    Markdown Permalinks
+
+    If you have enabled the markdown extension and want to change
+    the style of your permalinks, you can do so here.
+*/
+
+@layer components {
+  .prose {
+    h1:has(.heading-permalink),
+    h2:has(.heading-permalink),
+    h3:has(.heading-permalink),
+    h4:has(.heading-permalink) {
+      position: relative;
+      scroll-margin: --spacing(38);
+
+      & .heading-content {
+        cursor: pointer;
+      }
+    }
+
+    & .heading-permalink {
+      position: absolute;
+      left: calc((var(--spacing) * 4.5) * -1);
+      font-size: 0.7em;
+      line-height: 2.7;
+      text-decoration: none;
+
+      @variant hover {
+        font-weight: 900;
+      }
+
+      @media (min-width: theme(--breakpoint-lg)) {
+        font-size: 0.8em;
+        line-height: 2.2;
+        left: calc((var(--spacing) * 6) * -1);
+      }
+    }
+  }
+}
