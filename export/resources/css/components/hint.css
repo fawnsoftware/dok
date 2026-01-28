@@ -1,0 +1,79 @@
+@layer components {
+  .hint {
+    display: flex;
+    padding: --spacing(5);
+    color: inherit;
+    overflow: hidden;
+    border: 1px solid var(--hint-accent);
+    border-radius: var(--radius-control);
+    background:
+      linear-gradient(
+        --alpha(var(--hint-accent) / 3%),
+        --alpha(var(--hint-accent) / 3%)
+      ),
+      var(--color-base-100);
+  }
+
+  .hint-content-container {
+    width: 100%;
+    min-width: 0;
+  }
+
+  .hint-title {
+    display: flex;
+    align-items: center;
+    margin: 0;
+    font-size: var(--font-md);
+    gap: --spacing(2);
+    font-weight: var(--font-weight-semibold);
+    color: var(--hint-accent);
+  }
+
+  .hint-icon {
+    padding-right: --spacing(3);
+    padding-top: --spacing(0.6);
+    color: var(--hint-accent);
+
+    & svg {
+      width: 20px;
+      height: 20px;
+      fill: currentColor;
+    }
+  }
+
+  .hint-content {
+    :where(p:first-child) {
+      margin-top: 0;
+    }
+  }
+
+  .hint-important {
+    --hint-accent: var(--color-important);
+  }
+
+  .hint-caution,
+  .hint-error {
+    --hint-accent: var(--color-error);
+  }
+
+  .hint-note {
+    --hint-accent: var(--color-note);
+  }
+
+  .hint-tip {
+    --hint-accent: var(--color-tip);
+  }
+
+  .hint-warning {
+    --hint-accent: var(--color-warning);
+  }
+
+  .hint-sm {
+    padding: --spacing(1);
+  }
+
+  .hint-soft {
+    background: none;
+    border: none;
+  }
+}

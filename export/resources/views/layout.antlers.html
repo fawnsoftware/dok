@@ -1,15 +1,26 @@
-<!doctype html>
-<html lang="{{ site:short_locale }}" class="dark">
+<!DOCTYPE html>
+<html lang="{{ site:short_locale }}" data-theme="forest">
     <head>
         <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <title>{{ title ?? site:name }}</title>
 
-        {{ vite src="resources/js/index.js|resources/css/site.css" }}
+        {{ partial:layout/favicon }}
+
+        {{ partial:helpers/theme }}
+
+        {{ vite src="resources/js/site/index.js|resources/css/site.css" }}
     </head>
-    <body class="antialiased font-default bg-midnight-900">
-        {{ template_content }}
+    <body class="antialiased font-default text-base bg-base-100">
+
+        {{ partial:layout/header }}
+
+        <main>
+            {{ template_content }}
+        </main>
+
+        {{ partial:layout/footer }}
 
         {{ stack:popovers }}
         {{ stack:scripts }}

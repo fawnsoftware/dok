@@ -1,0 +1,50 @@
+
+<x-dropdown name="theme-picker" anchor="top.offset.20">
+    <x-slot:button>
+        <button
+            class="btn btn-outline touch-manipulation"
+            x-ref="button"
+            x-bind="button"
+        >
+            {{ svg src="icon/sun-dim" class="fill-current size-5" aria-hidden="true" }}
+            <span class="sr-only">Theme</span>
+            {{ svg src="icon/caret-down" class="size-2.5 ml-auto" aria-hidden="true" }}
+        </button>
+    </x-slot:button>
+    <x-slot:content>
+        <div class="flex text-left flex-col gap-1" x-data="themePicker()">
+            <x-dropdown.section>
+                <h2 class="block font-medium text-sm pb-3 text-base-content/90 contrast-more:text-base-content">
+                    Theme
+                </h2>
+                <div role="radiogroup" class="flex flex-col gap-1">
+                    <template x-for="theme in themes" :key="theme.id">
+                        <div>
+                            <button
+                                role="menuitemradio"
+                                class="text-base-content flex items-center py-1 rounded-notch px-2 cursor-pointer hover:bg-base-content/10 justify-between text-xs text-left group w-full  aria-checked:text-primary"
+                                :aria-checked="currentTheme === theme.id"
+                                @click="enableTheme(theme.id)"
+                            >
+                                <span x-text="theme.name"></span>
+                                <div class="size-4">
+                                    {{ svg src="icon/check" class="size-full hidden fill-current group-aria-checked:block" aria-hidden="true" }}
+                                </div>
+                            </button>
+                        </div>
+                    </template>
+                </div>
+            </x-dropdown.section>
+
+            <x-dropdown.section>
+                <label for="theme-contrast-more" class="flex items-center justify-between cursor-pointer">
+                    <span class="block text-xs select-none pb-1 text-base-content/90 contrast-more:text-base-content">
+                        More Contrast
+                    </span>
+
+                    <input role="menuitemcheckbox" type="checkbox" class="toggle toggle-sm" id="theme-contrast-more" x-ref="moreContrastCheckbox" @change="handleMoreContrastChange($el)">
+                </label>
+            </x-dropdown.section>
+        </div>
+    </x-slot:content>
+</x-dropdown>

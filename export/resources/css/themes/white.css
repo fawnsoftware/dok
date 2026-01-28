@@ -1,0 +1,28 @@
+[data-theme="white"] {
+  --color-base-100: oklch(100% 0.00011 271.152);
+  --color-base-200: oklch(99.779% 0.00104 11.135);
+  --color-base-300: oklch(100% 0.00011 271.152);
+  --color-base-content: oklch(0% 0 0);
+  --color-primary: oklch(43.376% 0.29226 264.163);
+  --color-primary-content: oklch(100% 0.00011 271.152);
+
+  --color-important-base: oklch(0.8711 0.0457 279.94);
+  --color-error-base: oklch(0.9232 0.0455 347.88);
+  --color-warning-base: oklch(0.9488 0.0523 92.93);
+  --color-note-base: oklch(0.9093 0.0344 219.87);
+  --color-tip-base: oklch(0.9213 0.0475 202.91);
+
+  --field-color: var(--color-base-content);
+  --field-background: --alpha(var(--color-base-content) / 5%);
+  --field-shadow: none;
+  --field-border-color: --alpha(var(--color-base-content) / 20%);
+
+  --radius-box: 0rem;
+  --radius-control: 0rem;
+  --radius-notch: 0rem;
+
+  --border-width: 1px;
+
+  --focus-color: oklch(43.376% 0.29226 264.163);
+  --focus-offset: 0;
+}

@@ -1,0 +1,32 @@
+[data-theme="amethyst"] {
+  --color-base-100: oklch(97% 0.014 308.299);
+  --color-base-200: oklch(94% 0.033 307.174);
+  --color-base-300: oklch(90% 0.063 306.703);
+  --color-base-content: oklch(25.987% 0.08683 306.818);
+  --color-primary: oklch(54.922% 0.22774 321.059);
+  --color-primary-content: oklch(97% 0.014 343.198);
+
+  --color-important-base: oklch(0.8711 0.0457 279.94);
+  --color-error-base: oklch(0.9232 0.0455 347.88);
+  --color-warning-base: oklch(0.9488 0.0523 92.93);
+  --color-note-base: oklch(0.9093 0.0344 219.87);
+  --color-tip-base: oklch(0.9213 0.0475 202.91);
+
+  --field-color: var(--color-base-content);
+  --field-background: --alpha(var(--color-primary) / 5%);
+  --field-shadow: 0 1.5px 4px 0 --alpha(var(--color-primary) / 10%);
+  --field-border-color: --alpha(var(--color-base-content) / 30%);
+
+  --radius-box: 1rem;
+  --radius-control: 1rem;
+  --radius-notch: 0.5rem;
+
+  --border-width: 1px;
+
+  @variant contrast-more {
+    --color-base-100: oklch(100% 0.00011 271.152);
+    --color-base-200: oklch(99.537% 0.00292 307.085);
+    --color-base-300: oklch(97.415% 0.01554 306.182);
+    --color-base-content: oklch(27.266% 0.10167 306.552);
+  }
+}

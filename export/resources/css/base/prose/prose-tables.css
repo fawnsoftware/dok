@@ -1,0 +1,78 @@
+@layer base {
+  .prose {
+    @variant prose-table-wrapper {
+      overflow-x: auto;
+      max-width: 100%;
+      padding: --spacing(1);
+      margin-top: --spacing(4);
+      margin-bottom: --spacing(4);
+      border-radius: var(--radius-box);
+      background-color: transparent;
+
+      table {
+        margin: 0;
+      }
+    }
+
+    @variant prose-table {
+      width: 100%;
+      table-layout: auto;
+      text-align: left;
+      margin-top: --spacing(4);
+      margin-bottom: --spacing(4);
+      color: var(--prose-table-color);
+      font-size: 0.86rem;
+      background-color: transparent;
+      border-color: var(--prose-table-border-color);
+    }
+
+    @variant prose-thead {
+      border-bottom-width: 2px;
+      border-bottom-color: var(--prose-table-border-color);
+      background: transparent;
+    }
+
+    @variant prose-th {
+      color: var(--prose-table-header-color);
+      font-weight: 800;
+      padding: --spacing(2);
+      vertical-align: bottom;
+    }
+
+    @variant prose-tr {
+      border-bottom-width: 1px;
+      border-bottom-color: var(--prose-table-border-color);
+    }
+
+    @variant prose-td {
+      padding: --spacing(2);
+    }
+  }
+}
+
+@layer prose.children {
+  .prose {
+    /* Give table cells no padding if they're the first one (on the left) */
+    :where(
+      tbody td:first-child,
+      tfoot td:first-child,
+      thead th:first-child
+    ):not(:where(.not-prose, .not-prose *)) {
+      padding-left: 0;
+    }
+
+    /* Give table cells no padding if they're the last one (on the right) */
+    :where(tbody td:last-child, tfoot td:last-child, thead th:last-child):not(
+      :where(.not-prose, .not-prose *)
+    ) {
+      padding-right: 0;
+    }
+
+    /* Remove the bottom border from the last row, if it has one */
+    :where(tbody tr:last-child, tfoot tr:last-child):not(
+      :where(.not-prose, .not-prose *)
+    ) {
+      border-width: 0;
+    }
+  }
+}

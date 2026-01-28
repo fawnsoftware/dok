@@ -1,0 +1,29 @@
+[data-theme="forest"] {
+  --color-base-100: oklch(23.555% 0.01194 270.878);
+  --color-base-200: oklch(0.2025 0.0099 285.48);
+  --color-base-300: oklch(0.1947 0.0101 294.62);
+  --color-base-content: oklch(0.9432 0.0174 159.11);
+  --color-primary: oklch(0.8317 0.1682 153.91);
+  --color-primary-content: oklch(0.2735 0.0193 148.1);
+
+  --field-color: var(--color-white);
+  --field-background: color-mix(
+    in oklch,
+    var(--color-base-content) 10%,
+    var(--color-base-100)
+  );
+  --field-shadow: none;
+  --field-border-color: --alpha(var(--color-base-content) / 7%);
+
+  --radius-box: 1.3rem;
+  --radius-control: 0.65rem;
+  --radius-notch: 0.3rem;
+
+  --border-width: 1px;
+
+  @variant contrast-more {
+    --color-base-100: oklch(0.1998 0.0079 211.09);
+    --color-base-200: oklch(0.1557 0.0049 196.66);
+    --color-base-300: oklch(0.1514 0.0054 219.64);
+  }
+}

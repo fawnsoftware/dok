@@ -1,0 +1,15 @@
+{{ if {release:outdated} }}
+    <div class="mb-10 w-full">
+        <x-hint type="warning">
+            <div class="prose prose-sm">
+                <p>
+                    You're viewing the documentation for an older version of {{ project:entry:name }}.
+                    Consider upgrading your project to
+                    <a href="{{ project:stable:url }}">
+                        <span class="font-semibold">version {{ project:stable:entry:version }}</span>
+                    </a>
+                </p>
+            </div>
+        </x-hint>
+    </div>
+{{ /if }}

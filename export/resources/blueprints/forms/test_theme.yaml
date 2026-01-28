@@ -1,0 +1,156 @@
+tabs:
+  main:
+    display: Main
+    sections:
+      -
+        display: Section
+        instructions: 'This is a form section'
+        fields:
+          -
+            handle: text
+            field:
+              type: text
+              display: Text
+              validate:
+                - required
+          -
+            handle: text_wrapped
+            field:
+              prepend: 'https://'
+              append: .com
+              type: text
+              display: 'Text (Wrapped)'
+              validate:
+                - required
+          -
+            handle: select
+            field:
+              options:
+                -
+                  key: option_1
+                  value: 'Option 1'
+                -
+                  key: option_2
+                  value: 'Option 2'
+                -
+                  key: option_3
+                  value: 'Option 3'
+              type: select
+              display: Select
+              validate:
+                - required
+          -
+            handle: textarea
+            field:
+              type: textarea
+              display: Textarea
+              validate:
+                - required
+          -
+            handle: toggle
+            field:
+              type: toggle
+              display: Toggle
+              validate:
+                - required
+                - accepted
+              width: 50
+          -
+            handle: toggle_labels
+            field:
+              inline_label: 'Inline Label'
+              inline_label_when_true: 'Inline Label When True'
+              type: toggle
+              display: 'Toggle (Labels)'
+              width: 50
+          -
+            handle: checkboxes
+            field:
+              options:
+                -
+                  key: option_1
+                  value: 'Option 1'
+                -
+                  key: option_2
+                  value: 'Option 2'
+                -
+                  key: option_3
+                  value: 'Option 3'
+              type: checkboxes
+              display: Checkboxes
+              width: 50
+              validate:
+                - required
+          -
+            handle: checkboxes_inline
+            field:
+              options:
+                -
+                  key: option_1
+                  value: 'Option 1'
+                -
+                  key: option_2
+                  value: 'Option 2'
+                -
+                  key: option_3
+                  value: 'Option 3'
+              inline: true
+              type: checkboxes
+              display: 'Checkboxes (Inline)'
+              width: 50
+              always_save: false
+              validate:
+                - required
+          -
+            handle: radio
+            field:
+              options:
+                -
+                  key: option_1
+                  value: 'Option 1'
+                -
+                  key: option_2
+                  value: 'Option 2'
+                -
+                  key: option_3
+                  value: 'Option 3'
+              type: radio
+              display: Radio
+              width: 50
+              validate:
+                - required
+          -
+            handle: radios_inline
+            field:
+              options:
+                -
+                  key: option_1
+                  value: 'Option 1'
+                -
+                  key: option_2
+                  value: 'Option 2'
+                -
+                  key: option_3
+                  value: 'Option 3'
+              inline: true
+              type: radio
+              display: 'Radios (Inline)'
+              width: 50
+              validate:
+                - required
+          -
+            handle: files
+            field:
+              type: files
+              display: Files
+              validate:
+                - required
+      -
+        display: Section
+        instructions: 'This is a form section'
+        fields:
+          -
+            handle: text_2
+            field:
+              type: text
+              display: Text

@@ -1,0 +1,215 @@
+@custom-variant test {
+  .test :where():not(:where(.not-prose, .not-prose *)) {
+    @slot;
+  }
+}
+
+@custom-variant prose-headings {
+  :where(h1, h1, h2, h3, h4):not(:where(.not-prose, .not-prose *)) {
+    @slot;
+  }
+}
+
+@custom-variant prose-h1 {
+  :where(h1):not(:where(.not-prose, .not-prose *)) {
+    @slot;
+  }
+}
+
+@custom-variant prose-h2 {
+  :where(h2):not(:where(.not-prose, .not-prose *)) {
+    @slot;
+  }
+}
+
+@custom-variant prose-h3 {
+  :where(h3):not(:where(.not-prose, .not-prose *)) {
+    @slot;
+  }
+}
+
+@custom-variant prose-h4 {
+  :where(h4):not(:where(.not-prose, .not-prose *)) {
+    @slot;
+  }
+}
+
+@custom-variant prose-p {
+  :where(p):not(:where(.not-prose, .not-prose *)) {
+    @slot;
+  }
+}
+
+@custom-variant prose-a {
+  :where(a):not(:where(.not-prose, .not-prose *)) {
+    @slot;
+  }
+}
+
+@custom-variant prose-blockquote {
+  :where(blockquote):not(:where(.not-prose, .not-prose *)) {
+    @slot;
+  }
+}
+
+@custom-variant prose-figure {
+  :where(figure):not(:where(.not-prose, .not-prose *)) {
+    @slot;
+  }
+}
+
+@custom-variant prose-figcaption {
+  :where(figcaption):not(:where(.not-prose, .not-prose *)) {
+    @slot;
+  }
+}
+
+@custom-variant prose-strong {
+  :where(strong):not(:where(.not-prose, .not-prose *)) {
+    @slot;
+  }
+}
+
+@custom-variant prose-em {
+  :where(em):not(:where(.not-prose, .not-prose *)) {
+    @slot;
+  }
+}
+
+@custom-variant prose-kbd {
+  :where(kbd):not(:where(.not-prose, .not-prose *)) {
+    @slot;
+  }
+}
+
+@custom-variant prose-code {
+  :where(code):not(:where(.not-prose, .not-prose *)) {
+    @slot;
+  }
+}
+
+@custom-variant prose-pre {
+  :where(pre):not(:where(.not-prose, .not-prose *)) {
+    @slot;
+  }
+}
+
+@custom-variant prose-ol {
+  :where(ol):not(:where(.not-prose, .not-prose *)) {
+    @slot;
+  }
+}
+
+@custom-variant prose-ul {
+  :where(ul):not(:where(.not-prose, .not-prose *)) {
+    @slot;
+  }
+}
+
+@custom-variant prose-li {
+  :where(li):not(:where(.not-prose, .not-prose *)) {
+    @slot;
+  }
+}
+
+@custom-variant prose-dl {
+  :where(dl):not(:where(.not-prose, .not-prose *)) {
+    @slot;
+  }
+}
+
+@custom-variant prose-dt {
+  :where(dt):not(:where(.not-prose, .not-prose *)) {
+    @slot;
+  }
+}
+
+@custom-variant prose-dd {
+  :where(dd):not(:where(.not-prose, .not-prose *)) {
+    @slot;
+  }
+}
+
+@custom-variant prose-table {
+  :where(table):not(:where(.not-prose, .not-prose *)) {
+    @slot;
+  }
+}
+
+@custom-variant prose-thead {
+  :where(thead):not(:where(.not-prose, .not-prose *)) {
+    @slot;
+  }
+}
+
+@custom-variant prose-tr {
+  :where(tbody tr):not(:where(.not-prose, .not-prose *)) {
+    @slot;
+  }
+}
+
+@custom-variant prose-th {
+  :where(thead th):not(:where(.not-prose, .not-prose *)) {
+    @slot;
+  }
+}
+
+@custom-variant prose-td {
+  :where(tbody td, tfoot td):not(:where(.not-prose, .not-prose *)) {
+    @slot;
+  }
+}
+
+@custom-variant prose-img {
+  :where(img):not(:where(.not-prose, .not-prose *)) {
+    @slot;
+  }
+}
+
+@custom-variant prose-picture {
+  :where(picture):not(:where(.not-prose, .not-prose *)) {
+    @slot;
+  }
+}
+
+@custom-variant prose-video {
+  :where(video):not(:where(.not-prose, .not-prose *)) {
+    @slot;
+  }
+}
+
+@custom-variant prose-hr {
+  :where(hr):not(:where(.not-prose, .not-prose *)) {
+    @slot;
+  }
+}
+
+@custom-variant prose-lead {
+  :where(.lead):not(:where(.not-prose, .not-prose *)) {
+    @slot;
+  }
+}
+
+@custom-variant prose-hint {
+  :where(.hint):not(:where(.not-prose, .not-prose *)) {
+    @slot;
+  }
+}
+
+@custom-variant prose-accordion {
+  :where(.accordion):not(:where(.not-prose, .not-prose *)) {
+    @slot;
+  }
+}
+
+@custom-variant prose-code-group {
+  :where(.code-group):not(:where(.not-prose, .not-prose *)) {
+    @slot;
+  }
+}
+
+@custom-variant prose-table-wrapper {
+  :where(.markdown-table-wrapper):not(:where(.not-prose, .not-prose *)) {
+    @slot;
+  }
+}

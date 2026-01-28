@@ -1,0 +1,96 @@
+@import "./prose-variants.css";
+@import "./prose-blocks.css";
+@import "./prose-code.css";
+@import "./prose-lists.css";
+@import "./prose-media.css";
+@import "./prose-tables.css";
+@import "./prose-media.css";
+@import "./prose-typography.css";
+
+@theme {
+  --prose-body-color: --alpha(var(--color-base-content) / 80%);
+  --prose-heading-color: var(--color-base-content);
+  --prose-marker-color: var(--color-base-content);
+  --prose-strong-color: var(--color-base-content);
+  --prose-anchor-color: var(--color-primary);
+  --prose-hr-color: --alpha(var(--color-base-content) / 20%);
+  --prose-code-color: var(--color-base-content);
+  --prose-code-background: --alpha(var(--color-base-content) / 15%);
+  --prose-pre-color: var(--color-base-content);
+  --prose-pre-background: rgb(45, 47, 56);
+  --prose-quote-color: var(--color-base-content);
+  --prose-quote-border-color: var(--color-primary);
+  --prose-table-color: var(--color-base-content);
+  --prose-table-header-color: var(--color-base-content);
+  --prose-table-border-color: --alpha(var(--color-base-content) / 20%);
+
+  --prose-container-width: 720px;
+  --prose-size: 1rem;
+  --prose-tracking: inherit;
+  --prose-weight: normal;
+}
+
+@layer prose.default {
+  .prose {
+    font-size: var(--prose-size, --text-base);
+    line-height: var(--prose-leading, --text-base--line-height);
+    color: var(--prose-body-color);
+    letter-spacing: inherit;
+
+    @variant contrast-more {
+      color: var(--color-base-content);
+      --prose-table-border-color: --alpha(var(--color-base-content) / 60%);
+      --prose-pre-background: rgb(19, 20, 22);
+    }
+  }
+
+  .prose-container {
+    max-width: var(--prose-container-width);
+    margin-left: auto;
+    margin-right: auto;
+  }
+}
+
+@layer prose.children {
+  .prose {
+    /* Ensure the first child of a prose container has no top margin */
+    :where(& > :first-child):not(:where(.not-prose, .not-prose *)) {
+      margin-top: 0;
+    }
+
+    /* Ensure the last child of a prose container has no bottom margin*/
+    :where(& > :last-child):not(:where(.not-prose, .not-prose *)) {
+      margin-bottom: 0;
+    }
+  }
+}
+
+@utility prose-sm {
+  font-size: var(--text-sm);
+  line-height: var(--text-sm--line-height);
+
+  @variant prose-lead {
+    font-size: var(--text-base);
+    line-height: var(--text-base--line-height);
+  }
+}
+
+@utility prose-base {
+  font-size: var(--text-base);
+  line-height: var(--text-base--line-height);
+
+  @variant prose-lead {
+    font-size: var(--text-lg);
+    line-height: var(--text-lg--line-height);
+  }
+}
+
+@utility prose-lg {
+  font-size: var(--text-lg);
+  line-height: var(--text-lg--line-height);
+
+  @variant prose-lead {
+    font-size: var(--text-xl);
+    line-height: var(--text-xl--line-height);
+  }
+}

@@ -1,0 +1,77 @@
+<div class="py-4 w-full border-b border-base-content/10 contrast-more:border-base-content/30">
+    <div class="container">
+        <div class="flex justify-between">
+
+            {{# Logo #}}
+            <div class="w-full h-5 sm:h-7 flex max-w-[10rem] self-center items-center">
+                {{ project:entry }}
+                    <a href="{{ project:stable:url :collection="page:collection" }}" class="flex items-center size-full">
+                        {{ if logo }}
+                            {{ if logo.is_svg }}
+                                {{ svg :src="logo" class="h-full w-auto { logo_dark ?= 'dark:hidden' }" aria-hidden="true" }}
+                            {{ else if logo.is_image }}
+                                <img src="{{ glide:logo_dark quality="100" format="webp" }}" class="h-full w-auto {{ logo_dark ?= 'dark:hidden' }}" alt="{{ logo.alt }}">
+                            {{ /if }}
+                        {{ /if }}
+
+                        {{ if logo_dark }}
+                            {{ if logo_dark.is_svg }}
+                                {{ svg :src="logo_dark" class="h-full w-auto hidden dark:block" aria-hidden="true" }}
+                            {{ else if logo_dark.is_image }}
+                                <img src="{{ glide:logo_dark quality="100" format="webp" }}" class="h-full w-auto hidden dark:block" alt="{{ logo_dark.alt }}">
+                            {{ /if }}
+                        {{ /if }}
+
+                        {{ if (!logo && !logo_dark && logo_text) }}
+                            <span class="project-logo">{{ logo_text | antlers }}</span>
+                        {{ /if }}
+
+                        <span class="sr-only">Home</span>
+                    </a>
+                {{ /project:entry }}
+            </div>
+
+            {{# Desktop navigation #}}
+            <menu class="gap-6 hidden lg:flex">
+                {{ nav handle="primary_navigation" }}
+                    <li>
+                        <a href="{{ url }}" class="text-xs text-base-content/70 transition hover:bg-base-content/5 hover:text-base-content px-4 py-2 rounded-lg">
+                            {{ title }}
+                        </a>
+                    </li>
+                {{ /nav }}
+            </menu>
+
+            {{# Button trigger for the mobile navigation drawer #}}
+            <button class="flex items-center gap-2 text-base-content cursor-pointer lg:hidden" x-data @click="$dispatch('open-main-navigation')">
+                {{ svg src="icon/dots-three-vertical" class="size-6 text-base-content" aria-hidden="true" }}
+                <span class="sr-only">Menu</span>
+            </button>
+
+            {{# Mobile navigation drawer #}}
+            {{ push:popovers }}
+                <x-drawer position="right" name="main-navigation">
+                    <div class="p-10 pb-15">
+                        <div class="flex flex-col grow transition duration-1000 starting:opacity-0 starting:translate-y-1">
+                            <h2 class="text-lg mb-0 text-base-content font-medium mt-5">Menu</h2>
+                            <x-divider class="mb-4 mt-3" />
+
+                            <div class="flex flex-col grow w-full max-w-4xl mx-auto">
+                                <menu class="flex flex-col gap-2">
+                                    {{ nav handle="primary_navigation" }}
+                                        <li>
+                                            <a href="{{ url }}" class="py-2 text-base-content text-sm block">
+                                                {{ title }}
+                                            </a>
+                                        </li>
+                                    {{ /nav }}
+                                </menu>
+
+                            </div>
+                        </div>
+                    </div>
+                </x-drawer>
+            {{ /push:popovers }}
+        </div>
+    </div>
+</div>

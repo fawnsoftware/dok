@@ -1,0 +1,29 @@
+.label {
+  @layer ui.components {
+    display: inline-block;
+    font-size: var(--text-base);
+    color: var(--color-base-content);
+    font-weight: var(--font-weight-semibold);
+
+    /*
+      If you're attaching .prose to this component, you
+      can overwrite some of the base prose styles here.
+    */
+    &.prose {
+      --prose-p-size: var(--text-base);
+    }
+  }
+}
+
+.label-inline {
+  @layer ui.modifiers {
+    font-weight: var(--font-weight-normal);
+  }
+}
+
+&.label-description {
+  @layer ui.modifiers {
+    font-weight: var(--font-weight-normal);
+    opacity: 0.75;
+  }
+}

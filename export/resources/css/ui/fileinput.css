@@ -1,0 +1,42 @@
+.fileinput {
+  @layer ui.components {
+    appearance: none;
+    background-color: var(--field-background);
+    border-style: solid;
+    border-width: var(--border-width);
+    border-color: var(--field-border-color);
+    font-size: clamp(1rem, inherit, inherit);
+    color: var(--field-color);
+    box-shadow: var(--field-shadow);
+    border-radius: var(--radius-control);
+    width: 100%;
+    height: --spacing(12);
+    cursor: pointer;
+    overflow: hidden;
+    transition: outline-width 0.08s linear;
+
+    &::file-selector-button {
+      display: inline-block;
+      background-color: var(--color-primary);
+      color: var(--color-primary-content);
+      padding-inline: --spacing(5);
+      height: 100%;
+      margin-right: --spacing(5);
+    }
+
+    &.input-invalid,
+    &[aria-invalid="true"] {
+      --field-border-color: var(--color-error);
+    }
+
+    &::placeholder {
+      opacity: 1;
+      color: --alpha(var(--color-base-content) / 50%);
+    }
+
+    &:focus-visible {
+      outline: var(--focus-width) var(--focus-style) var(--focus-color);
+      outline-offset: var(--focus-offset);
+    }
+  }
+}

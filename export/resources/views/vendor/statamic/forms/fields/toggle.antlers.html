@@ -1,0 +1,35 @@
+<{{ inline_label ? 'label' : 'div' }} class="flex items-center group/toggle">
+  <input type="hidden" name="{{ handle }}" value="0">
+  <input
+    id="{{ id }}"
+    type="checkbox"
+    name="{{ handle }}"
+    value="1"
+    x-model="form.{{ handle }}"
+    @change="form.validate('{{ handle }}')"
+    class="toggle peer"
+    {{ if value && value !== '0' }}checked{{ /if }}
+    {{ if validate|contains:required }}required{{ /if }}
+    {{ if error }}
+      aria-invalid="true" aria-describedby="{{ id }}-error"
+    {{ elseif instructions }}
+      aria-describedby="{{ id }}-instructions"
+    {{ /if }}
+    :aria-invalid="form.invalid('{{ handle }}')"
+  >
+
+    {{ if inline_label || inline_label_when_true }}
+        <span role="region" id="planetInfo" aria-live="polite">
+            {{ if inline_label }}
+                <span class="label label-inline ml-3 group-has-checked/toggle:hidden">
+                    {{ inline_label }}
+                </span>
+            {{ /if }}
+            {{ if inline_label_when_true }}
+                <span class="label label-inline ml-3 group-has-not-checked:hidden group-has-checked/toggle:inline">
+                    {{ inline_label_when_true }}
+                </span>
+            {{ /if }}
+        </span>
+    {{ /if }}
+</{{ inline_label ?? 'label' : 'div' }}>

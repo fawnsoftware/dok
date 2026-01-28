@@ -1,0 +1,39 @@
+<svg xmlns="http://www.w3.org/2000/svg" version="1.1" xmlns:xlink="http://www.w3.org/1999/xlink" width="1000" height="1000"><style>
+    #light-icon {
+      display: inline;
+    }
+    #dark-icon {
+      display: none;
+    }
+
+    @media (prefers-color-scheme: dark) {
+      #light-icon {
+        display: none;
+      }
+      #dark-icon {
+        display: inline;
+      }
+    }
+  </style><g id="light-icon"><svg xmlns="http://www.w3.org/2000/svg" version="1.1" xmlns:xlink="http://www.w3.org/1999/xlink" width="1000" height="1000"><g><g transform="matrix(0.8333333333333334,0,0,0.8333333333333334,0,0)"><svg xmlns="http://www.w3.org/2000/svg" version="1.1" xmlns:xlink="http://www.w3.org/1999/xlink" width="1200px" height="1200px"><svg width="1200px" height="1200px" viewBox="0 0 1200 1200" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <title>dok-favicon</title>
+    <defs>
+        <path d="M0,0 L1200,0 L1200,1200 L0,1200 L0,0 Z" id="path-1"></path>
+    </defs>
+    <g id="dok-favicon" stroke="none" fill="none" xlink:href="#path-1" fill-rule="evenodd" stroke-width="1">
+        <g id="Group" transform="translate(160, 176)" fill="#000000">
+            <polygon id="Path" fill-rule="nonzero" points="1 0 1 849 275.923243 849 275.923243 735.734339 130.085824 735.734339 130.085824 113.265661 275.923243 113.265661 275.923243 0"></polygon>
+            <polygon id="Path" fill-rule="nonzero" points="879 849 879 0 605.062145 0 605.062145 113.265661 749.914176 113.265661 749.914176 735.734339 605.062145 735.734339 605.062145 849"></polygon>
+        </g>
+    </g>
+</svg></svg></g></g></svg></g><g id="dark-icon"><svg xmlns="http://www.w3.org/2000/svg" version="1.1" xmlns:xlink="http://www.w3.org/1999/xlink" width="1000" height="1000"><g clip-path="url(#SvgjsClipPath1026)"><rect width="1000" height="1000" fill="#ffffff"></rect><g transform="matrix(0.5833333333333334,0,0,0.5833333333333334,150,150)"><svg xmlns="http://www.w3.org/2000/svg" version="1.1" xmlns:xlink="http://www.w3.org/1999/xlink" width="1200px" height="1200px"><svg width="1200px" height="1200px" viewBox="0 0 1200 1200" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <title>dok-favicon</title>
+    <defs>
+        <path d="M0,0 L1200,0 L1200,1200 L0,1200 L0,0 Z" id="path-1"></path>
+    <clipPath id="SvgjsClipPath1026"><rect width="1000" height="1000" x="0" y="0" rx="350" ry="350"></rect></clipPath></defs>
+    <g id="dok-favicon" stroke="none" fill="none" xlink:href="#path-1" fill-rule="evenodd" stroke-width="1">
+        <g id="Group" transform="translate(160, 176)" fill="#000000">
+            <polygon id="Path" fill-rule="nonzero" points="1 0 1 849 275.923243 849 275.923243 735.734339 130.085824 735.734339 130.085824 113.265661 275.923243 113.265661 275.923243 0"></polygon>
+            <polygon id="Path" fill-rule="nonzero" points="879 849 879 0 605.062145 0 605.062145 113.265661 749.914176 113.265661 749.914176 735.734339 605.062145 735.734339 605.062145 849"></polygon>
+        </g>
+    </g>
+</svg></svg></g></g></svg></g></svg>

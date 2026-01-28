@@ -1,0 +1,17 @@
+<input
+    id="{{ id }}"
+    type="{{ input_type ?? 'text' }}"
+    name="{{ handle }}"
+    value="{{ value }}"
+    class="input"
+    {{ if placeholder }}placeholder="{{ placeholder }}"{{ /if }}
+    {{ if character_limit }}maxlength="{{ character_limit }}"{{ /if }}
+    x-model="form.{{ handle }}"
+    @change="form.validate('{{ handle }}')"
+    {{ if validate|contains:required }}required{{ /if }}
+    {{ if error }}
+        aria-invalid="true" aria-describedby="{{ id }}-error"
+    {{ elseif instructions }}
+        aria-describedby="{{ id }}-instructions"
+    {{ /if }}
+>

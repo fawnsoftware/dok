@@ -1,0 +1,62 @@
+.select {
+  @layer ui.components {
+    appearance: none;
+    background-color: var(--field-background);
+    border-style: solid;
+    border-width: var(--border-width);
+    border-color: var(--field-border-color);
+    font-size: clamp(1rem, inherit, inherit);
+    color: var(--field-color);
+    box-shadow: var(--field-shadow);
+    padding-inline-start: --spacing(3);
+    padding-inline-end: --spacing(3);
+    border-radius: var(--radius-control);
+    width: 100%;
+    height: --spacing(12);
+    transition: outline-width 0.08s linear;
+    cursor: pointer;
+    background-image:
+      linear-gradient(
+        135deg,
+        transparent 45%,
+        --alpha(var(--color-base-content) / 75%) 45%,
+        --alpha(var(--color-base-content) / 75%) 55%,
+        transparent 55%
+      ),
+      linear-gradient(
+        225deg,
+        transparent 45%,
+        --alpha(var(--color-base-content) / 75%) 45%,
+        --alpha(var(--color-base-content) / 75%) 55%,
+        transparent 55%
+      );
+    background-repeat: no-repeat, no-repeat;
+    background-position:
+      right 18px center,
+      right 22px center;
+    background-size:
+      4px 13px,
+      4px 13px;
+
+    &.input-invalid,
+    &[aria-invalid="true"] {
+      --field-border-color: var(--color-error);
+    }
+
+    &[size]:where(select:not([size="1"])) {
+      background-image: none;
+    }
+
+    &[multiple] {
+      padding: --spacing(3);
+      background-image: none;
+      cursor: default;
+      height: auto;
+    }
+
+    &:focus-visible {
+      outline: var(--focus-width) var(--focus-style) var(--focus-color);
+      outline-offset: var(--focus-offset);
+    }
+  }
+}

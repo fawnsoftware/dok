@@ -1,0 +1,83 @@
+@layer base {
+  .prose {
+    @variant prose-p {
+      margin-top: --spacing(5);
+      margin-bottom: --spacing(7);
+      letter-spacing: inherit;
+    }
+
+    @variant prose-strong {
+      font-weight: 600;
+      color: var(--prose-strong-color);
+    }
+
+    @variant prose-a {
+      color: var(--prose-anchor-color);
+      font-weight: inherit;
+      text-decoration: underline;
+      text-decoration-style: dotted;
+
+      &:hover,
+      &:focus {
+        opacity: 0.8;
+      }
+    }
+
+    @variant prose-headings {
+      color: var(--prose-heading-color);
+      font-weight: 600;
+    }
+
+    @variant prose-h1 {
+      font-size: var(--text-3xl);
+      margin-top: --spacing(15);
+      margin-bottom: --spacing(2);
+      line-height: 1.8;
+    }
+
+    @variant prose-h2 {
+      font-size: var(--text-2xl);
+      margin-top: --spacing(15);
+      margin-bottom: --spacing(2);
+      line-height: 1.8;
+    }
+
+    @variant prose-h3 {
+      font-size: var(--text-xl);
+      margin-top: --spacing(12);
+      margin-bottom: --spacing(2);
+      line-height: 1.8;
+    }
+
+    @variant prose-h4 {
+      font-size: var(--text-xl);
+      margin-top: --spacing(10);
+      margin-bottom: --spacing(2);
+      line-height: 1.8;
+    }
+  }
+}
+
+@layer prose.children {
+  .prose {
+    /* Reset the color on nested inlines so they use the link color instead */
+    :where(a strong, a code):not(:where(.not-prose, .not-prose *)) {
+      color: inherit;
+    }
+
+    /* Reset the margins on anything proceeding a heading */
+    :where(h1 + *, h2 + *, h3 + *, h4 + *):not(
+      :where(.not-prose, .not-prose *)
+    ) {
+      margin-top: 0;
+    }
+
+    /* Ensure if you have used a <code> element inside a heading, it uses the heading styles. */
+    :where(h1 code, h2 code, h3 code, h4 code):not(
+      :where(.not-prose, .not-prose *)
+    ) {
+      color: inherit;
+      font-weight: inherit;
+    }
+  }
+}

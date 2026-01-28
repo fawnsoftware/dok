@@ -16,13 +16,21 @@ return [
     */
 
     'configs' => [
-
         'default' => [
+            'html_input' => 'escape',
+            'allow_unsafe_links' => false,
+            'attributes' => [
+                'allow' => ['codegroup', 'collapse', 'title'],
+            ],
+            'code_group' => [
+                'auto_group' => true,
+            ],
             'heading_permalink' => [
                 'symbol' => '#',
                 'min_heading_level' => 2,
                 'max_heading_level' => 4,
                 'fragment_prefix' => '',
+                'apply_id_to_heading' => true,
                 'id_prefix' => '',
                 'aria_hidden' => false,
             ],
@@ -34,7 +42,6 @@ return [
                 'max_heading_level' => 4,
             ],
         ],
-
     ],
 
 ];
