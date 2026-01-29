@@ -8,36 +8,40 @@ updated_at: 1741264233
 # Installation
 
 :::lead
-Learn how to install Dok via the CLI or by installing into a new site.
+Learn how to install Dok via the CLI or by installing into an existing site.
 :::
 
 ---
 
-:::caution title="Dok only supports ^6.0.0-beta4 installations"
-Dok has been updated and released to support the v6.0 beta. This should cause minimal impact, but if you are installing from `statamic new my-site fawnsoftware/dok`, things won't work as you imagined.
+**Installing Dok**
 
-**Read the guide below to install into the latest beta.**
+:::codegroup
+{title="New site (Recommended)"}
+```
+statamic new mysite fawnsoftware/dok
+```
+
+{title="Existing site"}
+```
+php please starter-kit:install fawnsoftware/dok
+```
+:::/codegroup
+
+:::important
+Requires the [Statamic CLI tool](https://github.com/statamic/cli) if you're installing a new site via the `statamic` command.
 :::
 
 
-Install via the cli as normal:
+**After Installation**
+Run the initial build process. Installing the package dependencies and building the control panel assets.
 
 ```shell
-statamic new my-site fawnsoftware/dok
+npm i && npm run cp:build
 ```
 
-:::note
-You may get the error `Unknown searchable [content]`. You can safely ignore this as the config is for a v6 installation which we'll install next.
-:::
-
-Navigate to your newly created site in your terminal and require the latest Statamic beta:
+You can then run your dev server:
 
 ```shell
-composer require statamic/cms:^6.0@beta --with-all-dependencies
+npm run dev
 ```
 
-You're now ready to get started! But first, you'll need to install the node packages, build the control panel assets, and run your dev server:
-
-```shell
-npm i && npm run cp:build && npm run dev
-```
