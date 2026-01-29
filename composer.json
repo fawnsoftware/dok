@@ -1,5 +1,8 @@
 {
     "name": "fawnsoftware/dok",
+    "require": {
+        "statamic/cms": "^6.0"
+    },
     "extra": {
         "statamic": {
             "name": "Dok",
