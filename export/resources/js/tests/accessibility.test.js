@@ -1,4 +1,3 @@
-// accessibility.test.ts TODO
 import { describe, it, expect, beforeAll, afterAll } from "vitest";
 import { chromium } from "playwright";
 import { injectAxe, checkA11y } from "axe-playwright";

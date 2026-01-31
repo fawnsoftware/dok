@@ -16,19 +16,19 @@ return [
 
         'components' => [
             'note' => [
-                'template' => 'components.hint.hint'
+                'template' => 'components.hint.hint',
             ],
             'tip' => [
-                'template' => 'components.hint.hint'
+                'template' => 'components.hint.hint',
             ],
             'important' => [
-                'template' => 'components.hint.hint'
+                'template' => 'components.hint.hint',
             ],
             'caution' => [
-                'template' => 'components.hint.hint'
+                'template' => 'components.hint.hint',
             ],
             'warning' => [
-                'template' => 'components.hint.hint'
+                'template' => 'components.hint.hint',
             ],
             'lead' => [
                 'template' => 'components.lead.lead',

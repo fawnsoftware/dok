@@ -45,14 +45,6 @@
 
 @layer prose.children {
   .prose {
-    /* TODO: Test this, this has weird behaviour */
-    /* :where(ul ul, ol ol, ul ol, ol, ul):not(
-      :where(.not-prose, .not-prose *)
-    ) {
-      margin-top: --spacing(4);
-      margin-bottom: --spacing(10);
-    } */
-
     /* Give paragraphs less space because we're in a list */
     :where(ul > li p, ol > li p):not(:where(.not-prose, .not-prose *)) {
       margin-top: --spacing(2);

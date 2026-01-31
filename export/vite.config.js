@@ -6,7 +6,6 @@ import statamic from '@statamic/cms/vite-plugin';
 
 export default defineConfig({
     plugins: [
-        // TODO had to add statamic here??
         statamic(),
         laravel({
             input: [
