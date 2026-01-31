@@ -7,6 +7,7 @@ export_paths:
   - app/Services
   - app/Tags
   - config/dok.export.php
+  - config/statamic/markdown.php
   - public/assets
   - content/assets
   - public/apple-touch-icon.png
