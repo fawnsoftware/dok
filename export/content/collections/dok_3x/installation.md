@@ -13,23 +13,21 @@ Learn how to install Dok via the CLI or by installing into an existing site.
 
 ---
 
-**Installing Dok**
+**Installing Dok using the CLI**
 
-:::codegroup
-{title="New site (Recommended)"}
-```
+```shell
 statamic new mysite fawnsoftware/dok
 ```
-
-{title="Existing site"}
-```
-php please starter-kit:install fawnsoftware/dok
-```
-:::/codegroup
 
 :::important
 Requires the [Statamic CLI tool](https://github.com/statamic/cli) if you're installing a new site via the `statamic` command.
 :::
+
+**Installing Dok into an existing site**
+
+```shell
+php please starter-kit:install fawnsoftware/dok
+```
 
 
 **After Installation**
