@@ -1,4 +1,6 @@
-# Dok: A beautiful Markdown docs starter kit
+<img alt="Torchlight Engine" src="./dok_github_banner.png" style="margin-left: auto; margin-right: auto;">
+
+# Dok: A beautiful Markdown docs starter kit for Statamic
 
 Dok is a best-selling, modern documentation starter kit for Statamic. With powerful Markdown authoring tools, an extensible theme system, ready-to-use frontend UI components, and more. Dok lets you skip the groundwork, giving you a solid, production-ready foundation from day one.
 
