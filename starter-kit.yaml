@@ -26,7 +26,6 @@ export_paths:
   - resources/svg
   - resources/views
   - .editorconfig
-  - LICENSE.md
   - package.json
   - vite.config.js
   - vite-cp.config.js
