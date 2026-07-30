@@ -38,21 +38,22 @@
     @variant prose-h2 {
       font-size: var(--text-2xl);
       margin-top: --spacing(15);
-      margin-bottom: --spacing(2);
+      padding-top: --spacing(15);
+      margin-bottom: --spacing(4);
       line-height: 1.8;
     }
 
     @variant prose-h3 {
       font-size: var(--text-xl);
       margin-top: --spacing(12);
-      margin-bottom: --spacing(2);
+      margin-bottom: --spacing(4);
       line-height: 1.8;
     }
 
     @variant prose-h4 {
       font-size: var(--text-xl);
       margin-top: --spacing(10);
-      margin-bottom: --spacing(2);
+      margin-bottom: --spacing(4);
       line-height: 1.8;
     }
   }
@@ -60,6 +61,12 @@
 
 @layer prose.children {
   .prose {
+    /* Give immediate h2 decendants a border top */
+    :where(& > h2):not(:where(.not-prose, .not-prose *)) {
+      border-top: var(--border-width) solid
+        --alpha(var(--color-base-content) / 10%);
+    }
+
     /* Reset the color on nested inlines so they use the link color instead */
     :where(a strong, a code):not(:where(.not-prose, .not-prose *)) {
       color: inherit;

@@ -41,6 +41,10 @@ class Project extends Tags
             $method = 'stableUrl';
         }
 
+        if (! isset($method)) {
+            throw new TagNotFoundException("Tag {{ {$tag} }} not found");
+        }
+
         if (! method_exists($this, $method)) {
             throw new TagNotFoundException("Cannot find method [{$method}]");
         }
@@ -50,8 +54,6 @@ class Project extends Tags
         } else {
             return $this->{$method}();
         }
-
-        throw new TagNotFoundException("Tag {{ {$tag} }} not found");
     }
 
     /**
@@ -73,17 +75,19 @@ class Project extends Tags
      */
     public function stableEntry(?string $wildcard = null)
     {
-        if (! $this->project()->latest_stable_release) {
-            throw new \Exception('You must have a latest stable release. Go to your project entry in the Releases collection and add one.');
+        $project = $this->project();
+
+        if (! $project->latest_stable_release) {
+            throw new Exception('You must have a latest stable release. Go to your project entry in the Releases collection and add one.');
         }
 
         if ($wildcard) {
             // Automatically returns null if nothing is found,
             // sending nothing back to the tag.
-            return $this->project()->latest_stable_release->{$wildcard};
+            return $project->latest_stable_release->{$wildcard};
         }
 
-        return $this->project()->latest_stable_release;
+        return $project->latest_stable_release;
     }
 
     /**
@@ -91,17 +95,22 @@ class Project extends Tags
      */
     public function stableUrl()
     {
-        if (! $this->project()->latest_stable_release) {
-            throw new \Exception('You must have a latest stable release. Go to your project entry in the Releases collection and add one.');
+        $project = $this->project();
+
+        if (! $project->latest_stable_release) {
+            throw new Exception('You must have a latest stable release. Go to your project entry in the Releases collection and add one.');
         }
 
-        return Entry::find(
-            Collection::findByHandle($this->project()->latest_stable_release->version_collection->handle())
-                ->structure()
-                ->in(Site::current()->handle())
-                ->tree()[0]['entry']
-        )
-            ->url();
+        $collectionHandle = $project->latest_stable_release->version_collection->handle();
+
+        $tree = Collection::findByHandle($collectionHandle)
+            ->structure()
+            ->in(Site::current()->handle())
+            ->tree();
+
+        throw_if(empty($tree), new Exception("The [{$collectionHandle}] collection structure has no pages yet."));
+
+        return Entry::find($tree[0]['entry'])->url();
     }
 
     /**
@@ -109,10 +118,9 @@ class Project extends Tags
      */
     public function versions()
     {
-        $children = Entry::query()
-            ->where('collection', 'releases')
-            ->where('version_collection', $this->getCollectionHandle())
-            ->first()
+        $release = $this->releaseEntry($this->getCollectionHandle());
+
+        $children = $release
             ->parent()
             ->flattenedPages()
             ->map(function ($page) {
@@ -146,10 +154,9 @@ class Project extends Tags
      */
     public function versioned()
     {
-        $count = Entry::query()
-            ->where('collection', 'releases')
-            ->where('version_collection', $this->getCollectionHandle())
-            ->first()
+        $release = $this->releaseEntry($this->getCollectionHandle());
+
+        $count = $release
             ->parent()
             ->flattenedPages()
             ->count();
@@ -182,11 +189,20 @@ class Project extends Tags
 
     private function project()
     {
-        $release = Entry::query()
-            ->where('collection', 'releases')
-            ->where('version_collection', $this->getCollectionHandle())
-            ->first();
+        $release = $this->releaseEntry($this->getCollectionHandle());
 
         return Entry::findOrFail($release->parent()->id);
+    }
+
+    private function releaseEntry(string $collectionHandle): \Statamic\Entries\Entry
+    {
+        $release = Entry::query()
+            ->where('collection', 'releases')
+            ->where('version_collection', $collectionHandle)
+            ->first();
+
+        throw_if(! $release, new Exception("Cannot find a [releases] entry for collection [{$collectionHandle}]."));
+
+        return $release;
     }
 }

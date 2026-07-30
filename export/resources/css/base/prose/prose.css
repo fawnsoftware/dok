@@ -15,9 +15,8 @@
   --prose-anchor-color: var(--color-primary);
   --prose-hr-color: --alpha(var(--color-base-content) / 20%);
   --prose-code-color: var(--color-base-content);
-  --prose-code-background: --alpha(var(--color-base-content) / 15%);
+  --prose-code-background: --alpha(var(--color-base-content) / 4%);
   --prose-pre-color: var(--color-base-content);
-  --prose-pre-background: rgb(45, 47, 56);
   --prose-quote-color: var(--color-base-content);
   --prose-quote-border-color: var(--color-primary);
   --prose-table-color: var(--color-base-content);
@@ -40,7 +39,6 @@
     @variant contrast-more {
       color: var(--color-base-content);
       --prose-table-border-color: --alpha(var(--color-base-content) / 60%);
-      --prose-pre-background: rgb(19, 20, 22);
     }
   }
 

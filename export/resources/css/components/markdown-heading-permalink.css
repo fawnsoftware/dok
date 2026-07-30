@@ -20,20 +20,15 @@
     }
 
     & .heading-permalink {
+      display: none;
       position: absolute;
-      left: calc((var(--spacing) * 4.5) * -1);
-      font-size: 0.7em;
-      line-height: 2.7;
+      left: calc((var(--spacing) * 6) * -1);
+      font-size: 0.8em;
+      line-height: 2.2;
       text-decoration: none;
 
-      @variant hover {
-        font-weight: 900;
-      }
-
       @media (min-width: theme(--breakpoint-lg)) {
-        font-size: 0.8em;
-        line-height: 2.2;
-        left: calc((var(--spacing) * 6) * -1);
+        display: block;
       }
     }
   }

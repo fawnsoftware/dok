@@ -1,0 +1,34 @@
+<header
+    class="sticky p-2 top-0 z-40 w-full"
+    x-data="{ scrolled: false }"
+    x-init="
+        scrolled = window.scrollY > 20;
+        window.addEventListener('scroll', () => {
+            scrolled = window.scrollY > 20;
+        });
+    "
+>
+    <div class="py-4 sm:py-5 rounded-box border-default border-transparent container" :class="scrolled ? 'transition-colors duration-500 bg-base-200 shadow-2xl shadow-base-100 border-base-content/10!' : ''">
+        <div class="flex items-center gap-4 justify-between">
+
+            {{ partial:layout/header/logo }}
+
+            {{ $indexes =  [
+                ['label' => 'Dok', 'value' => 'project-dok'],
+            ] }}
+
+            {{ if {dok:index_exists :index="indexes | pluck('value') | piped"} }}
+                {{ partial:search/search_trigger }}
+                {{ partial:search/search :indexes="indexes" }}
+            {{ /if }}
+
+            {{ partial:layout/header/mobile_nav_trigger }}
+            {{ partial:layout/header/mobile_nav }}
+
+            {{ partial:layout/header/desktop_nav }}
+
+            {{ partial:layout/header/desktop_theme }}
+
+        </div>
+    </div>
+</header>

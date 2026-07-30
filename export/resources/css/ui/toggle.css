@@ -1,7 +1,7 @@
 .toggle {
   @layer ui.components {
-    --toggle-size: --spacing(8);
-    --toggle-padding: --spacing(1);
+    --toggle-size: --spacing(6);
+    --toggle-padding: --spacing(0.5);
 
     appearance: none;
     position: relative;
@@ -46,7 +46,7 @@
       grid-template-columns: 1fr 1fr 0fr;
 
       &::after {
-        background-color: --alpha(var(--color-primary-content) / 75%);
+        background-color: --alpha(var(--color-primary-content) / 100%);
       }
     }
 

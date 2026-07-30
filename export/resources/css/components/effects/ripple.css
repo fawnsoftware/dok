@@ -1,0 +1,75 @@
+@layer components {
+  .ripple {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    right: -50%;
+    opacity: 0.3;
+    transform: scale(2);
+
+    @media (min-width: theme(--breakpoint-sm)) {
+      transform: scale(1);
+    }
+  }
+
+  .ripple-animate .ripple-circle {
+    animation: ripple 15s infinite;
+  }
+
+  .ripple-circle {
+    position: absolute;
+    border-radius: 50%;
+    background: var(--color-primary);
+    box-shadow: 0px 0px 20px 20px var(--color-primary-content);
+  }
+
+  .ripple-circle:nth-child(1) {
+    width: 20%;
+    aspect-ratio: 1;
+    animation-duration: 28s;
+    opacity: 0.5;
+  }
+
+  .ripple-circle:nth-child(2) {
+    width: 40%;
+    aspect-ratio: 1;
+    animation-duration: 26s;
+    opacity: 0.4;
+  }
+
+  .ripple-circle:nth-child(3) {
+    width: 60%;
+    aspect-ratio: 1;
+    animation-duration: 24s;
+    opacity: 0.3;
+  }
+
+  .ripple-circle:nth-child(4) {
+    width: 80%;
+    aspect-ratio: 1;
+    animation-duration: 22s;
+    opacity: 0.2;
+  }
+
+  .ripple-circle:nth-child(5) {
+    width: 100%;
+    aspect-ratio: 1;
+    animation-duration: 20s;
+    opacity: 0.1;
+  }
+
+  @keyframes ripple {
+    0% {
+      transform: scale(0.9);
+    }
+
+    50% {
+      transform: scale(1.1);
+    }
+
+    100% {
+      transform: scale(0.9);
+    }
+  }
+}

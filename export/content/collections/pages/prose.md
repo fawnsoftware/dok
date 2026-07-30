@@ -12,7 +12,6 @@ updated_at: 1769178534
 Fermentum tamen luctus nam aliquam tamen massa pellentesque orci lectus curabitur igitur sollicitudin tamen. Nam natoque et ornare dolor accumsan curabitur sagittis ac varius vel sed id. Ultricies mattis et posuere posuere vestibulum tristique porta blandit odio ultrices at esse.
 :::
 
----
 
 ## Heading Level 2
 In excepteur tortor voluptate sapien aliquet praesent porttitor arcu mi cras enim pharetra in mauris interdum pulvinar et sapien vel porta. Ac primis arcu neque nibh euismod.
@@ -22,8 +21,6 @@ Ad sit amet justo quis nostrud; **itaque consectetur** nibh aliquip. Interdum no
 
 ## Heading with `code`
 In excepteur tortor voluptate sapien aliquet praesent porttitor arcu mi cras enim pharetra in mauris interdum pulvinar et sapien vel porta. Ac primis arcu neque nibh euismod.
-
----
 
 ## Lists
 
@@ -91,8 +88,6 @@ Term Three
 Term Four
 :  In excepteur tortor voluptate sapien aliquet praesent porttitor arcu mi.
 
----
-
 ## Tables
 
 In excepteur tortor voluptate sapien aliquet praesent porttitor arcu mi cras enim pharetra in mauris interdum pulvinar et sapien vel porta. Ac primis arcu neque nibh euismod.
@@ -107,16 +102,12 @@ In excepteur tortor voluptate sapien aliquet praesent porttitor arcu mi cras eni
 
 In excepteur tortor voluptate sapien aliquet praesent porttitor arcu mi cras enim pharetra in mauris interdum pulvinar et sapien vel porta. Ac primis arcu neque nibh euismod.
 
----
-
 ## Media
 In excepteur tortor voluptate sapien aliquet praesent porttitor arcu mi cras enim pharetra in mauris interdum pulvinar et sapien vel porta. Ac primis arcu neque nibh euismod.
 
 ![Alt text for image](https://picsum.photos/800/200)
 
 In excepteur tortor voluptate sapien aliquet praesent porttitor arcu mi cras enim pharetra in mauris interdum pulvinar et sapien vel porta. Ac primis arcu neque nibh euismod.
-
----
 
 ## Blocks
 In excepteur tortor voluptate sapien aliquet praesent porttitor arcu mi cras enim pharetra in mauris interdum pulvinar et sapien vel porta. Ac primis arcu neque nibh euismod.
@@ -162,7 +153,6 @@ In excepteur tortor voluptate sapien aliquet praesent porttitor arcu mi cras eni
 
 > This blockquote contains **bold text**, *italic text*, and `inline code`. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
 
----
 
 ## Link variations
 **A normal link**
@@ -180,8 +170,6 @@ The quick [brown fox `jumped over the`](#) lazy dog.
 **Link with everything**
 The quick **[_brown fox `jumped over the`_](#) lazy** dog.
 
----
-
 ## Strong Text Variations
 
 **Bold & italic**
@@ -192,8 +180,6 @@ The **quick brown `fox` jumped** over the lazy dog.
 
 **Bold with link**
 The **quick brown [fox](#) jumped** over the lazy dog.
-
----
 
 ## Emphasis Variations
 

@@ -9,7 +9,7 @@
     $el = $href ? 'a' : 'div';
 @endphp
 
-<{{ $el }} @if ($href) href="{{ $href }}" @endif class="flex flex-col group border border-base-content/10 bg-base-100 @if($href) cursor-pointer no-underline prose hover:border-primary @endif rounded-box transition p-6">
+<{{ $el }} @if ($href) href="{{ $href }}" @endif class="flex flex-col w-full group border-default border-base-content/10 contrast-more:border-base-content contrast-more:bg-base-200 bg-base-100 @if($href) cursor-pointer no-underline prose hover:border-primary @endif rounded-box transition p-6">
     @if ($icon)
         <s:svg :src="{{ $icon }}" class="fill-primary size-6 mb-3" aria-hidden="true" />
     @endif

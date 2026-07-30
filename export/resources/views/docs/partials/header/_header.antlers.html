@@ -1,0 +1,33 @@
+<div class="py-3 h-15 sm:h-20 flex items-center w-full border-b-default border-base-content/10 contrast-more:border-base-content/30">
+    <div class="container">
+        <div class="flex items-center gap-4 justify-between">
+
+            <div class="flex items-center gap-2 lg:gap-5">
+                {{ partial:docs/partials/header/logo }}
+
+                {{ partial:docs/partials/header/versions }}
+            </div>
+
+            <div class="ml-auto"></div>
+
+            {{ $indexes =  [
+                ['label' => '{ project:entry:name }', 'value' => { project:entry:slug }],
+            ] }}
+
+            {{ if {dok:index_exists :index="indexes | pluck('value') | piped"} }}
+                {{ partial:search/search_trigger }}
+                {{ partial:search/search :indexes="indexes" }}
+            {{ /if }}
+
+            {{ partial:layout/header/desktop_nav }}
+
+            {{ partial:layout/header/desktop_theme }}
+
+            {{ partial:layout/header/mobile_nav_trigger }}
+
+            {{ partial:layout/header/mobile_nav }}
+            {{ partial:docs/partials/header/mobile_nav }}
+
+        </div>
+    </div>
+</div>

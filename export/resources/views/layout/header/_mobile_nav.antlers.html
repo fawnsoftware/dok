@@ -1,0 +1,70 @@
+<x-drawer position="right" name="main-navigation">
+    <div class="container">
+
+        <menu class="flex flex-col">
+            {{ nav handle="primary_navigation" }}
+                <li>
+                    <a href="{{ url }}" class="text-base py-2 block font-medium">
+                        {{ title }}
+                    </a>
+                </li>
+            {{ /nav }}
+        </menu>
+
+        <x-divider class="my-10" />
+
+        {{ yield:mobile_nav }}
+
+        <div>
+            <h2 class="text-lg font-bold mb-1">Theme</h2>
+            <p class="text-base-content/70 text-sm">Choose a theme that matches your preference.</p>
+
+            <div class="grid grid-cols-2 gap-5 mt-10">
+                {{ $theme_button_class = 'flex items-center gap-3 px-3 w-full py-2 border-default border-base-content/5 contrast-more:border-base-content/50 font-medium rounded-lg text-sm text-left transition cursor-pointer' }}
+                {{ $theme_button_colors_class = 'grid grid-cols-2 grid-rows-2 gap-0.5 size-4 shrink-0 rounded-[3px] overflow-hidden' }}
+
+                <template x-for="theme in $store.theme.themes" :key="theme.id">
+                    <button
+                        type="button"
+                        class="{{ $theme_button_class }}"
+                        :class="$store.theme.currentTheme === theme.id ? 'bg-primary/10 text-primary' : 'text-base-content/70 hover:bg-base-200'"
+                        @click="$store.theme.currentTheme = theme.id"
+                    >
+                        <span class="{{ $theme_button_colors_class }}" :data-theme="theme.id">
+                            <span class="bg-base-300"></span>
+                            <span class="bg-base-100"></span>
+                            <span class="bg-primary"></span>
+                            <span class="bg-base-content"></span>
+                        </span>
+                        <span x-text="theme.name"></span>
+                    </button>
+                </template>
+                <button
+                    type="button"
+                    class="{{ $theme_button_class }}"
+                    :class="$store.theme.currentTheme === 'system'? 'bg-primary/10 text-primary' : 'text-base-content/70 hover:bg-base-200'"
+                    @click="$store.theme.currentTheme = 'system'"
+                >
+                    <span class="{{ $theme_button_colors_class }}">
+                        {{ svg src="icon/desktop" class="size-4" aria-hidden="true" }}
+                    </span>
+                    <span>System</span>
+                </button>
+            </div>
+        </div>
+
+        <x-divider class="my-10" />
+
+        <div>
+            <h2 class="text-lg font-bold mb-1">Contrast</h2>
+            <p class="text-base-content/70 text-sm">Increase the contrast of the selected theme.</p>
+            <label class="flex justify-between font-medium mb-10 mt-6 gap-y-72">
+                More contrast
+                <input type="checkbox" class="toggle" x-model="$store.theme.moreContrast">
+            </label>
+        </div>
+
+        <x-divider class="my-10" />
+
+    </div>
+</x-drawer>

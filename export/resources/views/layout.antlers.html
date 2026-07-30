@@ -1,32 +1,32 @@
 <!DOCTYPE html>
-<html lang="{{ site:short_locale }}" data-theme="forest">
+<html lang="{{ site:short_locale }}" data-theme="{{ dok:theme:default mode="dark" get="id" }}" data-appearance="{{ dok:theme:default mode="dark" get="appearance" }}">
     <head>
         <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1">
-        <title>{{ title ?? site:name }}</title>
+        <title>{{ site:name + ': ' + title }}</title>
 
         {{ partial:layout/favicon }}
 
         {{ partial:helpers/theme }}
 
-        {{ vite src="resources/js/site/index.js|resources/css/site.css" }}
+        {{ vite src="resources/css/site.css|resources/js/site/index.js" }}
     </head>
-    <body class="antialiased font-default text-base bg-base-100">
+    <body class="preload antialiased font-default text-base-content text-base bg-base-200">
+        {{ partial:partials/skip_link }}
 
-        {{ partial:layout/header }}
+        {{ partial:layout/header/header }}
 
-        <main>
+        <main id="main-content">
             {{ template_content }}
         </main>
 
         {{ partial:layout/footer }}
 
-        {{ stack:popovers }}
         {{ stack:scripts }}
 
-        <script type="module">
-            Alpine.start();
-        </script>
+        {{ partial:helpers/preload }}
+
+        {{ partial:helpers/alpine_start }}
     </body>
 </html>

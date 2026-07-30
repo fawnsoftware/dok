@@ -1,134 +1,521 @@
 ---
 features:
-    -
-        title: Markdown extensions
-        text: Give your markdown superpowers with accordions, codegroups, hints, and more.
-    -
-        title: Code extension
-        text: Supercharge your code blocks with titles, tabs, collapsible sections, and one-click copy for improved developer experience.
-    -
-        title: Highly customisable
-        text: Dok makes making themes fun again. No explosion of dark variants cluttering your markup.
-    -
-        title: Sync Github
-        text: Want to host your markdown files on GitHub instead? Sync across repositories, branches, and even different organisations.
-    -
-        title: Modern
-        text: A modern documentation starter kit using Tailwind CSS v4 and Alpine.js, with Blade components for total control.
-    -
-        title: Accessible
-        text: We go to great lengths to ensure Dok is as accessible as possible with both automated and manual tests.
+    - title: Flexible Search
+      icon: icon/magnifying-glass
+      text: Search your indexes with Documentation Search and a purpose built, accessible and flexible search component.
+    - title: Powerful Content Authoring
+      icon: icon/pen-nib-straight
+      text: Powerful markdown authoring features. Accordions, hints, code, and more. Easily create new components.
+    - title: GitHub Syncing
+      icon: icon/github-logo
+      text: Sync all your GitHub files across repositories, branches or organisations. Now supports images and media!
+    - title: Modern Stack
+      icon: icon/stack
+      text: A kit built to be modern, using AlpineJS, Tailwind, and Statamic. Leverage Blade components for total control.
+    - title: Themes
+      icon: icon/palette
+      text: Effortless theme creation and built-in background effects. Make the site yours!
+    - title: Scaffold Commands
+      icon: icon/tree-view
+      text: Commands do the heavy lifting for you - allowing you to start writing your documentation right away.
 
-next:
-    -
-        title: "Setup your homepage"
-        icon: icon/wrench
-        description: "Set up your homepage by starting fresh or editing this template."
-    -
-        title: "Write your content"
-        icon: icon/pen-nib
-        description: "Write content directly to your site, or import from Github."
-    -
-        title: "Launch"
-        icon: icon/rocket-launch
-        description: "Launch your beautiful new documentation site!"
+boot_lines:
+    - type: cmd
+      text: "statamic new mysite fawnsoftware/dok"
+    - type: out
+      text: "✓ Dok starter kit installed"
+    - type: cmd
+      text: "npm i"
+    - type: out
+      text: "✓ Dependencies installed"
+    - type: cmd
+      text: "php artisan dok:create:project"
+    - type: out
+      text: "✓ Documentation project created"
+    - type: cmd
+      text: "php artisan dok:create:release"
+    - type: out
+      text: "✓ First release created - v1.x"
+    - type: cmd
+      text: "npm run dev"
+    - type: out
+      text: "Docs running → craft beautiful documentation sites"
+codegroup_markdown: |
+  :::codegroup
+  {title="Tab 1"}
+  ```php
+  Route::get('/', function () {
+    return view('homepage', ['title' => 'Welcome']);
+  });
+  ```
+
+  {title="Tab 2" collapse="true"}
+  ```yaml
+  themes:
+    - id: forest
+      name: Forest
+      appearance: dark
+    - id: black
+      name: Black
+      appearance: dark
+    - id: white
+      name: White
+      appearance: light
+    - id: coffee
+      name: Coffee
+      appearance: dark
+    - id: amethyst
+      name: Amethyst
+      appearance: light
+    - id: papyrus
+      name: Papyrus
+      appearance: light
+    - id: moonlight
+      name: Moonlight
+      appearance: dark
+    - id: azure
+      name: Azure
+      appearance: light
+    - id: otto
+      name: Otto
+      appearance: dark
+
+  ```
+  :::
 ---
 
-<header class="py-32 flex items-center border-b border-base-content/10 min-h-[80svh] text-center bg-base-200">
-    <div class="container">
-        <div class="absolute pointer-events-none -top-[500px] bg-gradient-to-b blur-2xl from-slate-500/40 h-[1000px] to-transparent w-[200px] -left-[100px] -rotate-45 z-10">
+
+<header class="relative p-5 pt-0" x-data>
+    <div class="relative overflow-hidden bg-base-300 border-2 border-base-content/5 rounded-box pt-10 pb-36 sm:py-36 md:py-52 flex items-center">
+
+        <div class="absolute inset-0 z-0 pointer-events-none" x-data="{index: 0, count: 4}" @update-effect-index.window="
+            index = (index + 1) > count ? 0 : index + 1;
+            let themeIndex = $store.theme.themes.findIndex(theme => theme.id === $store.theme.currentTheme);
+            themeIndex = themeIndex + 1 < $store.theme.themes.length ? themeIndex + 1 : 0;
+            $store.theme.currentTheme = $store.theme.themes[themeIndex].id;">
+            <div class="pointer-events-none" x-show="index === 0">
+                <x-effects.ripple />
+            </div>
+            <div class="pointer-events-none" x-cloak x-show="index === 1">
+                <x-effects.aurora />
+            </div>
+            <div class="pointer-events-none" x-cloak x-show="index === 2">
+                <x-effects.beams />
+            </div>
+            <div class="pointer-events-none" x-cloak x-show="index === 3">
+                <x-effects.grid-gradient />
+            </div>
+            <div class="pointer-events-none" x-cloak x-show="index === 4">
+                <x-effects.gradient />
+            </div>
         </div>
 
-        <p class="inline-flex gap-2 bg-primary/5 border text-base-content border-primary mx-auto py-2 px-4 mb-5 rounded-full text-xs">
-            <svg xmlns="http://www.w3.org/2000/svg" class="size-5 fill-primary" viewBox="0 0 256 256"><path d="M197.58,129.06,146,110l-19-51.62a15.92,15.92,0,0,0-29.88,0L78,110l-51.62,19a15.92,15.92,0,0,0,0,29.88L78,178l19,51.62a15.92,15.92,0,0,0,29.88,0L146,178l51.62-19a15.92,15.92,0,0,0,0-29.88ZM137,164.22a8,8,0,0,0-4.74,4.74L112,223.85,91.78,169A8,8,0,0,0,87,164.22L32.15,144,87,123.78A8,8,0,0,0,91.78,119L112,64.15,132.22,119a8,8,0,0,0,4.74,4.74L191.85,144ZM144,40a8,8,0,0,1,8-8h16V16a8,8,0,0,1,16,0V32h16a8,8,0,0,1,0,16H184V64a8,8,0,0,1-16,0V48H152A8,8,0,0,1,144,40ZM248,88a8,8,0,0,1-8,8h-8v8a8,8,0,0,1-16,0V96h-8a8,8,0,0,1,0-16h8V72a8,8,0,0,1,16,0v8h8A8,8,0,0,1,248,88Z"></path></svg>
-            v3 out now
-            </p>
-        <h1 class="h1 font-semibold text-balance text-base-content mx-auto mb-5">
-            Craft beautiful documentation sites
-        </h1>
-        <div class="text-base-content/80 font-medium leading-loose text-lg mx-auto max-w-3xl mb-10">
-            <p>
-                The easiest way to start a modern documentation site on Statamic.<br>
-                Highly customisable - from setup to launch.
-            </p>
-        </div>
+        <div class="container flex flex-col items-center justify-center text-center py-16 lg:py-10">
 
-        <div class="grid sm:grid-cols-2 gap-5 max-w-90 mx-auto">
-            <a class="btn btn-primary" href="https://statamic.com/starter-kits/fawn/dok-documentation">
-                Buy now
-            </a>
-            <a class="btn btn-outline" href="/docs">
-                Documentation
-            </a>
+                <span class="inline-flex items-center gap-2 text-xs text-primary bg-primary/10 border-default border-primary/20 rounded-full px-3 py-1 mb-6">
+                    {{ svg src="icon/rocket-launch" class="size-3" }} v4.0 released
+                </span>
+                <h1 class="text-4xl sm:text-5xl xl:text-7xl font-bold text-balance text-base-content mx-auto mb-8">
+                    Craft <span class="text-primary italic">beautiful</span> <br> documentation sites
+                </h1>
+                <p class="text-base-content font-medium leading-loose sm:text-lg md:text-xl mx-auto max-w-2xl mb-10">
+                    The easiest way to start a modern documentation site on Statamic. Highly customisable - from setup to launch.
+                </p>
+                <div class="flex flex-wrap justify-center gap-4">
+                    <a class="btn btn-primary grow" href="https://statamic.com/starter-kits/fawn/dok-documentation" target="_blank">
+                        Buy now - $99
+                    </a>
+                    <a class="btn btn-outline grow" href="/docs">Documentation</a>
+                </div>
+
+                <button
+                    class="absolute left-1/2 -translate-1/2 bottom-0 btn mb-10 inline-flex gap-2 bg-primary/5 border-default text-base-content border-primary mx-auto py-2 px-4 rounded-full"
+                    @click="$dispatch('update-effect-index');"
+                    type="button"
+                >
+                    {{ svg src="icon/shuffle" class="size-4" }}
+                    <span>Shuffle</span>
+                </button>
         </div>
     </div>
 </header>
 
-<section class="py-16">
-    <div class="container">
-        <div class="text-center">
-            <h2 class="h2 text-base-content mb-5">Features</h2>
-            <div class="text-base-content prose mx-auto max-w-3xl mb-10">
-                <p>
-                    Dok is a modern and easy to use documentation starterkit for Statamic.
-                </p>
-            </div>
-        </div>
+<section class="py-20">
+    <div class="container max-w-4xl">
+        <h2 class="h2 text-center mb-3">Dok Features</h2>
+        <p class="text-lg max-w-2xl mx-auto text-center text-base-content/70 mb-4">Dok is easy to use, flexible, and has some great documentation should you ever need it. Below are just some of the best features!</p>
 
-        <ul class="grid md:grid-cols-3 gap-10 mt-20">
+        <div class="grid sm:grid-cols-2 gap-20 mt-20 max-w-5xl mx-auto">
             {{ view:features }}
-                <li>
-                    <div class="prose">
-                        <h3 class="mb-2 mt-5">{{ title }}</h3>
-                        <p>{{ text }}</p>
+                <div>
+                    <div class="flex items-center gap-3 mb-2">
+                        {{ svg :src="icon" class="fill-primary size-5" }}
+                        <h3 class="font-bold text-lg text-base-content">{{ title }}</h3>
                     </div>
-                </li>
+                    <p class="text-base-content/70 max-w-xl">{{ text }}</p>
+                </div>
             {{ /view:features }}
-        </ul>
+        </div>
     </div>
 </section>
 
-<section class="py-16 prose">
+<section class="py-20" x-data="{ index: 0, count: 5 }">
     <div class="container">
-        <div class="text-center">
-            <h2 class="h2 text-base-content mb-5">What's next?</h2>
-            <div class="prose max-w-3xl text-center mx-auto">
-                <p>
-                    You are now ready to get cooking.
-                    As Dok can be used for a single project or documentation for multiple projects, addons or products, we've
-                    provided a barebones setup to help you get up and running as quickly as possible.
-                </p>
-            </div>
+        <div class="text-center mb-16">
+            <h2 class="h2 text-base-content mb-3">Building blocks included</h2>
+            <p class="text-lg text-base-content/70 max-w-3xl mx-auto mb-6">Dok comes bundled with a core collection of flexible components to get you started with your new build. Accessibility is built into every component. </p>
+
+                <div class="flex flex-wrap justify-center gap-5 mt-20">
+                    <template x-for="theme in $store.theme.themes" :key="theme.id">
+                        <button
+                            type="button"
+                            class="flex items-center gap-3 px-3 py-2 rounded-lg text-sm text-left transition cursor-pointer"
+                            :class="$store.theme.resolvedTheme === theme.id ? 'bg-primary/10 text-primary' : 'text-base-content/70 hover:bg-base-200'"
+                            @click="$store.theme.currentTheme = theme.id"
+                        >
+                            <span class="grid grid-cols-2 grid-rows-2 gap-0.5 size-4 shrink-0 rounded-[3px] overflow-hidden" :data-theme="theme.id">
+                                <span class="bg-base-300"></span>
+                                <span class="bg-base-100"></span>
+                                <span class="bg-primary"></span>
+                                <span class="bg-base-content"></span>
+                            </span>
+                            <span x-text="theme.name"></span>
+                        </button>
+                    </template>
+                </div>
         </div>
 
-        <div class="grid md:grid-cols-3 gap-10 mt-20">
-            {{ view:next }}
-                <x-card title="{{ title }}" icon="{{ icon }}">
-                    <p>{{ description }}</p>
-                </x-card>
-            {{ /view:next }}
+        <div class="grid lg:grid-cols-6 lg:grid-flow-dense lg:auto-rows-[minmax(160px,auto)] gap-5">
+
+            {{# Effects #}}
+            <div class="lg:col-span-4 lg:row-span-2 relative rounded-box border-default border-base-content/10 bg-base-100 overflow-hidden flex flex-col">
+                <div class="relative flex-1 overflow-hidden min-h-56">
+                    <div class="">
+                        <div x-show="index === 0"><x-effects.aurora /></div>
+                        <div x-cloak x-show="index === 1"><x-effects.beams /></div>
+                        <div x-cloak x-show="index === 2"><x-effects.ripple /></div>
+                        <div x-cloak x-show="index === 3"><x-effects.grid-gradient /></div>
+                        <div x-cloak x-show="index === 4"><x-effects.gradient /></div>
+                    </div>
+                    <button type="button" class="btn btn-square absolute bottom-3 right-3" @click="index = (index + 1) % count">
+                        {{ svg src="icon/shuffle" class="size-4" }}
+                        <span class="sr-only">Shuffle background</span>
+                    </button>
+                </div>
+                <div class="p-5 border-base-content/10">
+                    <p class="font-bold text-base-content text-sm mb-1">Backgrounds</p>
+                    <p class="text-base-content/60 text-xs">Effects and backgrounds for heroes and sections.</p>
+                </div>
+            </div>
+
+
+
+            {{# Form controls #}}
+            <div class="lg:col-span-2 row-span-2  rounded-box border-default border-base-content/10 bg-base-100 overflow-hidden flex flex-col">
+                <div class="flex-1 flex items-center p-6 bg-base-200/50">
+                    <div class="w-full max-w-56 mx-auto space-y-3 text-sm text-base-content min-h-56">
+                        <label class="flex items-center justify-between gap-3">
+                            <span>Notifications</span>
+                            <input type="checkbox" class="toggle" checked>
+                        </label>
+
+                        <x-divider />
+
+                        <label class="flex items-center justify-between gap-3">
+                            <span>Read</span>
+                            <input type="checkbox" class="checkbox" checked>
+                        </label>
+
+                        <label class="flex items-center justify-between gap-3">
+                            <span>Write</span>
+                            <input type="checkbox" class="checkbox">
+                        </label>
+
+                        <x-divider />
+
+                        <label class="flex items-center justify-between gap-3">
+                            <span>Free</span>
+                            <input type="radio" name="essentials-radio" class="radio">
+                        </label>
+                        <label class="flex items-center justify-between gap-3">
+                            <span>Pro</span>
+                            <input type="radio" name="essentials-radio" class="radio">
+                        </label>
+                        <label class="flex items-center justify-between gap-3">
+                            <span>Enterprise</span>
+                            <input type="radio" name="essentials-radio" class="radio">
+                        </label>
+                    </div>
+                </div>
+                <div class="p-5 border-base-content/10">
+                    <p class="font-bold text-base-content text-sm mb-1">Form Controls</p>
+                    <p class="text-base-content/60 text-xs">Controls for forms.</p>
+                </div>
+            </div>
+
+
+            {{# Dropdown #}}
+            <div class="lg:col-span-2 rounded-box border-default border-base-content/10 bg-base-100 overflow-hidden flex flex-col">
+                <div class="flex-1 flex items-center justify-center p-6 bg-base-200/50 min-h-56" x-data="{name: 'staging'}">
+                    <x-dropdown name="essentials-dropdown">
+                        <button type="button" class="btn btn-outline">
+                            Open menu {{ svg src="icon/caret-down" class="size-2.5" }}
+                        </button>
+                        <x-dropdown.menu>
+                            <x-dropdown.group>
+                                <x-dropdown.radio.group x-model="name">
+                                    <x-dropdown.radio value="development">Development</x-dropdown.radio>
+                                    <x-dropdown.radio value="staging">Staging</x-dropdown.radio>
+                                    <x-dropdown.radio value="production">Production</x-dropdown.radio>
+                                </x-dropdown.radio.group>
+                            </x-dropdown.group>
+                        </x-dropdown.menu>
+                    </x-dropdown>
+                </div>
+                <div class="p-5 border-base-content/10">
+                    <p class="font-bold text-base-content text-sm mb-1">Dropdown</p>
+                    <p class="text-base-content/60 text-xs">A dropdown menu.</p>
+                </div>
+            </div>
+
+            {{# Button #}}
+            <div class="lg:col-span-2 rounded-box border-default border-base-content/10 bg-base-100 overflow-hidden flex flex-col">
+                <div class="flex-1 flex flex-wrap items-center justify-center gap-3 p-6 bg-base-200/50 min-h-56">
+                    <button type="button" class="btn btn-primary">Primary</button>
+                    <button type="button" class="btn btn-outline">Outline</button>
+                    <button type="button" class="btn btn-error">Delete</button>
+                </div>
+                <div class="p-5 border-base-content/10">
+                    <p class="font-bold text-base-content text-sm mb-1">Button</p>
+                    <p class="text-base-content/60 text-xs">Buttons for actions or links.</p>
+                </div>
+            </div>
+
+            {{# Drawer #}}
+            <div class="lg:col-span-2 rounded-box border-default border-base-content/10 bg-base-100 overflow-hidden flex flex-col">
+                <div class="flex-1 flex items-center justify-center p-6  bg-base-200/50 min-h-56">
+                    <button type="button" class="btn btn-outline" @click="$dispatch('drawer:open:essentials-demo')">
+                        Open drawer
+                    </button>
+                </div>
+                <div class="p-5 border-base-content/10">
+                    <p class="font-bold text-base-content text-sm mb-1">Drawer</p>
+                    <p class="text-base-content/60 text-xs">A slide-in panel.</p>
+                </div>
+            </div>
+
+            {{# Fields #}}
+            <div class="lg:col-span-2 rounded-box border-default border-base-content/10 bg-base-100 overflow-hidden flex flex-col">
+                <div class="flex-1 flex flex-col items-center justify-center gap-3 p-6 bg-base-200/50 min-h-56">
+                    <input type="text" class="input max-w-52" placeholder="Name">
+
+                    <x-divider />
+
+                    <select class="select max-w-52">
+                        <option>Development</option>
+                        <option>Staging</option>
+                        <option>Production</option>
+                    </select>
+                </div>
+                <div class="p-5 border-base-content/10">
+                    <p class="font-bold text-base-content text-sm mb-1">Fields</p>
+                    <p class="text-base-content/60 text-xs">Text inputs and selects.</p>
+                </div>
+            </div>
+
+            {{# Accordion #}}
+            <div class="lg:col-span-2 rounded-box border-default border-base-content/10 bg-base-100 overflow-hidden flex flex-col">
+                <div class="flex-1 flex items-center p-6 bg-base-200/50 min-h-56">
+                    <x-accordion title="Accordion">
+                        <p class="text-sm">Dok is the easiest way to start a modern documentation site on Statamic.</p>
+                    </x-accordion>
+                </div>
+                <div class="p-5 border-base-content/10">
+                    <p class="font-bold text-base-content text-sm mb-1">Accordion</p>
+                    <p class="text-base-content/60 text-xs">Collapsible sections for FAQs and docs.</p>
+                </div>
+            </div>
+
+            {{# Card #}}
+            <div class="lg:col-span-2 rounded-box border-default border-base-content/10 bg-base-100 overflow-hidden flex flex-col">
+                <div class="flex-1 flex items-center p-6 bg-base-200/50 min-h-56">
+                    <x-card title="Card component" icon="icon/magnifying-glass">
+                        <p class="text-xs">Card contents</p>
+                    </x-card>
+                </div>
+                <div class="p-5 border-base-content/10">
+                    <p class="font-bold text-base-content text-sm mb-1">Card</p>
+                    <p class="text-base-content/60 text-xs">A flexible container for content and links.</p>
+                </div>
+            </div>
+
+            {{# Hint #}}
+            <div class="lg:col-span-3  rounded-box border-default border-base-content/10 bg-base-100 overflow-hidden flex flex-col">
+                <div class="flex-1 justify-center gap-1 p-6 prose bg-base-200/50">
+                    <x-hint type="note">
+                        <div>Note hint</div>
+                    </x-hint>
+                    <x-hint type="tip">
+                        <div class="prose">Tip hint</div>
+                    </x-hint>
+                    <x-hint type="caution">
+                        <div class="prose">Caution hint</div>
+                    </x-hint>
+                </div>
+                <div class="p-5 border-base-content/10">
+                    <p class="font-bold text-base-content text-sm mb-1">Hint</p>
+                    <p class="text-base-content/60 text-xs">Callouts for notes, tips, and warnings.</p>
+                </div>
+            </div>
+
+            {{# Codegroup #}}
+            <div class="lg:col-span-3 rounded-box border-default border-base-content/10 bg-base-100 overflow-hidden flex flex-col">
+                <div class="flex-1 flex items-center p-6 bg-base-200/50">
+                    <div class="w-full prose">
+                        {{ view:codegroup_markdown | markdown }}
+                    </div>
+                </div>
+                <div class="p-5 border-base-content/10">
+                    <p class="font-bold text-base-content text-sm mb-1">Code Group</p>
+                    <p class="text-base-content/60 text-xs">Tabbed code blocks, with copy and collapse built in.</p>
+                </div>
+            </div>
+
         </div>
     </div>
+
+    <x-drawer name="essentials-demo" position="right">
+        <div class="px-6">
+            <h3 class="font-bold text-lg text-base-content mb-3">Drawer</h3>
+            <p class="text-base-content/70 text-sm">A simple slide-in panel</p>
+        </div>
+    </x-drawer>
 </section>
 
-<section class="relative py-32">
+<script type="application/json" id="terminal-commands">
+    {{ view:boot_lines | to_json }}
+</script>
+
+<section class="relative bg-base-100 py-32 lg:py-52 overflow-hidden">
     <div class="container">
-        <div class="flex items-center justify-center absolute inset-0 pointer-events-none">
-            <div class="blur-3xl to-primary/0 bg-gradient-to-t from-primary/20 h-[400px] rotate-[-10deg] w-[900px]"></div>
-            <div class="bg-gradient-to-b blur-3xl translate-y-20 from-primary/20 h-[320px] to-primary/0  w-[400px]"></div>
+
+        <div class="absolute inset-0 z-0 pointer-events-none">
+            <div class="pointer-events-none">
+                <x-effects.ripple />
+            </div>
         </div>
 
-        <div class="text-center">
-            <div class="prose">
-                <h2 class="text-4xl">Ready to build your documentation?</h2>
-                <p>You can find the full documentation on <a href="https://statamic.com/starter-kits/fawn/dok-documentation">the marketplace</a>.</p>
-            </div>
+        <div class="relative flex gap-10 justify-between">
+            <div>
+                <h2 class="h2">Ready to build your documentation?</h2>
+                <p>Get started by copying the command below into your terminal.</p>
 
-            <div class="grid sm:grid-cols-2 gap-5 mt-20 max-w-70 sm:max-w-120 mx-auto">
-                <a class="btn btn-primary" href="/docs">Get Started</a>
-                <a class="btn btn-outline" href="https://statamic.com/starter-kits/fawn/dok-documentation" target="_blank">View on Statamic</a>
+                <div x-data="demoCopyCommand" class="flex items-center justify-between bg-base-300 text-base-content font-mono rounded-box px-5 py-5 max-w-xl mt-10 border-default border-base-content/20">
+                    <span x-ref="text">statamic new mysite fawnsoftware/dok</span>
+
+                    <button class="btn btn-primary btn-square group" x-bind:data-copied="copied" x-ref="btn" @click="writeToClipboard()">
+                        {{ svg src="icon/copy" class="size-4 fill-current block group-data-[copied=true]:hidden group-data-[copied=error]:hidden" aria-hidden="true" }}
+                        {{ svg src="icon/check" class="size-4 group-data-[copied=true]:block hidden" aria-hidden="true" }}
+                        {{ svg src="icon/x" class="size-4 group-data-[copied=error]:block hidden" aria-hidden="true" }}
+                    </button>
+                </div>
+
+                <div class="prose text-xs max-w-xl mt-5 text-base-content/40">
+                    <p>Dok is paid software that requires a licence key. Get a licence key by purchasing on <a href="https://statamic.com/starter-kits/fawn/dok-documentation">Statamic.</a> Requires the Statamic CLI tool. <a href="https://dok-demo.test/dok/3.x/installation">Install by other methods.</a></p>
+                </div>
+
+            </div>
+            <div class="not-lg:hidden">
+                <div
+                    class="text-left font-mono min-h-80 text-sm sm:text-base min-w-120 max-w-3xl mx-auto w-full"
+                    x-data="{
+                        lines: $json.inline('terminal-commands'),
+                        shown: 0,
+                        chars: 0,
+                        done: false,
+                        tick() {
+                            if (this.shown >= this.lines.length) { this.done = true; return; }
+                            let line = this.lines[this.shown];
+                            if (this.chars < line.text.length) {
+                                this.chars++;
+                                setTimeout(() => this.tick(), line.type === 'cmd' ? 22 : 8);
+                            } else {
+                                this.shown++;
+                                this.chars = 0;
+                                setTimeout(() => this.tick(), 200);
+                            }
+                        }
+                    }"
+                    x-init="setTimeout(() => tick(), 400)"
+                >
+                    <template x-for="(line, i) in lines" :key="i">
+                        <p x-show="i <= shown" x-cloak class="min-h-[1.5em] leading-relaxed">
+                            <span x-show="line.type === 'cmd'" class="text-primary">$ </span><span
+                                :class="line.type === 'out' ? 'text-base-content/55' : 'text-base-content'"
+                                x-text="i < shown ? line.text : line.text.slice(0, chars)"
+                            ></span><span x-show="i === shown && !done" class="terminal-cursor"></span>
+                        </p>
+                    </template>
+                </div>
             </div>
         </div>
     </div>
+
+
+    <style>
+        .terminal-cursor {
+            display: inline-block;
+            width: 0.5em;
+            height: 1em;
+            margin-left: 2px;
+            background: var(--color-primary);
+            vertical-align: text-bottom;
+            animation: dok-terminal-blink 1s steps(1) infinite;
+        }
+        @keyframes dok-terminal-blink {
+            50% { opacity: 0; }
+        }
+    </style>
 </section>
 
+
+<script type="module">
+    Alpine.data('demoCopyCommand', () => ({
+        copied: 'false',
+
+        async writeToClipboard() {
+            const el = this.$refs.btn;
+
+            try {
+                let text = this.$refs.text.textContent;
+
+                await navigator.clipboard.writeText(text.trim());
+
+                this.copied = 'true';
+                this.text = 'Copied';
+
+            } catch (error) {
+                this.copied = 'error';
+                this.text = 'Error';
+
+                el.classList.add('animate-shake');
+
+                console.error(error.message);
+
+            } finally {
+                setTimeout(() => {
+                    this.copied = 'false';
+                    this.text = 'Copy';
+
+                    el.classList.remove('animate-shake');
+                }, 1250)
+            }
+        },
+
+        eventListeners: {
+            [`@click`](event) {
+                this.writeToClipboard();
+            },
+        }
+    }));
+</script>

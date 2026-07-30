@@ -1,7 +1,7 @@
 .h1 {
   @layer ui.components {
     font-size: var(--text-3xl);
-    font-weight: var(--font-weight-medium);
+    font-weight: var(--font-weight-bold);
     line-height: var(--leading-tight);
 
     @media (width >= theme("breakpoint.md")) {
@@ -17,7 +17,7 @@
 .h2 {
   @layer ui.components {
     font-size: var(--text-3xl);
-    font-weight: var(--font-weight-medium);
+    font-weight: var(--font-weight-bold);
 
     @media (width >= theme("breakpoint.md")) {
       font-size: var(--text-3xl);
@@ -32,7 +32,7 @@
 .h3 {
   @layer ui.components {
     font-size: var(--text-xl);
-    font-weight: var(--font-weight-medium);
+    font-weight: var(--font-weight-bold);
     line-height: var(--leading-tight);
 
     @media (width >= theme("breakpoint.md")) {
@@ -48,7 +48,7 @@
 .h4 {
   @layer ui.components {
     font-size: var(--text-lg);
-    font-weight: var(--font-weight-medium);
+    font-weight: var(--font-weight-bold);
     line-height: var(--leading-tight);
 
     @media (width >= theme("breakpoint.md")) {

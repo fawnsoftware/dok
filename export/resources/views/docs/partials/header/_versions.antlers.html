@@ -1,0 +1,21 @@
+{{ if {project:versioned} }}
+    <x-dropdown name="version-dropdown" anchor="bottom">
+        <button class="btn btn-sm btn-interact:bg-base-content/5 flex gap-0.5 items-center font-bold text-base-content/50 text-[0.7rem] sm:text-xs">
+            <span>v{{ release:version }}</span>
+            {{ svg src="icon/caret-down" class="size-3 sm:size-4 fill-current ml-auto" aria-hidden="true" }}
+        </button>
+        <x-dropdown.menu>
+            {{ project:versions }}
+                <x-dropdown.item href="{{ url }}">
+                    {{ version }}
+
+                    {{ if label }}
+                        <span class="text-[0.8rem] rounded-full px-2 py-1 text-base-content/70">
+                            {{ label:label }}
+                        </span>
+                    {{ /if }}
+                </x-dropdown.item>
+            {{ /project:versions }}
+        </x-dropdown.menu>
+    </x-dropdown>
+{{ /if }}

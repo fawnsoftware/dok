@@ -1,4 +1,4 @@
-{{ dok:outline as="permalinks" min="3" markdown="{content | raw}" }}
+{{ dok:outline as="permalinks" min="3" md="{content | raw}" }}
     {{ unless no_results }}
         <div x-data="outline()" x-bind="eventListeners" id="on-this-page">
             <h2 class="flex gap-2 mb-3 text-xs">
@@ -11,7 +11,7 @@
                     <li>
                         <a
                             href="#{{ id }}"
-                            class="py-1 text-xs border-l border-base-content/20 has-[+ul_a[data-active='true']]:border-primary has-[+ul_a[data-active='true']]:text-primary data-active:text-primary contrast-more:data-active:font-bold data-active:border-primary hover:border-base-content hover:text-base-content block"
+                            class="py-1.5 text-xs border-l-default border-base-content/20 has-[+ul_a[data-active='true']]:border-primary has-[+ul_a[data-active='true']]:text-primary data-active:text-primary contrast-more:data-active:font-bold data-active:border-primary hover:border-base-content hover:text-base-content block"
                             :data-active="active === '{{ id }}'"
                         >
                             {{ text }}
@@ -23,7 +23,7 @@
                                     <li>
                                         <a
                                             href="#{{ id }}"
-                                            class="py-1 text-xs border-l border-base-content/20 has-[+ul_a[data-active='true']]:border-primary has-[+ul_a[data-active='true']]:text-primary data-active:text-primary contrast-more:data-active:font-bold data-active:border-primary hover:border-base-content hover:text-base-content block"
+                                            class="py-1.5 text-xs border-l-default border-base-content/20 has-[+ul_a[data-active='true']]:border-primary has-[+ul_a[data-active='true']]:text-primary data-active:text-primary contrast-more:data-active:font-bold data-active:border-primary hover:border-base-content hover:text-base-content block"
                                             :data-active="active === '{{ id }}'"
                                         >
                                             {{ text }}
@@ -35,7 +35,7 @@
                                                     <li>
                                                         <a
                                                             href="#{{ id }}"
-                                                            class="py-1 text-xs border-l border-base-content/20 has-[+ul_a[data-active='true']]:border-primary has-[+ul_a[data-active='true']]:text-primary data-active:text-primary contrast-more:data-active:font-bold data-active:border-primary hover:border-base-content hover:text-base-content block"
+                                                            class="py-1.5 text-xs border-l-default border-base-content/20 has-[+ul_a[data-active='true']]:border-primary has-[+ul_a[data-active='true']]:text-primary data-active:text-primary contrast-more:data-active:font-bold data-active:border-primary hover:border-base-content hover:text-base-content block"
                                                             :data-active="active === '{{ id }}'"
                                                         >
                                                             {{ text }}

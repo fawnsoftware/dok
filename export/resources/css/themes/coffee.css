@@ -3,7 +3,7 @@
   --color-base-200: oklch(21% 0.021 329.708);
   --color-base-300: oklch(16% 0.019 329.708);
   --color-base-content: oklch(83.302% 0.003 326.261);
-  --color-primary: oklch(71.996% 0.123 62.756);
+  --color-primary: oklch(65.306% 0.16932 46.71);
   --color-primary-content: oklch(14.399% 0.024 62.756);
 
   --field-color: var(--color-base-content);
@@ -16,4 +16,10 @@
   --radius-notch: 0.3rem;
 
   --border-width: 1px;
+
+  @variant contrast-more {
+    --color-base-100: oklch(18.381% 0.00258 325.303);
+    --color-base-200: oklch(17.304% 0.00002 271.152);
+    --color-base-300: oklch(0% 0 0);
+  }
 }

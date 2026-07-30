@@ -1,0 +1,21 @@
+/*
+  Markdown External Link
+
+  The League/CommonMark extension is enabled by default, and will add the class
+  below to all external links. You may style that class here.
+*/
+
+@layer components {
+  .markdown-external-link {
+    &:after {
+      content: "";
+      width: 15px;
+      height: 15px;
+      display: inline-block;
+      background-color: currentColor;
+      mask-image: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" fill="%23000000" viewBox="0 0 256 256"><path d="M224,104a8,8,0,0,1-16,0V59.32l-66.33,66.34a8,8,0,0,1-11.32-11.32L196.68,48H152a8,8,0,0,1,0-16h64a8,8,0,0,1,8,8Zm-40,24a8,8,0,0,0-8,8v72H48V80h72a8,8,0,0,0,0-16H48A16,16,0,0,0,32,80V208a16,16,0,0,0,16,16H176a16,16,0,0,0,16-16V136A8,8,0,0,0,184,128Z"></path></svg>');
+      mask-size: contain;
+      mask-repeat: no-repeat;
+    }
+  }
+}

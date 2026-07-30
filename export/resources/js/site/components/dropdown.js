@@ -1,29 +1,50 @@
 export default function dropdown(Alpine){
     Alpine.data('dropdown', (uid, anchor) => ({
         open: false,
+        availableWidth: 0,
+
         init() {
             document.addEventListener('alpine:initialized', () => {
                 this.$refs.panel.querySelectorAll('a, button, input').forEach(el => {
                     el.setAttribute('tabindex', '-1');
                     el.tabIndex = '-1';
                 });
+
+                const button = this.$root.querySelector('button');
+
+                if (! button) console.warn(`[dropdown.js] Cannot find element [button] inside of [${uid}] dropdown component`);
+
+                button.setAttribute('x-ref', 'button');
+                button.setAttribute('x-bind', 'button');
+
+                Alpine.initTree(this.$root);
+
+
+                this.$nextTick(() => {
+                    // ResizeObserver reports the button's size
+                    // as soon as it starts observing
+                    new ResizeObserver(() => {
+                        this.availableWidth = this.$refs.button.offsetWidth;
+                    }).observe(this.$refs.button);
+                })
             });
         },
-        toggle(open) {
-            this.open = open || ! this.open;
+
+        show() {
+            this.focusNext = this.$focus.within(document.body).getNext();
+            this.focusPrevious = this.$focus.within(document.body).getPrevious();
+
+            this.open = true;
         },
+
         close() {
             this.open = false;
         },
-        dropdownClose() {
-            this.open = false;
-        },
-        container: {
-            ['@keydown.tab']($event) {
-                this.dropdownClose();
-            },
-        },
+
         button: {
+            ['@keydown.tab']($event) {
+                this.close();
+            },
             [':aria-haspopup']() {
                 return this.open;
             },
@@ -31,20 +52,21 @@ export default function dropdown(Alpine){
                 return this.open;
             },
             ['@click']() {
-                this.toggle();
+                if (this.open) {
+                    this.close()
+                } else {
+                    this.show();
+                }
             },
             ['@keydown.down.prevent']() {
-                if (!this.open) {
-                    this.toggle();
+                if (! this.open) {
+                    this.show();
                 }
 
                 this.$nextTick(() => {
-                    if (this.open) {
-                        let firstFocusableEl = this.$focus.within(this.$root.querySelector('[x-ref="panel"]')).getFirst();
-                        this.$focus.focus(firstFocusableEl);
+                    let firstFocusableEl = this.$focus.within(this.$refs.panel).getFirst();
 
-                        return;
-                    }
+                    this.$focus.focus(firstFocusableEl);
                 });
             },
             [':data-active']() {
@@ -56,24 +78,36 @@ export default function dropdown(Alpine){
             'aria-controls': `dropdown-panel-${ uid }`,
         },
         dropdown: {
+            ['@keydown.tab.prevent.stop']($event) {
+                if (this.open) {
+
+                    if ($event.shiftKey) {
+                        this.$focus.focus(this.focusPrevious);
+                    } else {
+                        this.$focus.focus(this.focusNext);
+                    }
+
+                    this.close();
+                }
+            },
             ['x-show']() {
                 return this.open;
             },
             ['@click.away']() {
-                this.open = false;
+                this.close();
 
                 this.$nextTick(() =>{
                     this.$refs.button.focus();
                 });
             },
             ['@keydown.down.prevent']() {
-                this.$focus.wrap().next();
+                this.$focus.within(this.$refs.panel).wrap().next();
             },
             ['@keydown.up.prevent']() {
-                this.$focus.wrap().previous();
+                 this.$focus.within(this.$refs.panel).wrap().previous();
             },
             [`x-anchor.${anchor}`]() {
-                return this.$refs.button;
+                return this.$root.querySelector('button');
             },
             'id': `dropdown-panel-${ uid }`,
             'role': 'menu',

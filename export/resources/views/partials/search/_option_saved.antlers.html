@@ -1,0 +1,37 @@
+<li
+    role="option"
+    class="search-option search-option--saved transition-opacity opacity-0"
+    :class="{'search-option--root': item.is_root}"
+    :id="generateId(type, itemIndex, groupIndex)"
+    :data-identifier="item._identifier"
+    x-init="$nextTick(() => {$el.classList.add('opacity-100'); $el.classList.remove('opacity-0')})"
+>
+    <a class="search-option-link" :href="item.search_url" @click="handleLinkClick($el)">
+        <div class="search-option-body">
+            <h3 class="search-option-title">
+                <span class="search-option-origin">
+                    <template x-if="config.showIndexLabel && item._indexLabel">
+                        <span>
+                            <span x-text="item._indexLabel"></span>
+                            {{ svg src="icon/caret-right" class="search-option-origin-caret" }}
+                        </span>
+                    </template>
+                    <span x-html="$str.mark(item.origin_title, query)"></span>
+                </span>
+                <span x-html="$str.mark(item.search_title, query)"></span>
+            </h3>
+        </div>
+
+        <div class="search-option-actions">
+            <button
+                type="button"
+                title="Remove from saved"
+                class="search-option-action"
+                @click.prevent.stop="focusAfter($el); removeSavedResult(item._identifier);"
+            >
+                <span class="sr-only">Remove</span>
+                {{ svg src="icon/x" class="search-option-action-icon" }}
+            </button>
+        </div>
+    </a>
+</li>

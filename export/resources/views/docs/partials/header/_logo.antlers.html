@@ -1,0 +1,27 @@
+<div class="w-full h-5 sm:h-7 flex max-w-40 self-center items-center">
+    {{ project:entry }}
+        <a href="{{ project:stable:url :collection="page:collection" }}" class="flex items-center size-full">
+            {{ if logo }}
+                {{ if logo.is_svg }}
+                    {{ svg :src="logo" class="h-full w-auto { logo_dark ?= 'dark:hidden' }" aria-hidden="true" }}
+                {{ else if logo.is_image }}
+                    <img src="{{ glide:logo_dark quality="100" format="webp" }}" class="h-full w-auto {{ logo_dark ?= 'dark:hidden' }}" alt="{{ logo.alt }}">
+                {{ /if }}
+            {{ /if }}
+
+            {{ if logo_dark }}
+                {{ if logo_dark.is_svg }}
+                    {{ svg :src="logo_dark" class="h-full w-auto hidden dark:block" aria-hidden="true" }}
+                {{ else if logo_dark.is_image }}
+                    <img src="{{ glide:logo_dark quality="100" format="webp" }}" class="h-full w-auto hidden dark:block" alt="{{ logo_dark.alt }}">
+                {{ /if }}
+            {{ /if }}
+
+            {{ if (!logo && !logo_dark && logo_text) }}
+                <span class="project-logo">{{ logo_text | antlers }}</span>
+            {{ /if }}
+
+            <span class="sr-only">Home</span>
+        </a>
+    {{ /project:entry }}
+</div>

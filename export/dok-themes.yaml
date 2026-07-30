@@ -1,0 +1,31 @@
+default:
+  dark: moonlight
+  light: white
+themes:
+  - id: forest
+    name: Forest
+    appearance: dark
+  - id: black
+    name: Black
+    appearance: dark
+  - id: coffee
+    name: Coffee
+    appearance: dark
+  - id: otto
+    name: Otto
+    appearance: dark
+  - id: moonlight
+    name: Moonlight
+    appearance: dark
+  - id: white
+    name: White
+    appearance: light
+  - id: amethyst
+    name: Amethyst
+    appearance: light
+  - id: papyrus
+    name: Papyrus
+    appearance: light
+  - id: azure
+    name: Azure
+    appearance: light

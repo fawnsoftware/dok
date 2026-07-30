@@ -8,7 +8,7 @@ use Illuminate\Http\Request;
 class SyncRemoteController extends Controller
 {
     /**
-     * Handles the sync process via the control pnel
+     * Handles the sync process via the control panel
      *
      * @param  Request  $request  The current request.
      */

@@ -25,7 +25,7 @@
             {{ /unless }}
 
             {{ if instructions && instructions_position == 'above' }}
-                <div class="label label-description prose prose-on-base" id="{{ id }}-instructions">{{ instructions | markdown }}</div>
+                <div class="label label-description prose" id="{{ id }}-instructions">{{ instructions | markdown }}</div>
             {{ /if }}
 
             <div class="flex {{ inline ? 'flex-col sm:flex-row flex-wrap gap-2 sm:gap-10' : 'flex-col gap-2' }} mt-2">

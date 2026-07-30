@@ -6,12 +6,6 @@
   --color-primary: oklch(54.922% 0.22774 321.059);
   --color-primary-content: oklch(97% 0.014 343.198);
 
-  --color-important-base: oklch(0.8711 0.0457 279.94);
-  --color-error-base: oklch(0.9232 0.0455 347.88);
-  --color-warning-base: oklch(0.9488 0.0523 92.93);
-  --color-note-base: oklch(0.9093 0.0344 219.87);
-  --color-tip-base: oklch(0.9213 0.0475 202.91);
-
   --field-color: var(--color-base-content);
   --field-background: --alpha(var(--color-primary) / 5%);
   --field-shadow: 0 1.5px 4px 0 --alpha(var(--color-primary) / 10%);

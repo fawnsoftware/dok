@@ -1,0 +1,36 @@
+<li
+    role="option"
+    class="search-option search-option--search"
+    :class="{'search-option--root': item.is_root}"
+    :id="generateId(type, itemIndex, groupIndex)"
+    :data-identifier="item._identifier"
+>
+    <a
+        class="search-option-link"
+        :href="item.search_url"
+        @click="handleLinkClick($el)"
+    >
+        <span class="search-option-icon">
+            {{ svg src="icon/hash" class="search-option-icon-svg search-option-icon-svg--section" }}
+            {{ svg src="icon/book-open-text" class="search-option-icon-svg search-option-icon-svg--root" }}
+        </span>
+
+        <div class="search-option-body">
+            <h3 class="search-option-title">
+                <template x-if="!item.is_root">
+                    <span class="search-option-origin" x-html="$str.mark(item.origin_title, query)"></span>
+                </template>
+                <span x-html="$str.mark(item.search_title, query)"></span>
+            </h3>
+
+            {{# Uncomment to include search snippets #}}
+            {{# <template x-if="item.search_snippets?.search_content?.length > 0 && !group[0].is_root ">
+                <p class="search-option-snippet"
+                    x-html="$str.mark($str.truncate(item.search_snippets.search_content[0]), query)">
+                </p>
+            </template> #}}
+        </div>
+
+        {{ svg src="icon/caret-right" class="search-option-caret" }}
+    </a>
+</li>

@@ -26,9 +26,9 @@
                 x-bind:data-copied="copied"
                 class="group px-1 py-1 rounded-lg items-center justify-center cursor-pointer transition duration-100 font-bold gap-1 hidden md:flex"
             >
-                <s:svg src="icon/clipboard" class="size-4 fill-current block group-data-[copied=true]:hidden group-data-[copied=error]:hidden" aria-hidden="true" />
-                <s:svg src="icon/check" class="size-4 fill-primary group-data-[copied=true]:block hidden" aria-hidden="true" />
-                <s:svg src="icon/x" class="size-4 fill-error group-data-[copied=error]:block hidden" aria-hidden="true" />
+                <s:svg src="icon/clipboard" class="size-3 fill-current block group-data-[copied=true]:hidden group-data-[copied=error]:hidden" aria-hidden="true" />
+                <s:svg src="icon/check" class="size-3 fill-primary group-data-[copied=true]:block hidden" aria-hidden="true" />
+                <s:svg src="icon/x" class="size-3 fill-error group-data-[copied=error]:block hidden" aria-hidden="true" />
                 <span x-text="text" class="group-data-[copied=true]:text-primary group-data-[copied=error]:text-error">Copy</span>
             </button>
         </div>

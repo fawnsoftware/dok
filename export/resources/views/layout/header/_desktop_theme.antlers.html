@@ -1,0 +1,29 @@
+<div x-data class="not-lg:hidden">
+    <x-dropdown name="theme-picker" anchor="top.offset.20">
+        <button class="btn text-base-content touch-manipulation">
+            {{ svg src="icon/sun-dim" class="fill-current size-5" aria-hidden="true" }}
+            <span class="sr-only">Theme</span>
+            {{ svg src="icon/caret-down" class="size-2.5 ml-auto" aria-hidden="true" }}
+        </button>
+
+        <x-dropdown.menu>
+            <x-dropdown.group>
+                <x-dropdown.radio.group x-model="$store.theme.currentTheme">
+                    <template x-for="theme in $store.theme.themes">
+                        <x-dropdown.radio x-bind:value="theme.id">
+                            <span x-text="theme.name"></span>
+                        </x-dropdown.radio>
+                    </template>
+                    <x-dropdown.radio value="system">
+                        <span>System</span>
+                    </x-dropdown.radio>
+                </x-dropdown.radio.group>
+            </x-dropdown.group>
+            <x-dropdown.group>
+                <x-dropdown.checkbox x-model="$store.theme.moreContrast">
+                    More Contrast
+                </x-dropdown.checkbox>
+            </x-dropdown.group>
+        </x-dropdown.menu>
+    </x-dropdown>
+</div>

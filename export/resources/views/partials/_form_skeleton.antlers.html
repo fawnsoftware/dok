@@ -12,23 +12,23 @@
             )}}"
             type="{{ type }}"
     ">
-        <div class="bg-base-content/20 animate-pulse radius-control max-w-4/12"><span class="label invisible">label</span></div>
+        <div class="bg-base-content/20 animate-pulse rounded-control max-w-4/12"><span class="label invisible">label</span></div>
 
         {{ if instructions }}
-            <div class="bg-base-content/20 animate-pulse radius-control max-w-6/12"><span class="label invisible">label</span></div>
+            <div class="bg-base-content/20 animate-pulse rounded-control max-w-6/12"><span class="label invisible">label</span></div>
         {{ /if }}
 
         <div class="mt-2">
             {{ if type == 'text' || type == 'integer' }}
-                <div class="bg-base-content/20 animate-pulse radius-control">
+                <div class="bg-base-content/20 animate-pulse rounded-control">
                     <div class="input invisible"></div>
                 </div>
             {{ elseif type == 'textarea' }}
-                <div class="bg-base-content/20 animate-pulse radius-control">
+                <div class="bg-base-content/20 animate-pulse rounded-control">
                     <textarea class="textarea invisible" rows="5"></textarea>
                 </div>
             {{ elseif type == 'select' || type == 'dictionary' }}
-                <div class="bg-base-content/20 animate-pulse radius-control">
+                <div class="bg-base-content/20 animate-pulse rounded-control">
                     <select class="select invisible" {{ type == 'dictionary' ?= 'multiple' }}>
                     {{ foreach:options as="option|label" }}
                         <option class="invisible">
@@ -53,7 +53,7 @@
                     <div class="toggle invisible"></div>
                 </div>
             {{ elseif type == 'files' || type == 'assets' }}
-                    <div class="bg-base-content/20 animate-pulse radius-control">
+                    <div class="bg-base-content/20 animate-pulse rounded-control">
                     <div class="fileinput invisible"></div>
                 </div>
             {{ /if }}

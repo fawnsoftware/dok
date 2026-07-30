@@ -1,9 +1,9 @@
 [data-theme="moonlight"] {
-  --color-base-100: oklch(22% 0.02 283);
-  --color-base-200: oklch(17.447% 0.0194 270.07);
-  --color-base-300: oklch(14.551% 0.01358 269.443);
+  --color-base-100: oklch(20% 0.02978 286.429);
+  --color-base-200: oklch(17.5% 0.0229 287.795);
+  --color-base-300: oklch(15% 0.0313 284.69);
   --color-base-content: oklch(93.041% 0.01495 281.874);
-  --color-primary: var(--color-cyan-500);
+  --color-primary: oklch(65.061% 0.22844 351.85);
   --color-primary-content: oklch(25% 0.09 281.288);
 
   --field-color: var(--color-base-content);
@@ -12,7 +12,7 @@
   --field-border-color: --alpha(var(--color-white) / 10%);
 
   --radius-box: 1rem;
-  --radius-control: 0.4rem;
+  --radius-control: 0.8rem;
   --radius-notch: 0.4rem;
 
   --border-width: 1px;

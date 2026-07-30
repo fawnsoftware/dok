@@ -9,6 +9,7 @@ use Illuminate\Support\Str;
 use Statamic\Facades\Collection;
 use Statamic\Facades\Entry;
 use Statamic\Facades\Nav;
+use Stillat\Proteus\Support\Facades\ConfigWriter;
 
 use function Laravel\Prompts\confirm;
 use function Laravel\Prompts\progress;
@@ -44,6 +45,9 @@ class CreateRelease extends Command
     public function handle(): int
     {
 
+        $shouldUpdateSearchIndex = false;
+        $shouldCreateSearchIndex = false;
+
         $projectId = $this->askForProjectId();
 
         $projectEntry = Entry::find($projectId);
@@ -58,7 +62,19 @@ class CreateRelease extends Command
 
         $releaseIsStable = $this->askForIsReleaseStable();
 
-        $this->startProgress('Starting scaffolding', 10);
+        $searchIndexConfigKey = "statamic.search.indexes.{$projectEntry->slug}";
+        if (config($searchIndexConfigKey)) {
+            $shouldUpdateSearchIndex = confirm(
+                label: 'Update the search index content?',
+            );
+        } else {
+            $shouldCreateSearchIndex = confirm(
+                label: 'Create a new search index for this release?',
+                hint: "You are asked this because the [{$projectEntry->slug}] index is not found."
+            );
+        }
+
+        $this->startProgress('Starting scaffolding', 11);
 
         $this->advance('Creating collection');
         $docsCollection = Collection::make($releaseHandle)
@@ -67,11 +83,14 @@ class CreateRelease extends Command
             ->icon('programming-code-block')
             ->template('docs/show')
             ->layout('docs/layout')
-            ->routes($route)
             ->structureContents([
                 'root' => true,
             ])
             ->requiresSlugs(true);
+
+        if ($route !== 'skip') {
+            $docsCollection->routes($route);
+        }
 
         $this->advance('Creating navigation');
         $navigation = Nav::make($releaseHandle)
@@ -111,6 +130,33 @@ class CreateRelease extends Command
             $projectEntry->set('latest_stable_release', $releaseEntry->id());
 
             $projectEntry->save();
+        }
+
+        $this->advance('Setting up search');
+        if ($shouldUpdateSearchIndex) {
+            ConfigWriter::write("statamic.search.indexes.{$projectEntry->slug}.searchables", [
+                "docs:{$releaseHandle}",
+            ]);
+        }
+
+        if ($shouldCreateSearchIndex) {
+            ConfigWriter::write("statamic.search.indexes.{$projectEntry->slug}", [
+                'driver' => 'local',
+                'searchables' => [
+                    "docs:{$releaseHandle}",
+                ],
+                'fields' => [
+                    'title',
+                    'id',
+                    'search_title',
+                    'search_url',
+                    'search_content',
+                    'origin_title',
+                    'origin_url',
+                    'is_root',
+                    'additional_context',
+                ],
+            ]);
         }
 
         $this->advance('Setting up default blueprint');

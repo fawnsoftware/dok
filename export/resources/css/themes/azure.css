@@ -1,0 +1,49 @@
+[data-theme="azure"] {
+  --color-base-100: oklch(96.994% 0.00605 224.233);
+  --color-base-200: oklch(92.647% 0.02193 211.289);
+  --color-base-300: oklch(86.758% 0.03568 214.654);
+  --color-base-content: oklch(16.976% 0.09609 268.049);
+  --color-primary: oklch(46.623% 0.19421 263.966);
+  --color-primary-content: oklch(100% 0.00011 271.152);
+
+  --color-note: oklch(58.763% 0.08955 214.113);
+  --color-note-content: oklch(99.779% 0.00104 11.135);
+
+  --color-tip: oklch(0.7105 0.127578 181.6019);
+  --color-tip-content: oklch(100% 0.00011 271.152);
+
+  --color-important: oklch(40.464% 0.14447 274.102);
+  --color-important-content: oklch(100% 0.00011 271.152);
+
+  --color-error: oklch(50.576% 0.15494 10.734);
+  --color-error-content: oklch(100% 0.00011 271.152);
+
+  --color-warning: oklch(70.646% 0.12499 93.198);
+  --color-warning-content: oklch(100% 0.00011 271.152);
+
+  --color-tip: oklch(56.203% 0.09004 185.132);
+  --color-tip-content: oklch(0% 0 0);
+
+  --color-success: oklch(59.032% 0.11281 163.995);
+  --color-tip-content: oklch(100% 0.00011 271.152);
+
+  --field-color: var(--color-base-content);
+  --field-background: --alpha(var(--color-primary) / 8%);
+  --field-shadow: 0 1.5px 4px 0 --alpha(var(--color-primary) / 10%);
+  --field-border-color: --alpha(var(--color-base-content) / 20%);
+
+  --radius-box: 0.75rem;
+  --radius-control: 0.75rem;
+  --radius-notch: 0.5rem;
+
+  --border-width: 1px;
+
+  --focus-color: oklch(43.804% 0.27812 268.915);
+  --focus-width: 2px;
+
+  @variant contrast-more {
+    --color-base-100: oklch(91.476% 0.01309 221.786);
+    --color-base-200: oklch(79.181% 0.02028 208.975);
+    --color-base-300: oklch(72.874% 0.02703 215.359);
+  }
+}

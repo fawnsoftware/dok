@@ -5,7 +5,7 @@
   display: grid;
   position: relative;
   overflow: hidden;
-  border: 1px solid --alpha(var(--color-base-content) / 10%);
+  border: var(--border-width) solid --alpha(var(--color-base-content) / 10%);
   background-color: --alpha(var(--color-base-content) / 2%);
 
   &:has(:focus-visible) {
@@ -32,7 +32,7 @@
   }
 
   @variant contrast-more {
-    border: 1px solid var(--color-base-content) !important;
+    border: var(--border-width) solid var(--color-base-content) !important;
   }
 }
 

@@ -1,0 +1,8 @@
+<button
+    class="flex items-center text-base-content cursor-pointer lg:hidden"
+    x-data
+    @click="$dispatch('drawer:open:main-navigation')"
+>
+    {{ svg src="icon/list" class="size-6 text-base-content" aria-hidden="true" }}
+    <span class="sr-only">Menu</span>
+</button>

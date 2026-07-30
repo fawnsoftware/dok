@@ -4,8 +4,8 @@
     padding: --spacing(5);
     color: inherit;
     overflow: hidden;
-    border: 1px solid var(--hint-accent);
-    border-radius: var(--radius-control);
+    border: var(--border-width) solid var(--hint-accent);
+    border-radius: var(--radius-box);
     background:
       linear-gradient(
         --alpha(var(--hint-accent) / 3%),

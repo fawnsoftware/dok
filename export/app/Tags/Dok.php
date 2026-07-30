@@ -2,6 +2,7 @@
 
 namespace App\Tags;
 
+use Illuminate\Support\Str;
 use League\CommonMark\Environment\Environment;
 use League\CommonMark\Extension\CommonMark\CommonMarkCoreExtension;
 use League\CommonMark\Extension\CommonMark\Node\Block\Heading;
@@ -11,6 +12,9 @@ use League\CommonMark\Node\NodeIterator;
 use League\CommonMark\Node\RawMarkupContainerInterface;
 use League\CommonMark\Node\StringContainerHelper;
 use League\CommonMark\Parser\MarkdownParser;
+use Statamic\Facades\Search;
+use Statamic\Facades\YAML;
+use Statamic\Tags\TagNotFoundException;
 use Statamic\Tags\Tags;
 
 class Dok extends Tags
@@ -23,15 +27,26 @@ class Dok extends Tags
         return [];
     }
 
+    public function wildcard(string $tag)
+    {
+        $method = Str::camel(str_replace(':', ' ', $tag));
+
+        if (! method_exists($this, $method)) {
+            throw new TagNotFoundException("Tag {{ {$tag} }} not found");
+        }
+
+        return $this->{$method}();
+    }
+
     /**
      * {{ dok:outline }}
      */
     public function outline()
     {
-        $min = $this->params->get('min') ?? 999999;
+        $min = $this->params->get('min') ?? 0;
 
         // Gotta use raw Markdown, not preprocessed by Statamic
-        $rawMarkdown = $this->params['markdown'] ?? '';
+        $rawMarkdown = $this->params['markdown'] ?? $this->params['md'] ?? '';
 
         // Create a fresh replica CommonMark environment
         $environment = new Environment(config('statamic.markdown.configs.default'));
@@ -65,7 +80,19 @@ class Dok extends Tags
 
         $headingTree = $this->builtOutlineTree($headings);
 
-        if (empty($headingTree) || count($headingTree) < $min) {
+        $headingTreeCount = 0;
+        $stack = $headingTree;
+
+        while (! empty($stack)) {
+            $item = array_pop($stack);
+            $headingTreeCount++;
+
+            foreach ($item['children'] ?? [] as $child) {
+                $stack[] = $child;
+            }
+        }
+
+        if (empty($headingTree) || $headingTreeCount < $min) {
             return $this->parseNoResults();
         }
 
@@ -113,5 +140,63 @@ class Dok extends Tags
                 }
             }
         }
+    }
+
+    /**
+     * {{ dok:index_exists }}
+     */
+    private function indexExists(): bool
+    {
+        $names = $this->params->get(['index', 'indexes']);
+
+        $names = is_iterable($names)
+            ? collect($names)
+            : collect($this->params->explode(['index', 'indexes'], []));
+
+        $indexes = Search::indexes();
+
+        return $names
+            ->map(fn ($name) => trim((string) $name))
+            ->contains(fn ($name) => $name !== '' && $indexes->has($name));
+    }
+
+    /**
+     * {{ dok:theme:list }}
+     */
+    private function themeList(): array
+    {
+        return $this->themeManifest()['themes'] ?? [];
+    }
+
+    /**
+     * {{ dok:theme:default }}
+     */
+    private function themeDefault(): array|string|null
+    {
+        $mode = $this->params->get('mode') ?? 'dark';
+
+        $manifest = $this->themeManifest();
+
+        $defaultThemeId = $manifest['default'][$mode] ?? null;
+
+        $theme = collect($manifest['themes'])->firstWhere('id', $defaultThemeId);
+
+        if ($get = $this->params->get('get')) {
+            return $theme[$get] ?? null;
+        }
+
+        return $theme;
+    }
+
+    /**
+     * {{ dok:theme:manifest }}
+     */
+    private function themeManifest(): array
+    {
+        $path = base_path('dok-themes.yaml');
+
+        $data = YAML::file($path)->parse();
+
+        return $data ?? [];
     }
 }

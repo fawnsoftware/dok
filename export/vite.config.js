@@ -2,7 +2,7 @@ import {defineConfig} from 'vite';
 import tailwindcss from '@tailwindcss/vite'
 import laravel from 'laravel-vite-plugin';
 import statamic from '@statamic/cms/vite-plugin';
-
+import { dokThemes } from './vite-dok-themes.js';
 
 export default defineConfig({
     plugins: [
@@ -15,6 +15,7 @@ export default defineConfig({
             refresh: true,
         }),
         tailwindcss(),
+        dokThemes(),
     ],
     server: {
         watch: {
