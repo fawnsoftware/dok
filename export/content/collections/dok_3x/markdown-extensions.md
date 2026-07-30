@@ -155,8 +155,6 @@ async function getSpaceData() {
 :::
 
 
----
-
 ## Table Wrap
 This neat little extension wraps your table blocks in a couple of HTML elements, giving a little more control over the styles. Dok already adds some useful styles, and enables overflowing for tables.
 
@@ -172,16 +170,12 @@ This neat little extension wraps your table blocks in a couple of HTML elements,
 
 It is enabled by default.
 
----
-
 ## Heading Permalinks
 Dok comes with the [Heading Permalink](https://commonmark.thephpleague.com/2.6/extensions/heading-permalinks/) extension pre-installed.
 
 :::caution
 Other extensions and features rely on this extension. Changing its config or disabling the extension can cause unintended consequences.
 :::
-
----
 
 ## Table of Contents
 Dok comes with the [Table of Contents](https://commonmark.thephpleague.com/2.6/extensions/table-of-contents/) extension pre-installed.

@@ -8,6 +8,8 @@ use League\CommonMark\Node\StringContainerInterface;
 
 final class ComponentBlock extends AbstractBlock implements StringContainerInterface
 {
+    protected string $literal;
+
     private string $componentName;
 
     private string $modifier;

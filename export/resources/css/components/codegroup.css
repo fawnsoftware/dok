@@ -1,8 +1,8 @@
 @layer components {
   .code-group {
-    background-color: var(--color-base-200);
+    background-color: var(--color-base-100);
     border-radius: var(--prose-pre-radius);
-    border: 1px solid --alpha(var(--color-base-content) / 20%);
+    border: var(--border-width) solid --alpha(var(--color-base-content) / 10%);
     border-radius: var(--radius-box);
     overflow: hidden;
     padding: --spacing(1);
@@ -15,14 +15,15 @@
   .code-group pre {
     margin: 0;
     border-radius: calc(var(--radius-box) - --spacing(1));
+    border: 0;
   }
 
   .code-group-header {
     display: flex;
     align-items: center;
     justify-content: space-between;
-    height: --spacing(10);
-    padding: --spacing(0) --spacing(4) --spacing(1) --spacing(4);
+    height: --spacing(7);
+    padding: --spacing(0) --spacing(4) --spacing(0) --spacing(4);
     font-size: 0.8rem;
     font-weight: var(--font-weight-bold);
     font-family: var(--font-mono);
@@ -34,9 +35,17 @@
     gap: --spacing(5);
   }
 
+  .code-group-copy-button {
+    font-size: 0.7rem;
+  }
+
+  .code-group-tab-button {
+    font-size: 0.7rem;
+  }
+
   button.code-group-tab-button {
     cursor: pointer;
-    border-bottom: 1px solid transparent;
+    border-bottom: var(--border-width) solid transparent;
 
     @media (hover: hover) {
       &:hover {

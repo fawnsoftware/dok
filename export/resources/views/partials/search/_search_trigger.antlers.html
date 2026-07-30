@@ -1,0 +1,18 @@
+
+<div class="search-trigger" x-data>
+    <button type="button" class="input search-trigger-btn" @click="$dispatch('search:open')">
+        <span class="sr-only">Search the docs</span>
+
+        <div class="search-trigger-icon">
+            {{ svg src="icon/magnifying-glass" class="search-trigger-icon-svg" }}
+        </div>
+
+        <kbd class="search-trigger-kbd hidden in-[.os-macos]:block">⌘K</kbd>
+        <kbd class="search-trigger-kbd hidden  not-[.os-macos_&]:block">Ctrl+K</kbd>
+    </button>
+
+    <button type="button" class="search-trigger-btn-mobile" @click="$dispatch('search:open')">
+        <span class="sr-only">Search the docs</span>
+        {{ svg src="icon/magnifying-glass" class="search-trigger-icon-mobile-svg" }}
+    </button>
+</div>

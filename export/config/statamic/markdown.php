@@ -41,6 +41,14 @@ return [
                 'min_heading_level' => 2,
                 'max_heading_level' => 4,
             ],
+            'external_link' => [
+                'internal_hosts' => env('APP_URL'),
+                'open_in_new_window' => true,
+                'html_class' => 'markdown-external-link',
+                'nofollow' => '',
+                'noopener' => 'external',
+                'noreferrer' => 'external',
+            ],
         ],
     ],
 

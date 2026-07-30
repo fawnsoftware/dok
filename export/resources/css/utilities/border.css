@@ -1,0 +1,62 @@
+/*
+  Tailwind doesnt provide theme values for border widths, and writing
+  border-(length:--border-width) everywhere kinda sucks. You can
+  use these utilities instead to make your life easier.
+
+  It uses your default border set in your theme.
+*/
+
+@utility border-default {
+  border-style: var(--tw-border-style);
+  border-width: var(--border-width);
+}
+
+@utility border-x-default {
+  border-style: var(--tw-border-style);
+  border-inline-width: var(--border-width);
+}
+
+@utility border-y-default {
+  border-style: var(--tw-border-style);
+  border-block-width: var(--border-width);
+}
+
+@utility border-s-default {
+  border-style: var(--tw-border-style);
+  border-inline-start-width: var(--border-width);
+}
+
+@utility border-e-default {
+  border-style: var(--tw-border-style);
+  border-inline-end-width: var(--border-width);
+}
+
+@utility border-bs-default {
+  border-style: var(--tw-border-style);
+  border-block-start-width: var(--border-width);
+}
+
+@utility border-be-default {
+  border-style: var(--tw-border-style);
+  border-block-end-width: var(--border-width);
+}
+
+@utility border-t-default {
+  border-style: var(--tw-border-style);
+  border-top-width: var(--border-width);
+}
+
+@utility border-r-default {
+  border-style: var(--tw-border-style);
+  border-right-width: var(--border-width);
+}
+
+@utility border-b-default {
+  border-style: var(--tw-border-style);
+  border-bottom-width: var(--border-width);
+}
+
+@utility border-l-default {
+  border-style: var(--tw-border-style);
+  border-left-width: var(--border-width);
+}

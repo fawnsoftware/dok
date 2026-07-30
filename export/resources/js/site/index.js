@@ -3,3 +3,4 @@ import './alpine.js';
 import './fonts.js';
 
 import './scripts/heading-permalink.js';
+import './scripts/is-mac.js';

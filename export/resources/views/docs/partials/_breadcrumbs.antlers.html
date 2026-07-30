@@ -1,0 +1,10 @@
+<ul class="flex items-center gap-2 mb-5">
+    {{ release:breadcrumbs prefix="Home" prefix_single="true" }}
+        <li class="flex items-center gap-2 text-base-content/70 text-xs  last:font-bold">
+            {{ title }}
+            {{ unless last }}
+                {{ svg src="icon/caret-double-right" class="size-2 text-base-content opacity-80" aria-hidden="true" }}
+            {{ /unless }}
+        </li>
+    {{ /release:breadcrumbs }}
+</ul>

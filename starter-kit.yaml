@@ -1,7 +1,10 @@
 export_paths:
-  - app/Console/Commands/Dok
+  - app/Console/Commands/Dok/CreateProject.php
+  - app/Console/Commands/Dok/CreateRelease.php
+  - app/Console/Commands/Dok/SyncGithub.php
   - app/Dictionaries
-  - app/Http/Controllers
+  - app/Http/Controllers/SyncRemoteController.php
+  - app/Listeners/IndexingContent.php
   - app/Markdown
   - app/Providers
   - app/Services
@@ -29,4 +32,11 @@ export_paths:
   - package.json
   - vite.config.js
   - vite-cp.config.js
+  - vite-dok-themes.js
+  - dok-themes.yaml
+  - pint.json
   - config/dok.export.php
+dependencies:
+  stillat/documentation-search: ^2.0
+  stillat/proteus: ^4.3
+  torchlight/engine: ^1.0

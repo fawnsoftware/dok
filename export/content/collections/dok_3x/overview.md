@@ -24,8 +24,6 @@ Not got a licence yet? You can buy Dok from the Statamic marketplace.
 
 :::/cardgroup
 
----
-
 ## Markdown
 Some of the best features of Dok are in it's flexible markdown authoring features. Learn more about these below!
 

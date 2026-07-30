@@ -5,20 +5,17 @@
       overflow-x: auto;
       color: var(--prose-pre-color);
       font-size: 0.8888889em;
-      background-color: var(--prose-pre-background);
+      background-color: var(--color-base-100) !important;
       line-height: 1.8;
       margin-top: --spacing(6);
       margin-bottom: --spacing(6);
       border-radius: var(--radius-box);
+      border: var(--border-width) solid --alpha(var(--color-base-content) / 10%);
       box-shadow: none;
-      padding: --spacing(4);
+      padding: --spacing(0);
       tab-size: 4;
       scrollbar-width: thin;
       scrollbar-color: --alpha(var(--prose-pre-color) / 15%) transparent;
-
-      @media (min-width: theme(--breakpoint-lg)) {
-        padding: --spacing(8);
-      }
     }
 
     @variant prose-code {
@@ -39,10 +36,9 @@
   .prose {
     /* Reset code styles inside of a pre */
     :where(pre code):not(:where(.not-prose, .not-prose *)) {
-      background-color: transparent;
+      background-color: transparent !important;
       border-width: 0;
       border-radius: 0;
-      padding: 0;
       font-weight: inherit;
       color: inherit;
       font-size: inherit;
@@ -50,6 +46,8 @@
       line-height: inherit;
       box-shadow: none;
       margin-inline: 0;
+      display: block;
+      padding: --spacing(4);
     }
   }
 }

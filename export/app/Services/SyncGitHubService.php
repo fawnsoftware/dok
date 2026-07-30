@@ -19,7 +19,6 @@ class SyncGitHubService
     /**
      * Sync the GitHub repository to the local file system.
      *
-     * @param  bool  $cleanDirectory  Whether to clean the directory before syncing.
      * @return array Statistics about the sync operation.
      *
      * @throws \Exception If the GitHub API request fails.
@@ -34,12 +33,13 @@ class SyncGitHubService
 
         $tree = $this->fetchRepositoryTree();
 
-        // Clean directory for a true 1:1 synd
+        // Clean content directory for a true 1:1 sync
         File::cleanDirectory($this->destination);
 
         $stats = [
             'files' => 0,
             'directories' => 0,
+            'public_files' => 0,
             'skipped' => 0,
         ];
 
@@ -54,8 +54,14 @@ class SyncGitHubService
             if ($item['type'] === 'blob') {
                 $this->downloadAndSaveBlob($item['path']);
                 $stats['files']++;
+
+                if ($this->isPublicPath($item['path'])) {
+                    $stats['public_files']++;
+                }
             } elseif ($item['type'] === 'tree') {
-                $this->ensureDirectory($item['path']);
+                $directory = Str::finish($this->destination, '/').$item['path'];
+                File::ensureDirectoryExists($directory);
+
                 $stats['directories']++;
             }
         }
@@ -65,9 +71,6 @@ class SyncGitHubService
 
     /**
      * Load the resource configuration from config.
-     *
-     * @param  string  $name  The resource name.
-     * @return array The resource configuration.
      *
      * @throws \Exception If the resource doesn't exist.
      */
@@ -111,8 +114,6 @@ class SyncGitHubService
     /**
      * Fetch the repository tree from GitHub.
      *
-     * @return array The repository tree.
-     *
      * @throws \Exception If the request fails.
      */
     protected function fetchRepositoryTree(): array
@@ -133,9 +134,8 @@ class SyncGitHubService
     }
 
     /**
-     * Download a blob from GitHub and save it locally.
-     *
-     * @param  string  $filePath  The path to the file in the repository.
+     * Download a blob from GitHub and save it locally (or to /public if its
+     * path matches one of the configured [public] mappings).
      *
      * @throws \Exception If the download fails.
      */
@@ -154,21 +154,107 @@ class SyncGitHubService
         }
 
         $content = base64_decode($response->json()['content']);
-        $localFilePath = Str::finish($this->destination, '/').$filePath;
 
-        File::ensureDirectoryExists(dirname($localFilePath));
-        File::put($localFilePath, $content);
+        if ($this->isPublicPath($filePath)) {
+            $publicFilePath = $this->publicPathFor($filePath);
+            File::ensureDirectoryExists(dirname($publicFilePath));
+            File::put($publicFilePath, $content);
+        } else {
+            $localFilePath = Str::finish($this->destination, '/').$filePath;
+            File::ensureDirectoryExists(dirname($localFilePath));
+            File::put($localFilePath, $content);
+        }
     }
 
     /**
-     * Ensure a directory exists.
-     *
-     * @param  string  $path  The relative path to the directory.
+     * Determine whether a given repo-relative path matches one of the
+     * resource's configured [public] mappings.
      */
-    protected function ensureDirectory(string $path): void
+    protected function isPublicPath(string $filePath): bool
     {
-        $directory = Str::finish($this->destination, '/').$path;
-        File::ensureDirectoryExists($directory);
+        return $this->resolvePublicMapping($filePath) !== null;
+    }
+
+    /**
+     * Find the [public] mapping (pattern => target) that matches the given
+     * repo-relative path, if any.
+     *
+     * Supports two forms:
+     *  - Wildcard:     'dok/images/*' => target   - pushes folder CONTENTS,
+     *                                                 stripping the matched prefix.
+     *  - Non-wildcard: 'dok/images'   => target   - pushes the folder itself,
+     *                                                 preserving the full path.
+     *
+     * @return array{pattern: string, target: string, wildcard: bool}|null
+     */
+    protected function resolvePublicMapping(string $filePath): ?array
+    {
+        if (empty($this->resource['public'])) {
+            return null;
+        }
+
+        foreach ($this->resource['public'] as $pattern => $target) {
+
+            // Normalize away any leading/trailing slashes so '/dok/images' and
+            // 'dok/images' are treated identically. GitHub doesn't send back a leading slash.
+            $pattern = trim($pattern, '/');
+
+            $isWildcard = Str::contains($pattern, '*');
+
+            if ($isWildcard) {
+                if (Str::is($pattern, $filePath)) {
+                    return [
+                        'pattern' => rtrim(Str::before($pattern, '*'), '/'),
+                        'target' => $target,
+                        'wildcard' => true,
+                    ];
+                }
+
+                continue;
+            }
+
+            // Non-wildcard: match the exact folder or anything nested under it,
+            // guarding against partial name collisions (e.g. `images` vs `images-2`).
+            if ($filePath === $pattern || Str::startsWith($filePath, Str::finish($pattern, '/'))) {
+                return [
+                    'pattern' => $pattern,
+                    'target' => $target,
+                    'wildcard' => false,
+                ];
+            }
+        }
+
+        return null;
+    }
+
+    /**
+     * Resolve the public path for a given repo-relative file path, based on
+     * its matched [public] mapping.
+     */
+    protected function publicPathFor(string $filePath): string
+    {
+        $mapping = $this->resolvePublicMapping($filePath);
+
+        $target = Str::finish($mapping['target'], '/');
+
+        if ($mapping['wildcard']) {
+            // Wildcard: strip the matched prefix entirely, keep only what's inside it.
+            // dok/images/* -> foo/bar.png  =>  {target}/foo/bar.png
+            $relative = ltrim(Str::after($filePath, $mapping['pattern']), '/');
+
+            return $target.$relative;
+        }
+
+        // Non-wildcard: strip the prefix but keep the folder's own name as the new root.
+        // dok/images -> foo/bar.png  =>  images/foo/bar.png  =>  {target}/images/foo/bar.png
+        $folderName = Str::afterLast($mapping['pattern'], '/');
+        $remainder = ltrim(Str::after($filePath, $mapping['pattern']), '/');
+
+        $relative = $remainder !== ''
+            ? $folderName.'/'.$remainder
+            : $folderName;
+
+        return $target.$relative;
     }
 
     /**

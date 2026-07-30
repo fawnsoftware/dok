@@ -62,17 +62,6 @@ class ComponentBlockStartParser implements BlockStartParserInterface
         )->at($cursor);
     }
 
-    private function buildRegexPattern()
-    {
-        $pattern = collect($this->components)
-            ->keys()
-            ->merge(['slot'])
-            ->map(fn ($name) => preg_quote($name))
-            ->implode('|');
-
-        return '/^[ \t]*(:{3,})('.$pattern.')(?:\.([a-zA-Z0-9._-]+))?(?=$|[ \t\/])/';
-    }
-
     private function getComponentView(string $componentName): string
     {
         return $this->components[$componentName]['template'] ?? '';

@@ -1,0 +1,12 @@
+{
+    "preset": "laravel",
+    "rules": {
+        "class_attributes_separation": {
+            "elements": {
+                "method": "one"
+            }
+        },
+        "fully_qualified_strict_types": false,
+        "psr_autoloading": true
+    }
+}

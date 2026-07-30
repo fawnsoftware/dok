@@ -25,14 +25,17 @@ class Release extends Tags
                 $method = $first;
                 break;
 
-            case $first === 'entry':
+            case $first == 'entry':
                 $method = 'entry';
                 $wildcard = $second;
                 break;
 
-            case $first === 'nav' && $second === 'handle':
+            case $first == 'nav' && $second == 'handle':
                 $method = 'navHandle';
                 break;
+
+            default:
+                throw new TagNotFoundException("Tag {{ {$tag} }} not found");
         }
 
         if (! method_exists($this, $method)) {
@@ -44,8 +47,6 @@ class Release extends Tags
         } else {
             return $this->{$method}();
         }
-
-        throw new TagNotFoundException("Tag {{ {$tag} }} not found");
     }
 
     /**
@@ -75,7 +76,7 @@ class Release extends Tags
      */
     public function outdated(): bool
     {
-        return $this->release()->data()->get('show_outdated_banner') ? true : false;
+        return (bool) $this->release()->data()->get('show_outdated_banner');
     }
 
     /**
@@ -86,7 +87,6 @@ class Release extends Tags
         $handle = $this->navHandle();
         $nav = Nav::findByHandle($handle);
         $currentUri = '/'.request()->path();
-        $breadcrumbs = [];
 
         if (! $nav) {
             throw new NavigationNotFoundException($handle);
@@ -108,7 +108,7 @@ class Release extends Tags
             ]);
         }
 
-        if ($this->params->get('prefix') && (! $this->params->get('prefix_single') == true || count($breadcrumbs) === 1)) {
+        if ($this->params->get('prefix') && (! $this->params->get('prefix_single') || count($breadcrumbs) === 1)) {
             array_unshift($breadcrumbs, ['title' => $this->params->get('prefix')]);
         }
 
@@ -125,13 +125,19 @@ class Release extends Tags
 
     private function release(): \Statamic\Entries\Entry
     {
-        return Entry::query()
+        $collectionHandle = $this->getCollectionHandle();
+
+        $release = Entry::query()
             ->where('collection', 'releases')
-            ->where('version_collection', $this->getCollectionHandle())
+            ->where('version_collection', $collectionHandle)
             ->first();
+
+        throw_if(! $release, new Exception("Cannot find a [releases] entry for collection [{$collectionHandle}]."));
+
+        return $release;
     }
 
-    private function findBreadcrumbTrail(array $items, string $currentUri, array $trail = [])
+    private function findBreadcrumbTrail(array $items, string $currentUri)
     {
         $stack = [];
 

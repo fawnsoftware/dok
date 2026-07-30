@@ -1,0 +1,441 @@
+@layer components {
+  .search {
+    display: contents;
+  }
+
+  .search-trigger {
+    /*  */
+  }
+
+  .search-trigger-kbd {
+    position: absolute;
+    right: --spacing(3);
+    inset-block: --spacing(0);
+    align-self: center;
+    font-size: 0.7rem;
+    line-height: --spacing(2.5);
+    border-radius: var(--radius-lg);
+    margin-left: auto;
+    height: auto;
+    font-family: var(--font-default);
+  }
+
+  /* Modal */
+  .search-modal {
+    position: fixed;
+    inset: 0;
+    z-index: 50;
+    padding: 2vw;
+    color: var(--color-base-content);
+    overflow: hidden;
+    min-height: 100dvh;
+    min-width: 100dvw;
+
+    @media (width >= theme("breakpoint.sm")) {
+      padding: 10vw;
+    }
+  }
+
+  .search-overlay {
+    position: absolute;
+    inset: 0;
+    background: rgb(0 0 0 / 0.5);
+  }
+
+  .search-dialog {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    z-index: 60;
+    margin-inline: auto;
+    min-height: 0;
+    max-height: 100%;
+    width: 100%;
+    max-width: 42rem;
+    border-radius: var(--radius-box);
+    border: var(--border-width) solid --alpha(var(--color-base-content) / 10%);
+    background: var(--color-base-200);
+    overflow: hidden;
+
+    @variant contrast-more {
+      border: var(--border-width) solid --alpha(var(--color-base-content) / 80%);
+    }
+  }
+
+  .search-dialog-header {
+    position: relative;
+    width: 100%;
+    display: flex;
+    align-items: center;
+  }
+
+  .search-dialog-close {
+    position: absolute;
+    right: --spacing(3);
+    inset-block: --spacing(0);
+    display: block;
+    align-self: center;
+    padding: 0.5rem;
+    font-size: var(--text-xs);
+    line-height: --spacing(2.5);
+    font-family: var(--font-default);
+    height: auto;
+    border: var(--border-width) solid --alpha(var(--color-base-content) / 10%);
+    border-radius: var(--radius-lg);
+  }
+
+  .search-dialog-close-kbd {
+    font-family: var(--font-default);
+    color: var(--color-base-content);
+  }
+
+  .search-dialog-input {
+    width: 100%;
+    max-width: calc(100% - 3rem);
+    padding: --spacing(5);
+    border: 0;
+    background: none;
+    outline: none;
+
+    &::placeholder {
+      color: --alpha(var(--color-base-content) / 50%);
+    }
+
+    &:focus::placeholder {
+      color: --alpha(var(--color-base-content) / 80%);
+    }
+  }
+
+  .search-dialog-loading {
+    position: absolute;
+    right: --spacing(20);
+    top: --spacing(6.5);
+    line-height: 0;
+
+    svg {
+      width: --spacing(4);
+      height: --spacing(4);
+    }
+  }
+
+  .search-dialog-output {
+    flex: 1 1 auto;
+    overflow: auto;
+    display: grid;
+    border-top: var(--border-width) solid
+      --alpha(var(--color-base-content) / 10%);
+
+    @variant contrast-more {
+      border-top: var(--border-width) solid
+        --alpha(var(--color-base-content) / 100%);
+    }
+  }
+
+  .search-dialog-message {
+    text-align: center;
+    padding: --spacing(4);
+    font-size: var(--text-sm);
+    opacity: 0.8;
+  }
+
+  .search-dialog-message--error {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    opacity: 1;
+    font-weight: var(--font-weight-medium);
+  }
+
+  .search-dialog-message--error-icon {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-right: --spacing(2);
+    width: --spacing(7);
+    height: --spacing(7);
+    background-color: var(--color-error);
+    border-radius: var(--radius-notch);
+
+    svg {
+      width: --spacing(5);
+      height: --spacing(5);
+      fill: var(--color-error-content);
+    }
+  }
+
+  .search-group {
+    padding-inline: --spacing(3);
+    padding-block: --spacing(3);
+
+    @media (width >= theme("breakpoint.sm")) {
+      padding-inline: --spacing(5);
+      padding-block: --spacing(5);
+    }
+  }
+
+  .search-group-title {
+    font-weight: bold;
+    font-size: var(--text-sm);
+    margin-bottom: --spacing(2);
+    color: --alpha(var(--color-base-content) / 80%);
+
+    @media (width >= theme("breakpoint.sm")) {
+      font-size: var(--text-lg);
+      margin-bottom: --spacing(3);
+    }
+  }
+
+  .search-group-list {
+    position: relative;
+    display: grid;
+    gap: --spacing(3);
+
+    @media (width >= theme("breakpoint.sm")) {
+      gap: --spacing(5);
+    }
+  }
+
+  .search-group-list--parent {
+    &:before {
+      content: "";
+      position: absolute;
+      height: 100%;
+      width: 1px;
+      left: --spacing(4);
+      z-index: -1;
+      background-image: repeating-linear-gradient(
+        to bottom,
+        --alpha(var(--color-base-content) / 20%),
+        --alpha(var(--color-base-content) / 5%)
+      );
+    }
+
+    & :where(.search-option:not(:first-of-type)) {
+      margin-left: --spacing(10);
+    }
+  }
+
+  /* Option */
+  .search-option {
+    border: var(--border-width) solid transparent;
+    border-radius: var(--radius-control);
+    background: var(--color-base-100);
+    color: var(--color-base-content);
+    font-weight: var(--font-weight-medium);
+
+    @variant contrast-more {
+      background-color: var(--color-base-200);
+      border-color: var(--color-base-content);
+      font-weight: var(--font-weight-bold);
+    }
+  }
+
+  .search-option[aria-selected="true"] {
+    background: var(--color-primary);
+    color: var(--color-primary-content);
+  }
+
+  @media (prefers-contrast: more) {
+    .search-option {
+      border-color: var(--color-base-content);
+    }
+  }
+
+  .search-option-link {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: --spacing(3);
+    padding: --spacing(3);
+    text-decoration: none;
+    color: inherit;
+
+    @media (width >= theme("breakpoint.sm")) {
+      gap: --spacing(5);
+      padding: --spacing(4);
+    }
+  }
+
+  .search-option-link mark {
+    color: currentColor;
+    background: transparent;
+  }
+
+  .search-option-icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    width: 2rem;
+    height: 2rem;
+    border: var(--border-width) solid --alpha(var(--color-base-content) / 5%);
+    border-radius: var(--radius-notch);
+
+    @media (width >= theme("breakpoint.sm")) {
+      width: 2.5rem;
+      height: 2.5rem;
+    }
+
+    svg {
+      width: 0.875rem;
+      height: 0.875rem;
+      fill: currentColor;
+      display: none;
+
+      @media (width >= theme("breakpoint.sm")) {
+        width: 1rem;
+        height: 1rem;
+      }
+    }
+  }
+
+  .search-option:not(.search-option--root) .search-option-icon-svg--section {
+    display: block;
+  }
+
+  .search-option--root .search-option-icon-svg--root {
+    display: block;
+  }
+
+  .search-option-body {
+    flex-grow: 1;
+  }
+
+  .search-option-title {
+    font-size: var(--text-xs);
+
+    @media (width >= theme("breakpoint.sm")) {
+      font-size: var(--text-sm);
+    }
+  }
+
+  .search-option-origin {
+    opacity: 0.7;
+    font-weight: var(--font-weight-semibold);
+    font-size: 0.75rem;
+    margin-bottom: --spacing(1);
+    display: block;
+  }
+
+  .search-option-origin-caret {
+    display: inline;
+    width: 0.75rem;
+    height: 0.75rem;
+  }
+
+  .search-option-snippet {
+    font-size: 0.75rem;
+    line-height: var(--leading-relaxed);
+    margin-top: --spacing(2);
+    opacity: 0.6;
+
+    @media (width >= theme("breakpoint.sm")) {
+      font-size: var(--text-xs);
+      margin-top: --spacing(3);
+    }
+  }
+
+  .search-option-caret {
+    width: 1.5rem;
+    height: 1.5rem;
+    padding: 0.375rem;
+
+    @media (width >= theme("breakpoint.sm")) {
+      width: 2rem;
+      height: 2rem;
+      padding: 0.5rem;
+    }
+  }
+
+  .search-option-actions {
+    display: flex;
+    gap: 0.375rem;
+  }
+
+  .search-option-action {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0.375rem;
+    opacity: 0.5;
+    border-radius: var(--radius-control);
+    transition: opacity 0.15s ease;
+    cursor: pointer;
+
+    @media (width >= theme("breakpoint.sm")) {
+      padding: 0.5rem;
+    }
+  }
+
+  .search-option-action:hover {
+    opacity: 1;
+    background: --alpha(var(--color-base-content) / 10%);
+  }
+
+  .search-option[aria-selected="true"] .search-option-action:hover {
+    background: --alpha(var(--color-primary-content) / 10%);
+  }
+
+  .search-option-action-icon {
+    width: 1rem;
+    height: 1rem;
+    fill: currentColor;
+  }
+}
+
+@layer ui.modifiers {
+  .search-index-dropdown {
+    width: auto;
+    padding-right: 37px;
+    padding-block: 0;
+    /* padding-inline: 0; */
+    background-color: transparent;
+    color: --alpha(var(--color-base-content) / 70%);
+    font-size: var(--text-xs);
+    height: 42px;
+    align-self: center;
+    margin-left: 10px;
+  }
+
+  .search-trigger-btn {
+    position: relative;
+    display: none;
+    align-items: center;
+    height: --spacing(7);
+    padding-block: --spacing(2.5);
+    min-width: --spacing(20);
+    cursor: pointer;
+
+    @media (width >= theme("breakpoint.lg")) {
+      display: flex;
+    }
+  }
+
+  .search-trigger-icon {
+    display: flex;
+    align-items: center;
+    pointer-events: none;
+  }
+
+  .search-trigger-icon-svg {
+    width: --spacing(4);
+    height: --spacing(4);
+  }
+
+  .search-trigger-btn-mobile {
+    position: relative;
+    display: flex;
+    align-items: center;
+    padding: --spacing(2);
+    cursor: pointer;
+
+    @media (width >= theme("breakpoint.lg")) {
+      display: none;
+    }
+  }
+
+  .search-trigger-icon-mobile-svg {
+    width: --spacing(5);
+    height: --spacing(5);
+  }
+}

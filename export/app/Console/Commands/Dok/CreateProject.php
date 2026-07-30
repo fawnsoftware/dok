@@ -66,16 +66,4 @@ class CreateProject extends Command
 
         return self::SUCCESS;
     }
-
-    private function getExistingProjects(): array
-    {
-        return Entry::query()
-            ->where('collection', 'releases')
-            ->where('blueprint', 'project')
-            ->get()
-            ->mapWithKeys(fn ($entry) => [
-                $entry->id => $entry->title,
-            ])
-            ->all();
-    }
 }

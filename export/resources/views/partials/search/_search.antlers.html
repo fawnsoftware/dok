@@ -1,0 +1,142 @@
+---
+start_index: null
+show_index_label: true
+min_chars: 3
+---
+
+<search
+    x-data="search($json.inline('dok-search-settings'))"
+    @keydown.escape.window="close()"
+    @keydown.window="e => { if ((e.metaKey || e.ctrlKey) && e.key === 'k') { e.preventDefault(); show(); } }"
+    @keydown.tab.window="handleTabKey()"
+    class="search"
+    role="search"
+    @search:open.window="show()"
+>
+
+    <input x-ref="focusPlaceholder" type="text" class="sr-only block" tabindex="-1" aria-hidden="true">
+
+    <template x-teleport="body">
+        <div class="search-modal"
+            x-show="open"
+            x-trap.noscroll.noreturn="open">
+
+            <div class="search-overlay" x-show="open" x-transition.opacity></div>
+
+            <div
+                x-ref="dropdown"
+                x-show="open"
+                x-on:click.outside="close()"
+                x-transition.opacity
+                class="search-dialog transform-gpu"
+            >
+                <div class="search-dialog-header">
+
+                    <button type="button" class="search-dialog-close" @click="close()">
+                        <kbd class="search-dialog-close-kbd">esc</kbd>
+                    </button>
+
+                    {{ if (view:indexes | count) > 1}}
+                        <select
+                            aria-label="The project to search within"
+                            class="select search-index-dropdown"
+                            x-model="currentSearchIndexId"
+                        >
+                            {{ view:indexes }}
+                                <option value="{{ value }}" {{ if value == {view:active_index} }} selected {{ /if }}>{{ label }}</option>
+                            {{ /view:indexes }}
+                        </select>
+                    {{ /if }}
+
+                    <input
+                        x-ref="input"
+                        x-model="query"
+                        x-on:input.debounce.300ms="search()"
+                        type="search"
+                        class="search-dialog-input"
+                        :placeholder="placeholder"
+                        autocomplete="off"
+                        spellcheck="false"
+                        aria-autocomplete="list"
+                        aria-haspopup="listbox"
+                        :aria-expanded="open.toString()"
+                        :aria-busy="loading.toString()"
+                        @keydown.up.prevent="moveUp()"
+                        @keydown.down.prevent="moveDown()"
+                        @keydown.enter="handleEnterKeydown()"
+                        autofocus
+                    >
+
+                    <span class="search-dialog-loading" x-show="loading" aria-hidden="true">
+                        <x-loading />
+                    </span>
+                </div>
+
+                <div
+                    class="search-dialog-output"
+                    x-ref="output"
+                    x-on:mousemove.window.debounce.10ms="observeMouseMove($event)"
+                    x-show="noResults || results.length || recentResults.length || savedResults.length || error "
+                >
+                    <template x-if="results.length">
+                        <template x-for="(group, groupIndex) in results" :key="groupIndex">
+                            <section class="search-group">
+                                <h2 class="search-group-title" x-text="group[0].origin_title"></h2>
+                                <ul class="search-group-list" :class="{'search-group-list--parent': group[0].is_root}" role="listbox" x-data="{type: 'search'}">
+                                    <template x-for="(item, itemIndex) in group" :key="`search-${itemIndex}`">
+                                        {{ partial:search/option_search }}
+                                    </template>
+                                </ul>
+                            </section>
+                        </template>
+                    </template>
+
+                    <template x-if="noResults">
+                        <p class="search-dialog-message">No results for "<span x-text="query"></span>"</p>
+                    </template>
+
+                    <template x-if="error">
+                        <p class="search-dialog-message search-dialog-message--error">
+                            <span class="search-dialog-message--error-icon">
+                                {{ svg src="icon/warning"  }}
+                            </span>
+                            <span x-text="error"></span>
+                        </p>
+                    </template>
+
+                    <template x-if="recentResults.length">
+                        <section class="search-group">
+                            <h2 class="search-group-title">Recent</h2>
+                            <ul class="search-group-list" role="listbox" x-data="{type: 'recent', groupIndex: null}">
+                                <template x-for="(item, itemIndex) in recentResults" :key="`recent-${item._identifier}`">
+                                    {{ partial:search/option_recent }}
+                                </template>
+                            </ul>
+                        </section>
+                    </template>
+
+                    <template x-if="savedResults.length">
+                        <section class="search-group">
+                            <h2 class="search-group-title">Saved</h2>
+                            <ul class="search-group-list" role="listbox" x-data="{type: 'saved', groupIndex: null}">
+                                <template x-for="(item, itemIndex) in savedResults" :key="`saved-${item._identifier}`">
+                                    {{ partial:search/option_saved }}
+                                </template>
+                            </ul>
+                        </section>
+                    </template>
+                </div>
+            </div>
+        </div>
+    </template>
+</search>
+
+
+<script type="application/json" id="dok-search-settings">
+    {
+        "startIndex": {{ {view:start_index | to_json } or 'null' }},
+        "indexes": {{ {view:indexes | to_json } or '[]' }},
+        "showIndexLabel": {{ {view:show_index_label | to_json } or 'false' }},
+        "min_chars": {{ {view:min_chars | to_json } or '3' }}
+    }
+</script>

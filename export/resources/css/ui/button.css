@@ -32,8 +32,8 @@
     text-align: center;
     line-height: var(--leading-relaxed);
     border-radius: var(--radius-control);
-    background-color: var(--btn-background);
-    border: 1px solid var(--btn-border);
+    background-color: var(--btn-background, #0000);
+    border: var(--border-width) solid var(--btn-border);
     transition-property:
       outline-width, color, background-color, border-color, opacity;
     transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);

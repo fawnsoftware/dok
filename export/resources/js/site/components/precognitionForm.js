@@ -21,6 +21,9 @@ export default function precognitionForm(Alpine) {
             )
         },
 
+        /**
+         * Submits the form
+         */
         async submit() {
             this.submitted = true;
             this.success = false;
@@ -41,6 +44,9 @@ export default function precognitionForm(Alpine) {
                 });
         },
 
+        /**
+         * Scrolls the page back to the top of the form.
+         */
         scrollToTop() {
             const rect = this.$refs.form.getBoundingClientRect();
 
@@ -49,6 +55,12 @@ export default function precognitionForm(Alpine) {
             window.scrollTo(0, yPos);
         },
 
+        /**
+         * Gets an element's top scroll margin in pixels.
+         *
+         * @param {HTMLElement} el
+         * @returns {number|string} The margin, or 0 if it isn't set in pixels.
+         */
         scrollMargin(el) {
             let value = getComputedStyle(el).scrollMarginTop || null;
 

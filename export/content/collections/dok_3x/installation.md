@@ -11,8 +11,6 @@ updated_at: 1741264233
 Learn how to install Dok via the CLI or by installing into an existing site.
 :::
 
----
-
 **Installing Dok using the CLI**
 
 ```shell

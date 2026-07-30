@@ -58,7 +58,10 @@ return [
         'torchlight' => [
             'enabled' => env('TORCHLIGHT_ENABLED', true),
 
-            'theme' => env('TORCHLIGHT_THEME', 'olaolu-palenight'),
+            'themes' => [
+                'light' => 'github-light',
+                'dark' => 'olaolu-palenight',
+            ],
 
             'options' => [
                 'lineNumbers' => false,

@@ -8,11 +8,17 @@ export default function outline(Alpine){
         offset: 300,
 
         init() {
-            this.initPermalinkPositionMap()
-
-            this.setActiveLink();
+            // Do this after the initialization process, as getBoundingClientRect
+            // forces the borser to compute the layout right away.
+            document.addEventListener('alpine:initialized', () => {
+                this.initPermalinkPositionMap();
+                this.setActiveLink();
+            });
         },
 
+        /**
+         * Builds the map of heading permalinks and their positions on the page.
+         */
         initPermalinkPositionMap() {
             this.permalinks = [];
 
@@ -27,10 +33,19 @@ export default function outline(Alpine){
             });
         },
 
+        /**
+         * Checks whether the given heading is the active one.
+         *
+         * @param {string} id The heading ID
+         * @returns {boolean}
+         */
         isLinkActive(id) {
             return this.active === id;
         },
 
+        /**
+         * Finds the heading closest to the top of the viewport and marks it active.
+         */
         setActiveLink() {
             // Get all of the y pos of permalinks to compare
             const permalinkTopValues = this.permalinks.map((value) => {

@@ -1,5 +1,5 @@
 
-<footer class="mt-auto pb-10 flex flex-wrap items-center justify-between py-5 gap-3">
+<footer class="mt-auto pb-10 flex flex-wrap items-center justify-start py-5 gap-3">
     {{ if {release:entry:github_repository_url} }}
         <div>
             <a
@@ -24,8 +24,4 @@
             <span class="sr-only">Opens in new tab</span>
         </a>
     {{ /if }}
-
-    <div class="ml-auto">
-        {{ partial:partials/theme_picker }}
-    </div>
 </footer>

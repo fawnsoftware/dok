@@ -1,5 +1,5 @@
 [data-theme="forest"] {
-  --color-base-100: oklch(23.555% 0.01194 270.878);
+  --color-base-100: oklch(24.351% 0.01413 267.002);
   --color-base-200: oklch(0.2025 0.0099 285.48);
   --color-base-300: oklch(0.1947 0.0101 294.62);
   --color-base-content: oklch(0.9432 0.0174 159.11);
@@ -22,8 +22,8 @@
   --border-width: 1px;
 
   @variant contrast-more {
-    --color-base-100: oklch(0.1998 0.0079 211.09);
-    --color-base-200: oklch(0.1557 0.0049 196.66);
-    --color-base-300: oklch(0.1514 0.0054 219.64);
+    --color-base-100: oklch(18.22% 0.00002 271.152);
+    --color-base-200: oklch(13.441% 0.00002 271.152);
+    --color-base-300: oklch(0% 0 0);
   }
 }
